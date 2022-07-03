@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#include "InitialScene.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -20,12 +21,33 @@ constexpr auto WINDOW_POSITION_Y = 50;
 GLsizei new_width, new_height;
 
 
+// Set Perspective projection
+void setPrespProjection() {
+    glMatrixMode(GL_PROJECTION); // Set projection
+    glLoadIdentity();
+    gluPerspective(65, new_width / new_height, 1.0, 150.0);
+}
+
+void setCameraInitial() {
+    // Set camera
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(5.0, 3.0, 5.0,
+        0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0);
+}
+
+
 void display() {
     //Clears
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-
+    setPrespProjection();
+    setCameraInitial();
+    
+    InitialScene initial_scene;
+    initial_scene.draw();
 
     glFlush();
     glutSwapBuffers();
@@ -63,7 +85,7 @@ int main(int argc, char** argv)
     glutCreateWindow("robot-scene");
     glutDisplayFunc(display);
     glutReshapeFunc(windowResize);
-    glutKeyboardFunc(MyKeyboardFunc);
+   // glutKeyboardFunc(MyKeyboardFunc);
     glutMainLoop();
     return 0;
 }
