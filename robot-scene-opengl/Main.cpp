@@ -9,6 +9,7 @@
 #include <vector>
 using namespace std;
 #include "InitialScene.h"
+#include "Constants.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -19,7 +20,7 @@ constexpr auto WINDOW_POSITION_Y = 50;
 
 //the current width and height of the window
 GLsizei new_width, new_height;
-
+InitialScene scene;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -28,15 +29,26 @@ void setPrespProjection() {
     gluPerspective(65, new_width / new_height, 1.0, 150.0);
 }
 
-void setCameraInitial() {
-    // Set camera
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(5.0, 3.0, 5.0,
-        0.0, 0.0, 0.0,
-        0.0, 1.0, 0.0);
-}
 
+//Draw axises X,Y and Z for reference and as shown in the assignment
+void drawAxis() {
+    glColor3f(1, 0, 0);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(10, 0, 0);
+    glEnd();
+    glColor3f(0, 1, 0);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, 10, 0);
+    glEnd();
+    glColor3f(0, 0, 1);
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, 0, 10);
+    glEnd();
+
+}
 
 void display() {
     //Clears
@@ -44,21 +56,13 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     setPrespProjection();
-    setCameraInitial();
     
-    InitialScene initial_scene;
-    initial_scene.draw();
+    
+    scene.draw();
 
+    drawAxis();
     glFlush();
     glutSwapBuffers();
-}
-
-
-
-// Handle pressing any key, so that user can switch between Orthogonal and Perspective projection
-void MyKeyboardFunc(unsigned char Key, int x, int y)
-{
-
 }
 
 // handles window reshape	
@@ -75,6 +79,30 @@ void windowResize(int width, int height) {
     glViewport(0, height - new_height, new_width, new_height);
 }
 
+void MyKeyboardFunc(unsigned char Key, int x, int y)
+{
+    switch (Key)
+    {
+    
+    case 'w': scene.moveCamera(CAMERA_FRONT); break; //Camera front
+    case 'a': scene.moveCamera(CAMERA_LEFT); break; //Camera left
+    case 's': scene.moveCamera(CAMERA_BACK); break; //Camera back
+    case 'd': scene.moveCamera(CAMERA_RIGHT); break; //Camera right
+    case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
+    case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
+    case GLUT_KEY_PAGE_UP: break;
+    case GLUT_KEY_PAGE_DOWN:  break;
+    case GLUT_KEY_HOME:  break;
+    case GLUT_KEY_END:  break;
+    case 27:
+        exit(1);
+        break;
+    };
+    glutPostRedisplay();
+}
+
+
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -85,7 +113,7 @@ int main(int argc, char** argv)
     glutCreateWindow("robot-scene");
     glutDisplayFunc(display);
     glutReshapeFunc(windowResize);
-   // glutKeyboardFunc(MyKeyboardFunc);
+    glutKeyboardFunc(MyKeyboardFunc);
     glutMainLoop();
     return 0;
 }

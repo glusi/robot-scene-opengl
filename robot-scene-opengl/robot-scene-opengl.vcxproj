@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Lights.cpp" />
@@ -156,8 +157,10 @@
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="SceneItem.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="InitialScene.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SceneItem.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="robot-scene-opengl.rc" />
