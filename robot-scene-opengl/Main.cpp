@@ -11,6 +11,7 @@ using namespace std;
 #include "InitialScene.h"
 #include "Constants.h"
 
+
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
 constexpr auto WINDOW_HEIGHT = 500;
@@ -21,6 +22,9 @@ constexpr auto WINDOW_POSITION_Y = 50;
 //the current width and height of the window
 GLsizei new_width, new_height;
 InitialScene scene;
+
+bool first_time_right_mouse = true;
+float xlast_mouse =0.0, ylast_mouse =0.0;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -54,13 +58,14 @@ void display() {
     //Clears
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     setPrespProjection();
     
     
     scene.draw();
 
-    drawAxis();
+   // drawAxis();
     glFlush();
     glutSwapBuffers();
 }
@@ -90,7 +95,7 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'd': scene.moveCamera(CAMERA_RIGHT); break; //Camera right
     case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
     case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
-    case GLUT_KEY_PAGE_UP: break;
+    case GLUT_KEY_PAGE_UP: scene.moveRobot(); break;
     case GLUT_KEY_PAGE_DOWN:  break;
     case GLUT_KEY_HOME:  break;
     case GLUT_KEY_END:  break;
@@ -101,7 +106,61 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     glutPostRedisplay();
 }
 
+void MyGlutSpecialFunc(int Key, int x, int y) {
+    switch (Key)
+    {
+    case GLUT_KEY_UP: scene.moveRobot(); break;
+    case GLUT_KEY_PAGE_DOWN:  break;
+    case GLUT_KEY_HOME:  break;
+    case GLUT_KEY_END:  break;
+    case 27:
+        exit(1);
+        break;
+    };
+    glutPostRedisplay();
+}
 
+void MyMouseFunc(int button, int state, int xpos, int ypos) {
+    /*if (button == GLUT_RIGHT_BUTTON){
+        int centerX = new_width / 2;
+        int centerY = new_height / 2;
+
+        int deltaX = -1 * (xpos - centerX);
+        int deltaY = -1 * (ypos - centerY);
+
+        if (deltaX != 0 || deltaY != 0) {
+            scene.rotateCamera(deltaX, deltaY);
+        }
+    }*/
+
+   /* if (button == GLUT_RIGHT_BUTTON){
+        if (first_time_right_mouse) {
+            xlast_mouse = xpos;
+            ylast_mouse = ypos;
+            first_time_right_mouse = false;
+        }
+        else {
+            float xoffset = xpos - xlast_mouse;
+            float yoffset = ylast_mouse - ypos;
+            xlast_mouse = xpos;
+            ylast_mouse = ypos;
+            scene.rotateCamera(xoffset, yoffset);
+        }
+        
+    }*/
+
+}
+
+//The Initialize function, called once:    
+void Init() {
+    glEnable(GL_TEXTURE_2D);
+    glShadeModel(GL_SMOOTH);                            // Enable Smooth Shading
+    glClearColor(0.0f, 0.0f, 0.0f, 0.5f);               // Black Background
+    glClearDepth(1.0f);                                 // Depth Buffer Setup
+    glEnable(GL_DEPTH_TEST);                            // Depth Buffer Setup                       // Enables Depth Testing
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
+    glEnable(GL_LIGHTING);
+}
 
 int main(int argc, char** argv)
 {
@@ -111,9 +170,12 @@ int main(int argc, char** argv)
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(WINDOW_POSITION_X, WINDOW_POSITION_Y);
     glutCreateWindow("robot-scene");
+    Init();
     glutDisplayFunc(display);
     glutReshapeFunc(windowResize);
     glutKeyboardFunc(MyKeyboardFunc);
+    glutMouseFunc(MyMouseFunc);
+    glutSpecialUpFunc(MyGlutSpecialFunc);
     glutMainLoop();
     return 0;
 }

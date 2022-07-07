@@ -14,5 +14,7 @@ public:
 	InitialScene();
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
+	void rotateCamera(int mouseX, int mouseY);
+	void moveRobot();
 };
 

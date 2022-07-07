@@ -17,6 +17,6 @@ public:
 	Vector3 operator=(Vector3& other);
 	Vector3 operator=(Vector3 other);
 	void normalize();
-	static Vector3 zero();
+	static Vector3 zeroVector();
 };
 

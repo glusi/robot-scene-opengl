@@ -10,12 +10,16 @@ void Camera::updateCamera() {
 
 Camera::Camera()
 {
-	eye = Vector3(5.0, 5.0, 5.0);
+	eye = Vector3(-4.0, 7.0, 8.0);
 	center = Vector3();
 	upz = Vector3(0.0, 1.0, 0.0);
+
 	direction_foward = eye-center;
 	direction_foward.y = 0;
 	direction_foward.normalize();
+
+	angle_x = 0.0;
+	angle_y = 0.0;
 }
 
 void Camera::draw()
@@ -32,7 +36,7 @@ void Camera::moveCamera(USER_ACTION_CAMERA action)
 			eye_change.update(direction_foward);
 			break;
 		case CAMERA_BACK: 
-			eye_change.update(Vector3::zero()-direction_foward);
+			eye_change.update(Vector3::zeroVector()-direction_foward);
 			break;
 		case CAMERA_RIGHT: 
 			break;
@@ -44,4 +48,9 @@ void Camera::moveCamera(USER_ACTION_CAMERA action)
 	}
 	eye -= eye_change;
 	center -= eye_change;
+}
+
+void Camera::rotateCamera(int xoffset, int yoffset)
+{
+	
 }

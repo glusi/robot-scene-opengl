@@ -8,7 +8,7 @@ Lights::Lights() :
 
 
 void Lights::draw() {
-	GLfloat light_pos[] = { 1.0, 2.0, 5.0, 1.0 };
+	GLfloat light_pos[] = { 0.0, 2.0, 5.0, 1.0 };
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
@@ -16,13 +16,21 @@ void Lights::draw() {
 	GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
 	GLfloat diffuse0[] = { 0.0, 1.0, 0.0, 1.0 }; // Id term - Red
 	GLfloat specular0[] = { 1.0, 1.0, 1.0, 1.0 }; // Is term - White
-	GLfloat ambient0[] = { 0.1, 0.1, 0.1, 1.0 }; // Ia term - Gray
-	glEnable(GL_LIGHTING);
+	GLfloat ambient0[] = { 0.2, 0.2, 0.2, 1.0 }; // Ia term - Gray
+//	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, position0);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient0);
 
-	glShadeModel(GL_SMOOTH);
+	/*GLfloat diffu[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat spec[] = { 0.5f, 0.5f, 0.5f, 0.5f };
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffu);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, spec);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);*/
+
+	//glShadeModel(GL_SMOOTH);
 }

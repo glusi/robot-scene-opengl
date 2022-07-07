@@ -80,7 +80,7 @@ void Vector3::normalize()
 	z /= value;
 }
 
-Vector3 Vector3::zero()
+Vector3 Vector3::zeroVector()
 {
 	return Vector3();
 }

@@ -1,6 +1,8 @@
 #pragma once
-#include <GL/glut.h>
-#include <GL\freeglut.h>
+#include "tools.h"
+#include "Vector3.h"
+#include "Constants.h"
+
 class SceneItem
 {
 protected:
