@@ -33,10 +33,10 @@ void Camera::moveCamera(USER_ACTION_CAMERA action)
 	Vector3 eye_change = Vector3();
 	switch (action) {
 		case CAMERA_FRONT: 
-			eye_change.update(direction_foward);
+			eye_change.update(Vector3::zeroVector() - direction_foward);
 			break;
 		case CAMERA_BACK: 
-			eye_change.update(Vector3::zeroVector()-direction_foward);
+			eye_change.update(direction_foward);
 			break;
 		case CAMERA_RIGHT: 
 			break;

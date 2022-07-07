@@ -20,8 +20,8 @@ void Floor::draw() {
 	glMaterialfv(GL_FRONT, GL_SPECULAR, red_shiny_plastic.Ks);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, red_shiny_plastic.Kd);
 
-	for ( int x = -grid_size_x/2; x < grid_size_x; x++)
-		for ( int y = -grid_size_y/2; y < grid_size_y; y++)
+	for ( int x = -grid_size_x; x < grid_size_x; x++)
+		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{
 			glVertex3f(x * tile_size_x,0, y * tile_size_y);
 			glVertex3f((x + 1) * tile_size_x, 0, y * tile_size_y);
