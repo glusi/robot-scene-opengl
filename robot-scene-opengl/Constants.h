@@ -15,3 +15,7 @@ typedef enum {
 typedef enum {
 	ROBOT_SHOULDER, ROBOT_ELBOW, ROBOT_PALM
 }ROBOT_JOINT;
+
+typedef enum {
+	ROBOT_HAND_UP, ROBOT_HAND_DOWN
+}ROBOT_UP_DOWN_ACTION;

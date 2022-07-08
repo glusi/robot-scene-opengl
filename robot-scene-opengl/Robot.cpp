@@ -11,6 +11,9 @@ Robot::Robot()
 	shoulder_position_to_robot = Vector3(-0.8, 3.5, 0);//Vector3(-0.8, 3.5, 0);
 	elbow_position_to_robot = Vector3(-1.7, 2.6, 0);
 	palm_position_to_robot = Vector3(-2.6, 2.35, 0);
+	shoulder_lift = 0;
+	elbow_lift = 0;
+	palm_lift = 0;
 }
 
 void Robot::drawHand()
@@ -21,7 +24,7 @@ void Robot::drawHand()
 	//glLoadIdentity();
 	drawJoint(shoulder_position_to_robot);
 	applyJointRotation(ROBOT_SHOULDER);
-	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, 45, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1.2);
+	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_SHOULDER_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1.2);
 	drawJoint(elbow_position_to_robot);
 	glPushMatrix();
 	applyJointRotation(ROBOT_ELBOW);
@@ -130,6 +133,7 @@ void Robot::applyJointRotation(ROBOT_JOINT joint)
 		//glRotatef(-90, 1, 0, 0);
 		glTranslatef(shoulder_position_to_robot.x, shoulder_position_to_robot.y, shoulder_position_to_robot.z);
 		glRotatef(shoulder_rotation, 1, 0, 0);
+		glRotatef(shoulder_lift, 0, 0, 1);
 		glTranslatef(-shoulder_position_to_robot.x, -shoulder_position_to_robot.y, -shoulder_position_to_robot.z);
 		//glRotatef(90, 1, 0, 0);
 		break;
@@ -158,6 +162,29 @@ void Robot::rotateHandJoint(ROBOT_JOINT joint)
 		break;
 	case ROBOT_PALM:
 		palm_rotation++;
+		break;
+	};
+}
+
+void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
+{
+	switch (joint) {
+	case ROBOT_SHOULDER:
+		if ((shoulder_lift + INITIAL_SHOULDER_ROTATION > 90 - HEAD_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift + INITIAL_SHOULDER_ROTATION < -90 + HEAD_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			shoulder_lift = shoulder_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				shoulder_lift++;
+			else
+				shoulder_lift--;
+		}
+		
+		break;
+	case ROBOT_ELBOW:
+		elbow_lift++;
+		break;
+	case ROBOT_PALM:
+		palm_lift++;
 		break;
 	};
 }

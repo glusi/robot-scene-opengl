@@ -18,5 +18,6 @@ public:
 	void moveRobot(ROBOT_MOVE_DIRECTION direction);
 	void rotateRobot();
 	void rotateRobotHand(ROBOT_JOINT joint);
+	void liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
 };
 

@@ -6,6 +6,9 @@
 class Robot : SceneItem
 {
 	const float ROBOT_HAND_SIZE = 0.25;
+	const float INITIAL_SHOULDER_ROTATION = 45;
+	const int HEAD_UP_OFFSET = 18;
+	const int HEAD_DOWN_OFFSET = 10;
 
 	materialStruct material1{
 		{0.33, 0.22, 0.03, 1.0}, // Ka
@@ -25,10 +28,13 @@ class Robot : SceneItem
 
 	Vector3 shoulder_position_to_robot;
 	float shoulder_rotation;
+	float shoulder_lift;
 	Vector3 elbow_position_to_robot;
 	float elbow_rotation;
+	float elbow_lift;
 	Vector3 palm_position_to_robot;
 	float palm_rotation;
+	float palm_lift;
 
 	void drawHand();
 	void drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length);
@@ -46,6 +52,7 @@ class Robot : SceneItem
 		void draw();
 		void move(ROBOT_MOVE_DIRECTION direction);
 		void rotateHandJoint(ROBOT_JOINT joint);
+		void liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
 		void rotate();
 };
 

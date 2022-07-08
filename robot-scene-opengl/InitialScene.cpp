@@ -55,3 +55,8 @@ void InitialScene::rotateRobotHand(ROBOT_JOINT joint)
 {
 	robot->rotateHandJoint(joint);
 }
+
+void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
+{
+	robot->liftHandJoint(joint, action);
+}
