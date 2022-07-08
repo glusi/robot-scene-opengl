@@ -72,6 +72,12 @@ void Robot::drawHead()
 	glTranslatef(-0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -0.3, 0.55);
+	glScalef(5, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();
 	glPopMatrix();
 }
 
