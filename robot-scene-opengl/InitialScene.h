@@ -17,5 +17,6 @@ public:
 	void rotateCamera(int mouseX, int mouseY);
 	void moveRobot(ROBOT_MOVE_DIRECTION direction);
 	void rotateRobot();
+	void rotateRobotHand(ROBOT_JOINT joint);
 };
 

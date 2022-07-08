@@ -50,3 +50,8 @@ void InitialScene::rotateRobot()
 {
 	robot->rotate();
 }
+
+void InitialScene::rotateRobotHand(ROBOT_JOINT joint)
+{
+	robot->rotateHandJoint(joint);
+}

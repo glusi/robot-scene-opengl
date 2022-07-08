@@ -23,6 +23,13 @@ class Robot : SceneItem
 	Vector3 move_direction;
 	float angle;
 
+	Vector3 shoulder_position_to_robot;
+	float shoulder_rotation;
+	Vector3 elbow_position_to_robot;
+	float elbow_rotation;
+	Vector3 palm_position_to_robot;
+	float palm_rotation;
+
 	void drawHand();
 	void drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length);
 	void drawHead();
@@ -31,12 +38,14 @@ class Robot : SceneItem
 	void drawPalm(Vector3 poistion);
 	void translateToNewPosition();
 	void rotateToNewAngle();
+	void applyJointRotation(ROBOT_JOINT joint);
 
 	public:
 		Robot();
 		void moveHead(float left, float right, float up, float down);
 		void draw();
 		void move(ROBOT_MOVE_DIRECTION direction);
+		void rotateHandJoint(ROBOT_JOINT joint);
 		void rotate();
 };
 

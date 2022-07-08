@@ -65,7 +65,7 @@ void display() {
     
     scene.draw();
 
-   // drawAxis();
+    drawAxis();
     glFlush();
     glutSwapBuffers();
 }
@@ -95,7 +95,10 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'd': scene.moveCamera(CAMERA_RIGHT); break; //Camera right
     case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
     case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
-    case 'r': scene.rotateRobot(); break; //Camera down
+    case 'r': scene.rotateRobot(); break; //Rotate Robot
+    case 't': scene.rotateRobotHand(ROBOT_SHOULDER); break;
+    case 'y': scene.rotateRobotHand(ROBOT_ELBOW); break;
+    case 'u': scene.rotateRobotHand(ROBOT_PALM); break;
     case 27:
         exit(1);
         break;
