@@ -53,10 +53,25 @@ void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type
 void Robot::drawHead()
 {
 	glPushMatrix();
-	glTranslatef(0, 4.75, 0);
-	glScalef(0.75, 0.75, 0.75);
-	glColor3f(0.0f, 1.0f, 1.0f);//Blue
-	glutSolidSphere(1.0, 100, 100);
+	glTranslatef(0, 5, 0);
+	//glScalef(0.75, 0.75, 0.75);
+	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
+	glutSolidCube(1.1);
+
+	glPushMatrix();
+	glTranslatef(0, -0.7, 0);
+	glutSolidCube(0.7);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.3, 0.1, 0.5);
+	glutSolidSphere(0.15, 10, 10);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0.3, 0.1, 0.5);
+	glutSolidSphere(0.15, 10, 10);
+	glPopMatrix();
 	glPopMatrix();
 }
 
