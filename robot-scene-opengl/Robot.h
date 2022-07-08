@@ -36,7 +36,7 @@ class Robot : SceneItem
 		Robot();
 		void moveHead(float left, float right, float up, float down);
 		void draw();
-		void move();
+		void move(ROBOT_MOVE_DIRECTION direction);
 		void rotate();
 };
 

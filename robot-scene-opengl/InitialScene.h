@@ -15,7 +15,7 @@ public:
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
 	void rotateCamera(int mouseX, int mouseY);
-	void moveRobot();
+	void moveRobot(ROBOT_MOVE_DIRECTION direction);
 	void rotateRobot();
 };
 

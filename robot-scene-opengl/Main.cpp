@@ -96,10 +96,6 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
     case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
     case 'r': scene.rotateRobot(); break; //Camera down
-    case GLUT_KEY_PAGE_UP: scene.moveRobot(); break;
-    case GLUT_KEY_PAGE_DOWN:  break;
-    case GLUT_KEY_HOME:  break;
-    case GLUT_KEY_END:  break;
     case 27:
         exit(1);
         break;
@@ -110,8 +106,8 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
 void MyGlutSpecialFunc(int Key, int x, int y) {
     switch (Key)
     {
-    case GLUT_KEY_UP: scene.moveRobot(); break;
-    case GLUT_KEY_PAGE_DOWN:  break;
+    case GLUT_KEY_UP: scene.moveRobot(ROBOT_MOVE_FRONT); break;
+    case GLUT_KEY_DOWN: scene.moveRobot(ROBOT_MOVE_BACK); break;
     case GLUT_KEY_HOME:  break;
     case GLUT_KEY_END:  break;
     case 27:

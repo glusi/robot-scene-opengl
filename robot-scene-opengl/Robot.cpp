@@ -97,9 +97,12 @@ void Robot::draw() {
 	glPopMatrix();
 }
 
-void Robot::move()
+void Robot::move(ROBOT_MOVE_DIRECTION direction)
 {
-	translated_position += move_direction;
+	if(direction == ROBOT_MOVE_FRONT)
+		translated_position += move_direction;
+	else
+		translated_position -= move_direction;
 }
 
 void Robot::rotate()

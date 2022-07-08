@@ -41,9 +41,9 @@ void InitialScene::rotateCamera(int mouseX, int mouseY)
 	camera->rotateCamera(mouseX, mouseY);
 }
 
-void InitialScene::moveRobot()
+void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction)
 {
-	robot->move();
+	robot->move(direction);
 }
 
 void InitialScene::rotateRobot()
