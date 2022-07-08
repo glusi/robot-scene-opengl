@@ -51,6 +51,22 @@ Vector3 Vector3::operator-=(Vector3& other)
 	return *this;
 }
 
+Vector3 Vector3::operator*=(float other)
+{
+	this->x *= other;
+	this->y *= other;
+	this->z *= other;
+	return *this;
+}
+
+Vector3 Vector3::operator*=(Vector3 other)
+{
+	this->x *= other.x;
+	this->y *= other.y;
+	this->z *= other.z;
+	return *this;
+}
+
 Vector3 Vector3::operator-(Vector3& other)
 {
 	return Vector3(x-other.x,y-other.y,z-other.z);

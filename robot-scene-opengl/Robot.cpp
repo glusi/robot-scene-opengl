@@ -63,10 +63,20 @@ void Robot::translateToNewPosition() {
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 }
 
+void Robot::rotateToNewAngle()
+{
+	glRotatef(angle, 0, 1, 0);
+}
+
 Robot::Robot()
 {
 	move_direction = Vector3(0, 0, 1);
 	translated_position = Vector3::zeroVector();
+	angle = 0.0;
+}
+
+void Robot::moveHead(float left, float right, float up, float down)
+{
 }
 
 void Robot::draw() {
@@ -80,6 +90,7 @@ void Robot::draw() {
 	
 	glPushMatrix();
 	translateToNewPosition();
+	rotateToNewAngle();
 	drawHead();
 	drawBody();
 	drawHand();
@@ -89,4 +100,11 @@ void Robot::draw() {
 void Robot::move()
 {
 	translated_position += move_direction;
+}
+
+void Robot::rotate()
+{
+	angle++;
+	move_direction = Vector3(sin(angle*(M_PI / 180)), 0, cos(angle * (M_PI / 180)));
+	move_direction.normalize();
 }

@@ -16,5 +16,6 @@ public:
 	void moveCamera(USER_ACTION_CAMERA action);
 	void rotateCamera(int mouseX, int mouseY);
 	void moveRobot();
+	void rotateRobot();
 };
 

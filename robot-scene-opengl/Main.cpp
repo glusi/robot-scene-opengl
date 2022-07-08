@@ -95,6 +95,7 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'd': scene.moveCamera(CAMERA_RIGHT); break; //Camera right
     case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
     case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
+    case 'r': scene.rotateRobot(); break; //Camera down
     case GLUT_KEY_PAGE_UP: scene.moveRobot(); break;
     case GLUT_KEY_PAGE_DOWN:  break;
     case GLUT_KEY_HOME:  break;

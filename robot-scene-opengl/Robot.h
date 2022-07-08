@@ -21,6 +21,7 @@ class Robot : SceneItem
 	};
 	Vector3 translated_position;
 	Vector3 move_direction;
+	float angle;
 
 	void drawHand();
 	void drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length);
@@ -29,12 +30,13 @@ class Robot : SceneItem
 	void drawJoint(Vector3 poistion);
 	void drawPalm(Vector3 poistion);
 	void translateToNewPosition();
+	void rotateToNewAngle();
 
 	public:
 		Robot();
-		void walk(float x, float y, float z);
-		void move_head(float left, float right, float up, float down);
+		void moveHead(float left, float right, float up, float down);
 		void draw();
 		void move();
+		void rotate();
 };
 

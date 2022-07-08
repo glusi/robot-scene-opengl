@@ -45,3 +45,8 @@ void InitialScene::moveRobot()
 {
 	robot->move();
 }
+
+void InitialScene::rotateRobot()
+{
+	robot->rotate();
+}
