@@ -7,8 +7,11 @@ class Robot : SceneItem
 {
 	const float ROBOT_HAND_SIZE = 0.25;
 	const float INITIAL_SHOULDER_ROTATION = 45;
-	const int HEAD_UP_OFFSET = 18;
-	const int HEAD_DOWN_OFFSET = 10;
+	const float INITIAL_ELBOW_ROTATION = 15;
+	const int HAND_UP_OFFSET = 18;
+	const int HAND_DOWN_OFFSET = 10;
+	const int ELBOW_UP_OFFSET = 10;
+	const int ELBOW_DOWN_OFFSET = 10;
 
 	materialStruct material1{
 		{0.33, 0.22, 0.03, 1.0}, // Ka
@@ -44,7 +47,7 @@ class Robot : SceneItem
 	void drawPalm(Vector3 poistion);
 	void translateToNewPosition();
 	void rotateToNewAngle();
-	void applyJointRotation(ROBOT_JOINT joint);
+	void applyJointRotationAndLift(ROBOT_JOINT joint);
 
 	public:
 		Robot();

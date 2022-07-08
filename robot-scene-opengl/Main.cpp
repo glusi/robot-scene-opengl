@@ -101,6 +101,8 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'u': scene.rotateRobotHand(ROBOT_PALM); break;
     case 'f': scene.liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
     case 'g': scene.liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
+    case 'h': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
+    case 'j': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
     case 27:
         exit(1);
         break;

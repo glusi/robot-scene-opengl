@@ -23,15 +23,15 @@ void Robot::drawHand()
 	glPushMatrix();
 	//glLoadIdentity();
 	drawJoint(shoulder_position_to_robot);
-	applyJointRotation(ROBOT_SHOULDER);
+	applyJointRotationAndLift(ROBOT_SHOULDER);
 	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_SHOULDER_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1.2);
 	drawJoint(elbow_position_to_robot);
 	glPushMatrix();
-	applyJointRotation(ROBOT_ELBOW);
-	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, 15, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
+	applyJointRotationAndLift(ROBOT_ELBOW);
+	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_ELBOW_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
 	drawJoint(palm_position_to_robot);
 	glPushMatrix();
-	applyJointRotation(ROBOT_PALM);
+	applyJointRotationAndLift(ROBOT_PALM);
 	drawPalm(palm_position_to_robot);
 	glPopMatrix();
 	glPopMatrix();
@@ -126,7 +126,7 @@ void Robot::move(ROBOT_MOVE_DIRECTION direction)
 		translated_position -= move_direction;
 }
 
-void Robot::applyJointRotation(ROBOT_JOINT joint)
+void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
@@ -140,6 +140,7 @@ void Robot::applyJointRotation(ROBOT_JOINT joint)
 	case ROBOT_ELBOW:
 		glTranslatef(elbow_position_to_robot.x, elbow_position_to_robot.y, shoulder_position_to_robot.z);
 		glRotatef(elbow_rotation, 1, 0, 0);
+		glRotatef(elbow_lift, 0, 0, 1);
 		glTranslatef(-elbow_position_to_robot.x, -elbow_position_to_robot.y, -shoulder_position_to_robot.z);
 		break;
 	case ROBOT_PALM:
@@ -170,18 +171,24 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
-		if ((shoulder_lift + INITIAL_SHOULDER_ROTATION > 90 - HEAD_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift + INITIAL_SHOULDER_ROTATION < -90 + HEAD_UP_OFFSET && action == ROBOT_HAND_DOWN))
+		if ((shoulder_lift + INITIAL_SHOULDER_ROTATION > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift + INITIAL_SHOULDER_ROTATION < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			shoulder_lift = shoulder_lift;
 		else {
 			if (action == ROBOT_HAND_UP)
 				shoulder_lift++;
 			else
 				shoulder_lift--;
-		}
-		
+		}	
 		break;
 	case ROBOT_ELBOW:
-		elbow_lift++;
+		if ((elbow_lift  > 180 - ELBOW_DOWN_OFFSET- INITIAL_ELBOW_ROTATION && action == ROBOT_HAND_UP) || (elbow_lift < -INITIAL_ELBOW_ROTATION -90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			elbow_lift = elbow_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				elbow_lift++;
+			else
+				elbow_lift--;
+		}
 		break;
 	case ROBOT_PALM:
 		palm_lift++;
