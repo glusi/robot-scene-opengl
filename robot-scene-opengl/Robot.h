@@ -12,6 +12,9 @@ class Robot : SceneItem
 	const int HAND_DOWN_OFFSET = 10;
 	const int ELBOW_UP_OFFSET = 10;
 	const int ELBOW_DOWN_OFFSET = 10;
+	const int PALM_DOWN_OFFSET = 5;
+	const int PALM_UP_OFFSET = 5;
+	const float INITIAL_PALM_ROTATION = 0;
 
 	materialStruct material1{
 		{0.33, 0.22, 0.03, 1.0}, // Ka
@@ -24,6 +27,12 @@ class Robot : SceneItem
 		{1.0, 1.0, 1.0, 1.0}, // Kd
 		{1.0, 1.0, 1.0, 1.0}, // Ks
 		2 // n
+	};
+	materialStruct material3{
+	{0.0, 1.0, 1.0, 1.0}, // Ka
+	{0.0, 1.0, 1.0, 1.0}, // Kd
+	{0.0, 1.0, 1.0, 1.0}, // Ks
+	2 // n
 	};
 	Vector3 translated_position;
 	Vector3 move_direction;
@@ -38,6 +47,9 @@ class Robot : SceneItem
 	Vector3 palm_position_to_robot;
 	float palm_rotation;
 	float palm_lift;
+	float head_rotation;
+	float head_lift;
+	Vector3 head_position;
 
 	void drawHand();
 	void drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length);
@@ -48,10 +60,12 @@ class Robot : SceneItem
 	void translateToNewPosition();
 	void rotateToNewAngle();
 	void applyJointRotationAndLift(ROBOT_JOINT joint);
+	void applyHeadRotationAndLift();
+	void applyMaterial(materialStruct maaterial, float emission);
 
 	public:
 		Robot();
-		void moveHead(float left, float right, float up, float down);
+		void moveHead(ROBOT_HEAD_MOVEMENT movement);
 		void draw();
 		void move(ROBOT_MOVE_DIRECTION direction);
 		void rotateHandJoint(ROBOT_JOINT joint);

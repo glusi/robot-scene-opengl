@@ -103,6 +103,10 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
     case 'g': scene.liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
     case 'h': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
     case 'j': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
+    case 'c': scene.moveRobotHead(ROBOT_HEAD_UP); break;
+    case 'v': scene.moveRobotHead(ROBOT_HEAD_DOWN); break;
+    case 'b': scene.moveRobotHead(ROBOT_HEAD_RIGHT); break;
+    case 'n': scene.moveRobotHead(ROBOT_HEAD_LEFT); break;
     case 27:
         exit(1);
         break;
@@ -157,6 +161,8 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
 
 //The Initialize function, called once:    
 void Init() {
+    glEnable(GL_NORMALIZE);
+    glDepthFunc(GL_LEQUAL);
     glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_SMOOTH);                            // Enable Smooth Shading
     glClearColor(0.0f, 0.0f, 0.0f, 0.5f);               // Black Background
@@ -164,6 +170,10 @@ void Init() {
     glEnable(GL_DEPTH_TEST);                            // Depth Buffer Setup                       // Enables Depth Testing
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
     glEnable(GL_LIGHTING);
+   // glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+   // glFrontFace(GL_CCW);
+   // glCullFace(GL_BACK);
+   // glEnable(GL_CULL_FACE);
 }
 
 int main(int argc, char** argv)

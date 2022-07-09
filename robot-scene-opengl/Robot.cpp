@@ -9,11 +9,14 @@ Robot::Robot()
 	elbow_rotation = 0.0;
 	palm_rotation = 0.0;
 	shoulder_position_to_robot = Vector3(-0.8, 3.5, 0);//Vector3(-0.8, 3.5, 0);
-	elbow_position_to_robot = Vector3(-1.7, 2.6, 0);
-	palm_position_to_robot = Vector3(-2.6, 2.35, 0);
+	elbow_position_to_robot = Vector3(-1.6, 2.7, 0);
+	palm_position_to_robot = Vector3(-2.4, 2.5, 0);
 	shoulder_lift = 0;
 	elbow_lift = 0;
 	palm_lift = 0;
+	head_rotation = 0;
+	head_lift = 0;
+	head_position = Vector3(0, 5, 0);
 }
 
 void Robot::drawHand()
@@ -24,11 +27,11 @@ void Robot::drawHand()
 	//glLoadIdentity();
 	drawJoint(shoulder_position_to_robot);
 	applyJointRotationAndLift(ROBOT_SHOULDER);
-	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_SHOULDER_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1.2);
+	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_SHOULDER_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
 	drawJoint(elbow_position_to_robot);
 	glPushMatrix();
 	applyJointRotationAndLift(ROBOT_ELBOW);
-	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_ELBOW_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
+	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_ELBOW_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 0.8);
 	drawJoint(palm_position_to_robot);
 	glPushMatrix();
 	applyJointRotationAndLift(ROBOT_PALM);
@@ -37,6 +40,12 @@ void Robot::drawHand()
 	glPopMatrix();
 	glPopMatrix();
 	
+	//Circle around shoulder
+	glPushMatrix();
+	glTranslatef(shoulder_position_to_robot.x, shoulder_position_to_robot.y, shoulder_position_to_robot.z);
+	glScalef(0.1, 1, 1);
+	glutSolidSphere(0.5, 10, 10);
+	glPopMatrix();
 }
 
 void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length)
@@ -53,7 +62,10 @@ void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type
 void Robot::drawHead()
 {
 	glPushMatrix();
-	glTranslatef(0, 5, 0);
+	applyHeadRotationAndLift();
+
+	glPushMatrix();
+	glTranslatef(head_position.x, head_position.y, head_position.z);
 	//glScalef(0.75, 0.75, 0.75);
 	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
 	glutSolidCube(1.1);
@@ -63,6 +75,7 @@ void Robot::drawHead()
 	glutSolidCube(0.7);
 	glPopMatrix();
 
+	applyMaterial(material3,1);
 	glPushMatrix();
 	glTranslatef(0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);
@@ -73,12 +86,18 @@ void Robot::drawHead()
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
 
+	applyMaterial(material2,0);
+
 	glPushMatrix();
 	glTranslatef(0, -0.3, 0.55);
 	glScalef(5, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
 	glPopMatrix();
+
+	glPopMatrix();
+
+	applyMaterial(material1, 1);
 }
 
 void Robot::drawBody()
@@ -99,9 +118,31 @@ void Robot::drawJoint(Vector3 position)
 	glPopMatrix();
 }
 
-void Robot::drawPalm(Vector3 poistion)
+void Robot::drawPalm(Vector3 position)
 {
+	glPushMatrix();
+	glTranslatef(position.x-0.3, position.y, position.z);
+	glScalef(1, 1, 1);
+	glutSolidCube(0.5);
+	glPopMatrix();
 
+	/*glPushMatrix();
+	glTranslatef(position.x-0.7, position.y, position.z);
+	glScalef(3.5, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(position.x - 0.7, position.y, position.z+0.2);
+	glScalef(3.5, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(position.x - 0.7, position.y, position.z - 0.2);
+	glScalef(3.5, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();*/
 }
 
 void Robot::translateToNewPosition() {
@@ -113,23 +154,22 @@ void Robot::rotateToNewAngle()
 	glRotatef(angle, 0, 1, 0);
 }
 
-
-
-
-
-void Robot::moveHead(float left, float right, float up, float down)
+void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement)
 {
+	if (movement == ROBOT_HEAD_UP)
+		head_lift++;
+	if (movement == ROBOT_HEAD_DOWN)
+		head_lift--;
+	if (movement == ROBOT_HEAD_RIGHT)
+		head_rotation++;
+	if (movement == ROBOT_HEAD_LEFT)
+		head_rotation--;
 }
+
 
 void Robot::draw() {
 	
-	glColor3f(0.0f, 1.0f, 1.0f);//Blue
-	glMaterialfv(GL_FRONT, GL_AMBIENT, material1.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, material1.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, material1.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, material1.Kd);
-	glMaterialf(GL_FRONT, GL_EMISSION, 0);
-	
+	applyMaterial(material1, 0);
 	glPushMatrix();
 	translateToNewPosition();
 	rotateToNewAngle();
@@ -167,9 +207,27 @@ void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 	case ROBOT_PALM:
 		glTranslatef(-palm_position_to_robot.x, -palm_position_to_robot.y, -palm_position_to_robot.z);
 		glRotatef(palm_rotation, 1, 0, 0);
+		glRotatef(palm_lift, 0, 0, 1);
 		glTranslatef(palm_position_to_robot.x, palm_position_to_robot.y, palm_position_to_robot.z);
 		break;
 	};
+}
+
+void Robot::applyHeadRotationAndLift()
+{
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glRotatef(head_rotation, 1, 0, 0);
+	glRotatef(head_lift, 0, 1, 0);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
+}
+
+void Robot::applyMaterial(materialStruct maaterial, float emmision)
+{
+	glMaterialfv(GL_FRONT, GL_AMBIENT, maaterial.Ka);
+	glMaterialf(GL_FRONT, GL_SHININESS, maaterial.n);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, maaterial.Ks);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, maaterial.Kd);
+	glMaterialf(GL_FRONT, GL_EMISSION, emmision);
 }
 
 
@@ -212,7 +270,14 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 		}
 		break;
 	case ROBOT_PALM:
-		palm_lift++;
+		if ((palm_lift > 180 - PALM_DOWN_OFFSET - INITIAL_PALM_ROTATION && action == ROBOT_HAND_UP) || (palm_lift < -INITIAL_PALM_ROTATION - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			palm_lift = palm_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				palm_lift++;
+			else
+				palm_lift--;
+		}
 		break;
 	};
 }

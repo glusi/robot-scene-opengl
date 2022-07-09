@@ -60,3 +60,8 @@ void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	robot->liftHandJoint(joint, action);
 }
+
+void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement)
+{
+	robot->moveHead(movement);
+}
