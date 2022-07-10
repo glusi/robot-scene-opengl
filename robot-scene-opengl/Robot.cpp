@@ -121,28 +121,41 @@ void Robot::drawJoint(Vector3 position)
 void Robot::drawPalm(Vector3 position)
 {
 	glPushMatrix();
-	glTranslatef(position.x-0.3, position.y, position.z);
-	glScalef(1, 1, 1);
+	glTranslatef(position.x-0.45, position.y, position.z);
+	glScalef(1, 0.3, 1.2);
 	glutSolidCube(0.5);
 	glPopMatrix();
 
-	/*glPushMatrix();
-	glTranslatef(position.x-0.7, position.y, position.z);
-	glScalef(3.5, 1, 1);
+	glPushMatrix();
+	glTranslatef(position.x-0.85, position.y, position.z + 0.09);
+	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(position.x - 0.7, position.y, position.z+0.2);
-	glScalef(3.5, 1, 1);
+	glTranslatef(position.x - 0.85, position.y, position.z - 0.09);
+	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(position.x - 0.7, position.y, position.z - 0.2);
-	glScalef(3.5, 1, 1);
+	glTranslatef(position.x - 0.85, position.y, position.z+0.26);
+	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
-	glPopMatrix();*/
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(position.x - 0.85, position.y, position.z - 0.26);
+	glScalef(3, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(position.x - 0.55, position.y, position.z - 0.4);;
+	glRotatef(-45, 0, 1, 0);
+	glScalef(3, 1, 1);
+	glutSolidCube(0.1);
+	glPopMatrix();
 }
 
 void Robot::translateToNewPosition() {
@@ -216,8 +229,8 @@ void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 void Robot::applyHeadRotationAndLift()
 {
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	glRotatef(head_rotation, 1, 0, 0);
-	glRotatef(head_lift, 0, 1, 0);
+	glRotatef(head_rotation, 0, 1, 0);
+	glRotatef(head_lift, -1, 0, 0);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 }
 
