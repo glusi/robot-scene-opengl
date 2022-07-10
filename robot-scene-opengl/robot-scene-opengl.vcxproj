@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Gui.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Gui.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="resource.h" />

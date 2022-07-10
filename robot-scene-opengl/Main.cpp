@@ -10,7 +10,7 @@
 using namespace std;
 #include "InitialScene.h"
 #include "Constants.h"
-
+#include "Gui.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -60,12 +60,12 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    setPrespProjection();
-    
-    
+    setPrespProjection();   
     scene.draw();
-
     drawAxis();
+    Gui gui;
+    gui.draw();
+    
     glFlush();
     glutSwapBuffers();
 }
