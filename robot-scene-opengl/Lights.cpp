@@ -14,9 +14,9 @@ void Lights::draw() {
 	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 
 	GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
-	GLfloat diffuse0[] = { 0.0, 1.0, 0.0, 1.0 }; // Id term - Red
+	GLfloat diffuse0[] = { 1.0, 1.0, 1.0, 1.0 }; // Id term - Red
 	GLfloat specular0[] = { 1.0, 1.0, 1.0, 1.0 }; // Is term - White
-	GLfloat ambient0[] = { 0.2, 0.2, 0.2, 1.0 }; // Ia term - Gray
+	GLfloat ambient0[] = { 0.0, 0.0, 0.0, 1.0 }; // Ia term - Gray
 //	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, position0);

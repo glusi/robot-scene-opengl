@@ -3,11 +3,11 @@
 
 class Floor : SceneItem
 {
-	materialStruct red_shiny_plastic{
-		{0.0, 0.0, 0.3, 1.0}, // Ka
-		{0.0, 0.0, 0.6, 1.0}, // Kd
-		{0.8, 0.6, 0.6, 1.0}, // Ks
-		100.0 // n
+	materialStruct floor_material{
+		{0.05f,0.05f,0.05f,1.0f}, // Ka
+		{0.5f,0.5f,0.5f,1.0f}, // Kd
+		{0.7f,0.7f,0.04f,1.0f}, // Ks
+		11.3 // n
 		};
 	public:
 		void draw();
