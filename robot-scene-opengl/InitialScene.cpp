@@ -1,5 +1,77 @@
 #include "InitialScene.h"
 
+void InitialScene::addDecorations()
+{
+	glPushMatrix();
+	glTranslatef(-2, 0, -6);
+	//Table top
+	glPushMatrix();
+	glTranslatef(0, 4, 0);
+	glScalef(6, 0.2, 4);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	/*glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
+	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
+	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
+	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);*/
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, silver.Ka);
+	glMaterialf(GL_FRONT, GL_SHININESS, silver.n);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, silver.Ks);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, silver.Kd);
+	//Table legs
+	glPushMatrix();
+	glTranslatef(-2.5, 0, -1.5);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 4, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(2.5, 0, -1.5);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 4, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-2.5, 0, 1.5);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 4, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(2.5, 0, 1.5);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 4, 10, 5);
+	glPopMatrix();
+	//Teapot
+	glMaterialfv(GL_FRONT, GL_AMBIENT, polished_copper.Ka);
+	glMaterialf(GL_FRONT, GL_SHININESS, polished_copper.n);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, polished_copper.Ks);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, polished_copper.Kd);
+	glPushMatrix();
+	glTranslatef(0, 5, 0);
+	glutSolidTeapot(1);
+	glPopMatrix();
+	//Glasses
+	glMaterialfv(GL_FRONT, GL_AMBIENT, glass.Ka);
+	glMaterialf(GL_FRONT, GL_SHININESS, glass.n);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, glass.Ks);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, glass.Kd);
+	glPushMatrix();
+	glTranslatef(-2, 5, 0);
+	glRotatef(90, 1, 0, 0);
+	Tools::drawCylinder(0.25,1,100);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
 InitialScene::InitialScene() {
 	camera = new Camera();
 	floor = new Floor();
@@ -29,6 +101,7 @@ void InitialScene::draw() {
 	lights->draw();
 	floor->draw();
 	robot->draw();
+	addDecorations();
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)

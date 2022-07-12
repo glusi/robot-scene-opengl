@@ -8,15 +8,15 @@ Lights::Lights() :
 
 
 void Lights::draw() {
-	GLfloat light_pos[] = { 0.0, 2.0, 5.0, 1.0 };
+	GLfloat light_pos[] = { 0.0, 2.0, 9.0, 1.0 };
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 
 	GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
-	GLfloat diffuse0[] = { 1.0, 1.0, 1.0, 1.0 }; 
-	GLfloat specular0[] = { 1.0, 1.0, 1.0, 1.0 }; 
-	GLfloat ambient0[] = { 0.0, 0.0, 0.0, 1.0 }; 
+	GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
+	GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
+	GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
 //	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, position0);

@@ -3,6 +3,7 @@
 #include "Robot.h"
 #include "Lights.h"
 #include "Camera.h"
+#include "SceneItem.h"
 
 class InitialScene
 {
@@ -10,6 +11,8 @@ class InitialScene
 	Lights* lights;
 	Robot* robot;
 	Camera* camera;
+	void addDecorations();
+	
 public:
 	InitialScene();
 	void draw();

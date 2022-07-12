@@ -12,7 +12,7 @@ void Floor::draw() {
 	glPushMatrix();
 	//glBegin(GL_QUADS);
 	glNormal3d(0, 1, 0);
-	glEnable(GL_NORMALIZE);
+	//glEnable(GL_NORMALIZE);
 
 	glColor3f(0, 0, 1);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, floor_material.Ka);

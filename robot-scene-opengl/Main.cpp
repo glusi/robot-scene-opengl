@@ -193,7 +193,26 @@ void Init() {
     {
         std::cout << "Failed to load texture" << std::endl;
     }
-    stbi_image_free(data);
+    /*stbi_image_free(data);
+    unsigned int texture2;
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    int width2, height2, nrChannels2;
+    unsigned char* data2 = stbi_load(TABLE_TEXTURE_PATH, &width2, &height2, &nrChannels2, 3);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    if (data2)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height2, 0, GL_RGB, GL_UNSIGNED_BYTE, data2);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data2);*/
 }
 
 int main(int argc, char** argv)

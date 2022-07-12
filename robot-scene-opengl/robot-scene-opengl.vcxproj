@@ -167,6 +167,7 @@
     <ClInclude Include="Gui.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Lights.h" />
+    <ClInclude Include="Materials.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SceneItem.h" />
