@@ -1,6 +1,11 @@
 #include "Floor.h"
 
 
+Floor::Floor()
+{
+	texture = Texture("..\\Assets\\Cat03.jpg");
+}
+
 
 void Floor::draw() {
 	int grid_size_x = 10;
@@ -10,7 +15,7 @@ void Floor::draw() {
 	GLfloat color[4] = { 0,0,1,1 };
 
 	glPushMatrix();
-	glBegin(GL_QUADS);
+	//glBegin(GL_QUADS);
 	glNormal3d(0, 1, 0);
 	glEnable(GL_NORMALIZE);
 
@@ -23,12 +28,11 @@ void Floor::draw() {
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{
-			glVertex3f(x * tile_size_x,0, y * tile_size_y);
-			glVertex3f((x + 1) * tile_size_x, 0, y * tile_size_y);
-			glVertex3f((x + 1) * tile_size_x, 0, (y + 1) * tile_size_y);
-			glVertex3f(x * tile_size_x, 0, (y + 1) * tile_size_y);
+			texture.mapTexture(x, y, tile_size_x, tile_size_y);
 		}
-	glEnd();
+	//glEnd();
 	glPopMatrix();
+
+	
 
 }

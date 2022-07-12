@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/third-party/freeglut/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/third-party/freeglut/include/;$(SolutionDir)/third-party/imagui/;$(SolutionDir)/third-party/stb/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\third-party\imagui\imgui.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_demo.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_draw.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_impl_glut.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_tables.cpp" />
+    <ClCompile Include="..\third-party\imagui\imgui_widgets.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Gui.cpp" />
@@ -157,6 +165,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="SceneItem.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
@@ -170,6 +180,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SceneItem.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>

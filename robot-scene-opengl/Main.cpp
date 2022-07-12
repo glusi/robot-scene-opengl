@@ -10,7 +10,13 @@
 using namespace std;
 #include "InitialScene.h"
 #include "Constants.h"
-#include "Gui.h"
+
+//#include "Gui.h"
+//#include "../third-party/imagui/imgui.h"
+//#include "../third-party/imagui/imgui_impl_glut.h"
+//#include "../third-party/imagui/imgui_impl_opengl3.h"
+//#include <imgui_impl_opengl3.h>
+//#include <imgui_impl_opengl3_loader.h>
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -62,9 +68,9 @@ void display() {
 
     setPrespProjection();   
     scene.draw();
-    drawAxis();
+   /* drawAxis();
     Gui gui;
-    gui.draw();
+    gui.draw();*/
     
     glFlush();
     glutSwapBuffers();
@@ -174,6 +180,35 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
+
+    // Setup ImGui binding
+   /* ImGui::CreateContext();
+    ImGui_ImplGLUT_Init();
+    ImGui_ImplGLUT_InstallFuncs();
+    ImGui_ImplOpenGL3_Init();*/
+
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    int width, height, nrChannels;
+    unsigned char* data = stbi_load("..\\Assets\\container.jpg", &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+      //  glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE)
+        // glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
 }
 
 int main(int argc, char** argv)

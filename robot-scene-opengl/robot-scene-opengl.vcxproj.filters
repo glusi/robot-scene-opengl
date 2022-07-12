@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\imagui">
+      <UniqueIdentifier>{fc152cb4-323d-493e-a6f0-11665a10d5ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Floor.cpp">
@@ -43,6 +46,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_widgets.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_demo.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_draw.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_impl_glut.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_impl_opengl2.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\imagui\imgui_tables.cpp">
+      <Filter>Source Files\imagui</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
