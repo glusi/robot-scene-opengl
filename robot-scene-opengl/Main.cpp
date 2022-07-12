@@ -67,6 +67,7 @@ void display() {
     glClear(GL_DEPTH_BUFFER_BIT);
 
     setPrespProjection();   
+    scene = InitialScene();
     scene.draw();
    /* drawAxis();
     Gui gui;

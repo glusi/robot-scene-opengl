@@ -89,8 +89,7 @@ void Texture::mapTexture(float x, float y, float tile_size_x, float tile_size_y)
 	glTexCoord2f(1.0, 0.0); glVertex3f(x * tile_size_x, 0, (y + 1) * tile_size_y);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-	GLenum res = glGetError();
-	int i;
+	
 }
 
 Texture::Texture(std::string name)

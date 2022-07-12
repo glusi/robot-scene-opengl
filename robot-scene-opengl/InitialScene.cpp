@@ -3,8 +3,8 @@
 InitialScene::InitialScene() {
 	camera = new Camera();
 	floor = new Floor();
-//	lights = new Lights();
-//	robot = new Robot();
+	lights = new Lights();
+	robot = new Robot();
 	/*glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glFrontFace(GL_CCW);
@@ -28,7 +28,7 @@ void InitialScene::draw() {
 	camera->draw();
 	lights->draw();
 	floor->draw();
-	//robot->draw();
+	robot->draw();
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)
