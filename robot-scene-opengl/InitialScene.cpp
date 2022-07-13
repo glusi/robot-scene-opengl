@@ -5,20 +5,22 @@ void InitialScene::addDecorations()
 	glPushMatrix();
 	glTranslatef(-2, 0, -6);
 	//Table top
+	glColor3f(0.5f, 0.35f, 0.05f);
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glScalef(6, 0.2, 4);
 	glutSolidCube(1);
 	glPopMatrix();
 
-	/*glEnable(GL_TEXTURE_2D);
+	texture.bindTexture(TEXTURE_TABLE);
+	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
 	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
 	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
 	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
 	glEnd();
-	glDisable(GL_TEXTURE_2D);*/
+	glDisable(GL_TEXTURE_2D);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, silver.Ka);
 	glMaterialf(GL_FRONT, GL_SHININESS, silver.n);
@@ -73,6 +75,7 @@ void InitialScene::addDecorations()
 }
 
 InitialScene::InitialScene() {
+	texture = Texture();
 	camera = new Camera();
 	floor = new Floor();
 	lights = new Lights();
@@ -99,6 +102,7 @@ InitialScene::InitialScene() {
 void InitialScene::draw() {
 	camera->draw();
 	lights->draw();
+	texture.bindTexture(TEXTURE_FLOOR);
 	floor->draw();
 	robot->draw();
 	addDecorations();

@@ -13,6 +13,7 @@ using namespace std;
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
 constexpr auto WINDOW_HEIGHT = 500;
@@ -26,6 +27,7 @@ InitialScene scene;
 
 bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
+
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -175,24 +177,7 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int width, height, nrChannels;
-    unsigned char* data = stbi_load(FLOOR_TEXTURE_PATH, &width, &height, &nrChannels, 3);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
+    scene = InitialScene();
     /*stbi_image_free(data);
     unsigned int texture2;
     glGenTextures(1, &texture2);

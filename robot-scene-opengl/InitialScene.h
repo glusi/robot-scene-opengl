@@ -4,6 +4,7 @@
 #include "Lights.h"
 #include "Camera.h"
 #include "SceneItem.h"
+#include "Texture.h"
 
 class InitialScene
 {
@@ -12,7 +13,7 @@ class InitialScene
 	Robot* robot;
 	Camera* camera;
 	void addDecorations();
-	
+	Texture texture;
 public:
 	InitialScene();
 	void draw();

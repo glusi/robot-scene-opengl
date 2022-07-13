@@ -24,6 +24,10 @@ typedef enum {
 	ROBOT_HEAD_UP, ROBOT_HEAD_DOWN, ROBOT_HEAD_RIGHT, ROBOT_HEAD_LEFT
 }ROBOT_HEAD_MOVEMENT;
 
+typedef enum {
+	TEXTURE_FLOOR, TEXTURE_TABLE
+}TEXTURE_TYPE;
+
 static const char* FLOOR_TEXTURE_PATH = "..//Assets//floor-tiles.jpg";
 static const char* TABLE_TEXTURE_PATH = "..//Assets//wood.jpg";
 
