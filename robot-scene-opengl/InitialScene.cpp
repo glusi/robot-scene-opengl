@@ -50,16 +50,30 @@ void InitialScene::addDecorations()
 	//Teapot
 	Tools::assignMaterial(polished_copper);
 	glPushMatrix();
-	glTranslatef(0, 5, 0);
+	glTranslatef(1, 5, 0);
+	glRotatef(-200, 0, 1, 0);
 	glutSolidTeapot(1);
 	glPopMatrix();
+
 	//Glasses
-	Tools::assignMaterial(glass);
+	glEnable(GL_COLOR_MATERIAL);
+	//Tools::assignMaterial(glass);
+	glColor4f(0.0f, 1.0f, 1.0f, 0.5);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	glPushMatrix();
 	glTranslatef(-2, 5, 0);
 	glRotatef(90, 1, 0, 0);
 	Tools::drawCylinder(0.25,1,100);
 	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-1.2, 5, 1);
+	glRotatef(90, 1, 0, 0);
+	Tools::drawCylinder(0.25, 1, 100);
+	glPopMatrix();
+	glDisable(GL_BLEND);
+	glDisable(GL_COLOR_MATERIAL);
 
 	glPopMatrix();
 }
