@@ -21,7 +21,7 @@ void InitialScene::addDecorations()
 	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-	assignMaterial(silver);
+	Tools::assignMaterial(silver);
 	//Table legs
 	glPushMatrix();
 	glTranslatef(-2.5, 0, -1.5);
@@ -48,13 +48,13 @@ void InitialScene::addDecorations()
 	glutSolidCylinder(0.1, 4, 10, 5);
 	glPopMatrix();
 	//Teapot
-	assignMaterial(polished_copper);
+	Tools::assignMaterial(polished_copper);
 	glPushMatrix();
 	glTranslatef(0, 5, 0);
 	glutSolidTeapot(1);
 	glPopMatrix();
 	//Glasses
-	assignMaterial(glass);
+	Tools::assignMaterial(glass);
 	glPushMatrix();
 	glTranslatef(-2, 5, 0);
 	glRotatef(90, 1, 0, 0);

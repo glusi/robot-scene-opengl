@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glut.h>
 
+
 typedef struct materialStruct {
 	GLfloat Ka[4];
 	GLfloat Kd[4];
@@ -34,9 +35,4 @@ static const materialStruct floor_material{
 		5.3 // n
 };
 
-static void assignMaterial(materialStruct  material) {
-	glMaterialfv(GL_FRONT, GL_AMBIENT, material.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, material.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, material.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, material.Kd);
-}
+
