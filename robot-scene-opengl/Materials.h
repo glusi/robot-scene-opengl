@@ -33,3 +33,10 @@ static const materialStruct floor_material{
 		{0.7f,0.7f,0.04f,1.0f}, // Ks
 		5.3 // n
 };
+
+static void assignMaterial(materialStruct  material) {
+	glMaterialfv(GL_FRONT, GL_AMBIENT, material.Ka);
+	glMaterialf(GL_FRONT, GL_SHININESS, material.n);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, material.Ks);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, material.Kd);
+}

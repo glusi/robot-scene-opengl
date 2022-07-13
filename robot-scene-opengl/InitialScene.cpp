@@ -21,11 +21,7 @@ void InitialScene::addDecorations()
 	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, silver.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, silver.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, silver.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, silver.Kd);
+	assignMaterial(silver);
 	//Table legs
 	glPushMatrix();
 	glTranslatef(-2.5, 0, -1.5);
@@ -52,19 +48,13 @@ void InitialScene::addDecorations()
 	glutSolidCylinder(0.1, 4, 10, 5);
 	glPopMatrix();
 	//Teapot
-	glMaterialfv(GL_FRONT, GL_AMBIENT, polished_copper.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, polished_copper.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, polished_copper.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, polished_copper.Kd);
+	assignMaterial(polished_copper);
 	glPushMatrix();
 	glTranslatef(0, 5, 0);
 	glutSolidTeapot(1);
 	glPopMatrix();
 	//Glasses
-	glMaterialfv(GL_FRONT, GL_AMBIENT, glass.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, glass.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, glass.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, glass.Kd);
+	assignMaterial(glass);
 	glPushMatrix();
 	glTranslatef(-2, 5, 0);
 	glRotatef(90, 1, 0, 0);
