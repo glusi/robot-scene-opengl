@@ -13,6 +13,7 @@ public:
 	Gui();
 	Gui(std::list<Button> new_list);
 	void draw();
+	void drawText(float x, float y, std::string text, Vector3 color);
 	void drawAllButtons();
 };
 

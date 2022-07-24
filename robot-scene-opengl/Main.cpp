@@ -155,7 +155,45 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
         }
         
     }*/
+    GLint viewport[4];
+    GLdouble mvmatrix[16], projmatrix[16];
+    GLint realy; /* OpenGL y coordinate position */
+    GLdouble wx, wy, wz; /* returned world x, y, z coords */
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    glGetDoublev(GL_MODELVIEW_MATRIX, mvmatrix);
+    glGetDoublev(GL_PROJECTION_MATRIX, projmatrix);
+    /* note viewport[3] is height of window in pixels */
+    realy = viewport[3] - (GLint)ypos - 1;
+    gluUnProject((GLdouble)xpos, (GLdouble)realy, 0.0, mvmatrix, projmatrix, viewport, &wx, &wy, &wz);
+    printf("World coords at z = 0.0 are(% f, % f, % f)\n", wx, wy, wz);
 
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        for (Button button : buttons) {
+            //Check if the click was inside the 'exit' button
+            if (wx >= button.position.x && wx <= button.position.x+button.width && wy >= button.position.y && wy <= button.position.y+button.length)
+            {
+               cout<<"clicked "+ button.name<<endl;
+               button.function();
+            }
+        }
+    }
+}
+
+void exitFunc() {
+    exit(0);
+}
+
+void helpFunc() {
+   
+}
+
+std::list<Button> makeButtons() {
+    list<Button> res = *(new list<Button>());
+    res.push_back(Button(Vector3(-85, -80, 0), 10.0, 11.0, "exit", exitFunc));
+    res.push_back(Button(Vector3(-85, 20, 0), 10.0, 13.0, "help", helpFunc));
+    return res;
 }
 
 //The Initialize function, called once:    
@@ -173,7 +211,7 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
-
+    buttons = makeButtons();
     scene = InitialScene(buttons);
 
     
