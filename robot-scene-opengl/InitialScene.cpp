@@ -58,7 +58,7 @@ void InitialScene::addDecorations()
 	//Glasses
 	glEnable(GL_COLOR_MATERIAL);
 	//Tools::assignMaterial(glass);
-	glColor4f(0.0f, 1.0f, 1.0f, 0.5);
+	glColor4f(0.0f, 1.0f, 1.0f, 0.4);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glPushMatrix();
@@ -78,12 +78,22 @@ void InitialScene::addDecorations()
 	glPopMatrix();
 }
 
-InitialScene::InitialScene() {
+InitialScene::InitialScene()
+{
 	texture = Texture();
 	camera = new Camera();
 	floor = new Floor();
 	lights = new Lights();
 	robot = new Robot();
+}
+
+InitialScene::InitialScene(std::list<Button> buttons) {
+	texture = Texture();
+	camera = new Camera();
+	floor = new Floor();
+	lights = new Lights();
+	robot = new Robot();
+	gui = Gui(buttons);
 	/*glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glFrontFace(GL_CCW);
@@ -110,6 +120,8 @@ void InitialScene::draw() {
 	floor->draw();
 	robot->draw();
 	addDecorations();
+	texture.bindTexture(TEXTURE_BACKGROUND);
+	gui.draw();
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)

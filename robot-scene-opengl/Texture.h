@@ -6,7 +6,7 @@
 #include <iostream>
 class Texture
 {
-	GLuint textures[2];
+	GLuint textures[3];
 	void loadTexture(unsigned int texture, const char* texture_path);
 public:
 	Texture();

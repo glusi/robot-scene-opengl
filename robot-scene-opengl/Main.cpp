@@ -13,7 +13,6 @@ using namespace std;
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
 constexpr auto WINDOW_HEIGHT = 500;
@@ -28,6 +27,7 @@ InitialScene scene;
 bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
 
+std::list<Button> buttons;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -35,7 +35,6 @@ void setPrespProjection() {
     glLoadIdentity();
     gluPerspective(65, new_width / new_height, 1.0, 150.0);
 }
-
 
 //Draw axises X,Y and Z for reference and as shown in the assignment
 void drawAxis() {
@@ -66,9 +65,7 @@ void display() {
     setPrespProjection();   
     scene.draw();
     drawAxis();
-    Gui gui;
-    gui.draw();
-    
+ 
     glFlush();
     glutSwapBuffers();
 }
@@ -90,8 +87,7 @@ void windowResize(int width, int height) {
 void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
     switch (Key)
-    {
-    
+    { 
     case 'w': scene.moveCamera(CAMERA_FRONT); break; //Camera front
     case 'a': scene.moveCamera(CAMERA_LEFT); break; //Camera left
     case 's': scene.moveCamera(CAMERA_BACK); break; //Camera back
@@ -177,27 +173,10 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
-    scene = InitialScene();
-    /*stbi_image_free(data);
-    unsigned int texture2;
-    glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int width2, height2, nrChannels2;
-    unsigned char* data2 = stbi_load(TABLE_TEXTURE_PATH, &width2, &height2, &nrChannels2, 3);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    if (data2)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height2, 0, GL_RGB, GL_UNSIGNED_BYTE, data2);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data2);*/
+
+    scene = InitialScene(buttons);
+
+    
 }
 
 int main(int argc, char** argv)
@@ -215,6 +194,8 @@ int main(int argc, char** argv)
     glutMouseFunc(MyMouseFunc);
     glutSpecialUpFunc(MyGlutSpecialFunc);
     glutMainLoop();
+
+
     return 0;
 }
 

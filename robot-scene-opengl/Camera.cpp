@@ -10,7 +10,7 @@ void Camera::updateCamera() {
 
 Camera::Camera()
 {
-	eye = Vector3(-4.0, 12.0, 8.0);
+	eye = Vector3(-4.0, 10.0, 8.0);
 	center = Vector3();
 	upz = Vector3(0.0, 1.0, 0.0);
 

@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "SceneItem.h"
 #include "Texture.h"
+#include "Gui.h"
 
 class InitialScene
 {
@@ -14,8 +15,10 @@ class InitialScene
 	Camera* camera;
 	void addDecorations();
 	Texture texture;
+	Gui gui;
 public:
 	InitialScene();
+	InitialScene(std::list<Button> buttons);
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
 	void rotateCamera(int mouseX, int mouseY);
