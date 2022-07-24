@@ -1,21 +1,15 @@
 #pragma once
-#include "Tools.h"
-#include <string>
-#include <fstream>
-#include <stdint.h>
+#include <GL/glut.h>
+#include <GL\freeglut.h>
+#include "Constants.h"
 #include "stb_image.h"
 #include <iostream>
 class Texture
 {
-	std::string file_name;
-	unsigned char* Image_data;
-	GLuint texName;
-	GLsizei width;
-	GLsizei height;
-public: 
-	void loadTexture();
-	void mapTexture(float x, float y, float tile_size_x, float tile_size_y);
-	Texture(std::string name);
+	GLuint textures[3];
+	void loadTexture(unsigned int texture, const char* texture_path);
+public:
 	Texture();
+	void bindTexture(TEXTURE_TYPE texture);
 };
 

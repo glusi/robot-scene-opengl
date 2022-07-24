@@ -9,14 +9,9 @@
 #include <vector>
 using namespace std;
 #include "InitialScene.h"
-#include "Constants.h"
-
-//#include "Gui.h"
-//#include "../third-party/imagui/imgui.h"
-//#include "../third-party/imagui/imgui_impl_glut.h"
-//#include "../third-party/imagui/imgui_impl_opengl3.h"
-//#include <imgui_impl_opengl3.h>
-//#include <imgui_impl_opengl3_loader.h>
+#include "Gui.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -32,13 +27,14 @@ InitialScene scene;
 bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
 
+std::list<Button> buttons;
+
 // Set Perspective projection
 void setPrespProjection() {
     glMatrixMode(GL_PROJECTION); // Set projection
     glLoadIdentity();
     gluPerspective(65, new_width / new_height, 1.0, 150.0);
 }
-
 
 //Draw axises X,Y and Z for reference and as shown in the assignment
 void drawAxis() {
@@ -67,12 +63,9 @@ void display() {
     glClear(GL_DEPTH_BUFFER_BIT);
 
     setPrespProjection();   
-    scene = InitialScene();
     scene.draw();
-   /* drawAxis();
-    Gui gui;
-    gui.draw();*/
-    
+    drawAxis();
+ 
     glFlush();
     glutSwapBuffers();
 }
@@ -94,8 +87,7 @@ void windowResize(int width, int height) {
 void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
     switch (Key)
-    {
-    
+    { 
     case 'w': scene.moveCamera(CAMERA_FRONT); break; //Camera front
     case 'a': scene.moveCamera(CAMERA_LEFT); break; //Camera left
     case 's': scene.moveCamera(CAMERA_BACK); break; //Camera back
@@ -163,7 +155,45 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
         }
         
     }*/
+    GLint viewport[4];
+    GLdouble mvmatrix[16], projmatrix[16];
+    GLint realy; /* OpenGL y coordinate position */
+    GLdouble wx, wy, wz; /* returned world x, y, z coords */
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    glGetDoublev(GL_MODELVIEW_MATRIX, mvmatrix);
+    glGetDoublev(GL_PROJECTION_MATRIX, projmatrix);
+    /* note viewport[3] is height of window in pixels */
+    realy = viewport[3] - (GLint)ypos - 1;
+    gluUnProject((GLdouble)xpos, (GLdouble)realy, 0.0, mvmatrix, projmatrix, viewport, &wx, &wy, &wz);
+    printf("World coords at z = 0.0 are(% f, % f, % f)\n", wx, wy, wz);
 
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        for (Button button : buttons) {
+            //Check if the click was inside the 'exit' button
+            if (wx >= button.position.x && wx <= button.position.x+button.width && wy >= button.position.y && wy <= button.position.y+button.length)
+            {
+               cout<<"clicked "+ button.name<<endl;
+               button.function();
+            }
+        }
+    }
+}
+
+void exitFunc() {
+    exit(0);
+}
+
+void helpFunc() {
+   
+}
+
+std::list<Button> makeButtons() {
+    list<Button> res = *(new list<Button>());
+    res.push_back(Button(Vector3(-85, -80, 0), 10.0, 11.0, "exit", exitFunc));
+    res.push_back(Button(Vector3(-85, 20, 0), 10.0, 13.0, "help", helpFunc));
+    return res;
 }
 
 //The Initialize function, called once:    
@@ -181,35 +211,10 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
+    buttons = makeButtons();
+    scene = InitialScene(buttons);
 
-    // Setup ImGui binding
-   /* ImGui::CreateContext();
-    ImGui_ImplGLUT_Init();
-    ImGui_ImplGLUT_InstallFuncs();
-    ImGui_ImplOpenGL3_Init();*/
-
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    int width, height, nrChannels;
-    unsigned char* data = stbi_load("..\\Assets\\container.jpg", &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-      //  glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE)
-        // glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
+    
 }
 
 int main(int argc, char** argv)
@@ -227,6 +232,8 @@ int main(int argc, char** argv)
     glutMouseFunc(MyMouseFunc);
     glutSpecialUpFunc(MyGlutSpecialFunc);
     glutMainLoop();
+
+
     return 0;
 }
 
