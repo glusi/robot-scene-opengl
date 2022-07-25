@@ -1,4 +1,5 @@
 #include "InitialScene.h"
+#include "../third-party/imgui/imgui_impl_glut.h"
 
 void InitialScene::addDecorations()
 {
@@ -121,7 +122,13 @@ void InitialScene::draw() {
 	robot->draw();
 	addDecorations();
 	texture.bindTexture(TEXTURE_BACKGROUND);
-	gui.draw();
+	//gui.draw();
+
+	/*ImGui::Text("Hello, world %d", 123);
+	if (ImGui::Button("Save"))
+		printf("save");*/
+	//ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
+	//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)

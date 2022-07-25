@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/third-party/freeglut/include/;$(SolutionDir)/third-party/stb/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/third-party/freeglut/include/;$(SolutionDir)/third-party/stb/;$(SolutionDir)/third-party/imagui/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +149,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\third-party\imgui\imgui.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_impl_glut.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\third-party\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Floor.cpp" />
@@ -163,6 +170,15 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\third-party\imgui\imconfig.h" />
+    <ClInclude Include="..\third-party\imgui\imgui.h" />
+    <ClInclude Include="..\third-party\imgui\imgui_impl_glut.h" />
+    <ClInclude Include="..\third-party\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\third-party\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="..\third-party\imgui\imgui_internal.h" />
+    <ClInclude Include="..\third-party\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\third-party\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\third-party\imgui\imstb_truetype.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />

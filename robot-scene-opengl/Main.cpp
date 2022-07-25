@@ -12,6 +12,13 @@ using namespace std;
 #include "Gui.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include "../third-party/imgui/imgui_impl_glut.h"
+#include "../third-party/imgui/imgui_impl_opengl3.h"
+//#include "../third-party/imgui/imgui_impl_glut.h"
+//#include "../third-party/imgui/imgui.h"
+//#include "../third-party/imgui/imgui_impl_glut.h"
+//#include "../third-party/imgui/imgui_impl_opengl3_loader.h"
+//#include "../third-party/imgui/imgui_impl_glfw.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -62,12 +69,40 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    setPrespProjection();   
+    //imgui new frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGLUT_NewFrame();
+    //ImGui::NewFrame();
+
+    ImGui::Text("Hello, world %d", 123);
+    if (ImGui::Button("Save"))
+        printf("saved");
+
+
+    ImGui::Render();
+    ImGuiIO& io = ImGui::GetIO();
+    glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(40.0, io.DisplaySize.x / io.DisplaySize.y, 1.0, 150.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     scene.draw();
     drawAxis();
+
+    //ImGui_ImplGLUT_RenderDrawData();
  
+    //ImGui_Impl_RenderDrawData(ImGui::GetDrawData());
+    glDisable(GL_LIGHTING);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    glEnable(GL_LIGHTING);
+
+
     glFlush();
     glutSwapBuffers();
+    glutPostRedisplay();
+    
 }
 
 // handles window reshape	
@@ -193,7 +228,29 @@ std::list<Button> makeButtons() {
     list<Button> res = *(new list<Button>());
     res.push_back(Button(Vector3(-85, -80, 0), 10.0, 11.0, "exit", exitFunc));
     res.push_back(Button(Vector3(-85, 20, 0), 10.0, 13.0, "help", helpFunc));
+    res.push_back(Button(Vector3(-95, -50, 0), 20.0, 13.0, "Adjust ambient light", helpFunc));
     return res;
+}
+
+void initImgui() {
+    // Setup Dear ImGui context
+    //IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    //ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    // Setup Dear ImGui style
+    //ImGui::StyleColorsLight();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGLUT_Init();
+    ImGui_ImplGLUT_InstallFuncs();
+    ImGui_ImplOpenGL3_Init();
+    // Setup ImGui binding
+   // ImGui::CreateContext();
+
+    // Setup style
+    ImGui::StyleColorsClassic();
+
 }
 
 //The Initialize function, called once:    
@@ -227,12 +284,16 @@ int main(int argc, char** argv)
     glutCreateWindow("robot-scene");
     Init();
     glutDisplayFunc(display);
-    glutReshapeFunc(windowResize);
-    glutKeyboardFunc(MyKeyboardFunc);
+    initImgui();
+    //glutReshapeFunc(windowResize);
+    /*glutKeyboardFunc(MyKeyboardFunc);
     glutMouseFunc(MyMouseFunc);
-    glutSpecialUpFunc(MyGlutSpecialFunc);
+    glutSpecialUpFunc(MyGlutSpecialFunc);*/
     glutMainLoop();
-
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGLUT_Shutdown();
+    ImGui::DestroyContext();
 
     return 0;
 }
