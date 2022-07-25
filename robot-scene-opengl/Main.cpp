@@ -14,11 +14,6 @@ using namespace std;
 #include <stb_image.h>
 #include "../third-party/imgui/imgui_impl_glut.h"
 #include "../third-party/imgui/imgui_impl_opengl3.h"
-//#include "../third-party/imgui/imgui_impl_glut.h"
-//#include "../third-party/imgui/imgui.h"
-//#include "../third-party/imgui/imgui_impl_glut.h"
-//#include "../third-party/imgui/imgui_impl_opengl3_loader.h"
-//#include "../third-party/imgui/imgui_impl_glfw.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -234,19 +229,13 @@ std::list<Button> makeButtons() {
 
 void initImgui() {
     // Setup Dear ImGui context
-    //IMGUI_CHECKVERSION();
+    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    //ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-    // Setup Dear ImGui style
-    //ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer bindings
     ImGui_ImplGLUT_Init();
     ImGui_ImplGLUT_InstallFuncs();
     ImGui_ImplOpenGL3_Init();
-    // Setup ImGui binding
-   // ImGui::CreateContext();
 
     // Setup style
     ImGui::StyleColorsClassic();
@@ -286,9 +275,10 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
     initImgui();
     //glutReshapeFunc(windowResize);
-    /*glutKeyboardFunc(MyKeyboardFunc);
-    glutMouseFunc(MyMouseFunc);
-    glutSpecialUpFunc(MyGlutSpecialFunc);*/
+    glutKeyboardFunc(MyKeyboardFunc);
+    glutSpecialUpFunc(MyGlutSpecialFunc);
+    /*glutMouseFunc(MyMouseFunc);
+    */
     glutMainLoop();
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
