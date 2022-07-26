@@ -136,6 +136,11 @@ void InitialScene::moveCamera(USER_ACTION_CAMERA action)
 	camera->moveCamera(action);
 }
 
+void InitialScene::moveCamera(USER_ACTION_CAMERA action, float amount)
+{
+	camera->moveCamera(action, amount);
+}
+
 void InitialScene::rotateCamera(int mouseX, int mouseY)
 {
 	camera->rotateCamera(mouseX, mouseY);
@@ -174,4 +179,9 @@ void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 void InitialScene::setIFirstPerson(int isFirstPerson)
 {
 	camera->setIFirstPerson(isFirstPerson);
+}
+
+Vector3 InitialScene::getCameraPosition()
+{
+	return camera->getCameraPosition();
 }

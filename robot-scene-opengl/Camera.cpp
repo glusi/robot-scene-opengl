@@ -59,6 +59,33 @@ void Camera::moveCamera(USER_ACTION_CAMERA action)
 	center -= eye_change;
 }
 
+void Camera::moveCamera(USER_ACTION_CAMERA action, float amount)
+{
+	Vector3 eye_change = Vector3();
+	switch (action) {
+	case CAMERA_FRONT:
+		eye = Vector3(eye.x, eye.y, 0) + (Vector3(0, 0, 1) * amount);
+		break;
+	case CAMERA_BACK:
+		eye = Vector3(eye.x, eye.y, 0) + (Vector3(0, 0, 1) * (-amount));
+		break;
+	case CAMERA_RIGHT:
+		eye = Vector3(0, eye.y, eye.z) + (Vector3(1,0,0)* amount);
+		break;
+	case CAMERA_LEFT:
+		eye = Vector3(0, eye.y, eye.z) + (Vector3(1, 0, 0) * (-amount));
+		break;
+	case CAMERA_UP: 
+		eye = Vector3(eye.x, 0, eye.z) + (Vector3(0, 1, 0) * amount);
+		break;
+	case CAMERA_DOWN:
+		eye = Vector3(eye.x, 0, eye.z) + (Vector3(0, 1, 0) * (-amount));
+		break;
+		
+	default: break;
+	}
+}
+
 void Camera::rotateCamera(int xoffset, int yoffset)
 {
 	
@@ -72,6 +99,11 @@ void Camera::setIFirstPerson(int is_first_person_int)
 void Camera::setFirstPersonCamera(Vector3 translate_position)
 {
 	translate_position_camera_robot += translate_position;
+}
+
+Vector3 Camera::getCameraPosition()
+{
+	return eye;
 }
 
 

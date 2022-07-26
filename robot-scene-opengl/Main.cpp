@@ -35,8 +35,11 @@ std::list<Button> buttons;
 static bool show_menu = true;
 
 int isFirstPerson = 0;
-float rotate_head_right_left;
-float rotate_head_up_down;
+float rotate_head_right_left = 0;
+float rotate_head_up_down = 0;
+float rotate_camera_right_left;
+float rotate_camera_up_down;
+float rotate_camera_front_back;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -65,7 +68,14 @@ void drawAxis() {
 
 }
 
+void getInitialValues() {
+    rotate_camera_right_left = scene.getCameraPosition().x;
+    rotate_camera_up_down = scene.getCameraPosition().y;
+    rotate_camera_front_back = scene.getCameraPosition().z;
+}
+
 void createMenu(){
+    getInitialValues();
 
     //ImGui::Begin("Opengl Dog Scene", &show_menu);
    // if (ImGui::Begin("Opengl Dog Scene"))
@@ -95,13 +105,35 @@ void createMenu(){
                 scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
             else
                 scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
-
+            //
+            
         }
         if (ImGui::CollapsingHeader("Camera")) {
             
             ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
             ImGui::RadioButton("robot view", &isFirstPerson, 1);
             scene.setIFirstPerson(isFirstPerson);
+
+            //Move camera right and left
+            ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
+            if (rotate_camera_right_left > 0)
+                scene.moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
+            else
+                scene.moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
+
+            //Move camera up and down
+            ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
+            if (rotate_camera_up_down > 0)
+                scene.moveCamera(CAMERA_UP, rotate_camera_up_down);
+            else
+                scene.moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
+
+            //Move camera front and back
+            ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
+            if (rotate_camera_front_back > 0)
+                scene.moveCamera(CAMERA_FRONT, rotate_camera_front_back);
+            else
+                scene.moveCamera(CAMERA_BACK, -rotate_camera_front_back);
         }
    // }
         //ImGui::SetNextWindowPos();

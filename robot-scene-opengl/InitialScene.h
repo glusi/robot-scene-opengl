@@ -22,6 +22,7 @@ public:
 	InitialScene(std::list<Button> buttons);
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
+	void moveCamera(USER_ACTION_CAMERA action, float angle);
 	void rotateCamera(int mouseX, int mouseY);
 	void moveRobot(ROBOT_MOVE_DIRECTION direction);
 	void rotateRobot();
@@ -30,5 +31,6 @@ public:
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement);
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle);
 	void setIFirstPerson(int isFirstPerson);
+	Vector3 getCameraPosition();
 };
 

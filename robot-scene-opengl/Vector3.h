@@ -11,10 +11,13 @@ public:
 	Vector3();
 	void update(GLfloat x, GLfloat y, GLfloat z);
 	void update(Vector3 other);
-	Vector3 operator+=(Vector3& other);
+	Vector3 operator+=(Vector3 other);
+	//Vector3 operator+=(Vector3& other);
 	Vector3 operator-=(Vector3& other);
+	Vector3 operator*(float other);
 	Vector3 operator*=(float other); 
 	Vector3 operator*=(Vector3 other);
+	Vector3 operator+(Vector3 other);
 	Vector3 operator-(Vector3& other);
 	//Vector3 operator=(Vector3& other);
 	Vector3 operator=(Vector3 other);

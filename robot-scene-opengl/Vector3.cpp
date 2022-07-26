@@ -29,7 +29,15 @@ void Vector3::update(Vector3 other)
 	z = other.z;
 }
 
-Vector3 Vector3::operator+=(Vector3& other)
+Vector3 Vector3::operator+=(Vector3 other)
+{
+	this->x += other.x;
+	this->y += other.y;
+	this->z += other.z;
+	return *this;
+}
+
+/*Vector3 Vector3::operator+=(Vector3& other)
 {
 	// Guard self assignment
 	if (this == &other)
@@ -38,7 +46,7 @@ Vector3 Vector3::operator+=(Vector3& other)
 	this->y += other.y;
 	this->z += other.z;
 	return *this;
-}
+}*/
 
 Vector3 Vector3::operator-=(Vector3& other)
 {
@@ -49,6 +57,11 @@ Vector3 Vector3::operator-=(Vector3& other)
 	this->y -= other.y;
 	this->z -= other.z;
 	return *this;
+}
+
+Vector3 Vector3::operator*(float other)
+{
+	return Vector3(other* x, other* y, other* z);
 }
 
 Vector3 Vector3::operator*=(float other)
@@ -65,6 +78,11 @@ Vector3 Vector3::operator*=(Vector3 other)
 	this->y *= other.y;
 	this->z *= other.z;
 	return *this;
+}
+
+Vector3 Vector3::operator+(Vector3 other)
+{
+	return Vector3(x + other.x, y + other.y, z + other.z);
 }
 
 Vector3 Vector3::operator-(Vector3& other)
