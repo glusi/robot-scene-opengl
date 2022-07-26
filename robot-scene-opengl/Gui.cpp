@@ -1,4 +1,5 @@
 #include "Gui.h"
+#include "../third-party/imagui/imgui.h"
 
 Gui::Gui()
 {
@@ -12,7 +13,7 @@ Gui::Gui(std::list<Button> new_list)
 
 void Gui::draw()
 {
-    glDisable(GL_DEPTH_TEST);
+    /*glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
 
@@ -35,9 +36,14 @@ void Gui::draw()
     //drawButton(Button(Vector3(-85,-60,0), 10.0, 10.0, "hello"));
     drawAllButtons();
 
+
+
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);*/
+
+	
+	
 }
 
 void Gui::drawAllButtons()
