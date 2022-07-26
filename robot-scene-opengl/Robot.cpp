@@ -62,18 +62,22 @@ void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type
 void Robot::drawHead()
 {
 	glPushMatrix();
-	applyHeadRotationAndLift();
+	glTranslatef(head_position.x, head_position.y, head_position.z);
 
 	glPushMatrix();
+	glRotatef(head_lift, 1, 0, 0);
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glRotatef(head_rotation, 0, 1, 0);
+	
 	glTranslatef(head_position.x, head_position.y, head_position.z);
+
+	glPushMatrix();
+	//glTranslatef(head_position.x, head_position.y, head_position.z);
 	//glScalef(0.75, 0.75, 0.75);
 	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
 	glutSolidCube(1.1);
 
-	glPushMatrix();
-	glTranslatef(0, -0.7, 0);
-	glutSolidCube(0.7);
-	glPopMatrix();
+	
 
 	applyMaterial(material3,1);
 	glPushMatrix();
@@ -93,6 +97,13 @@ void Robot::drawHead()
 	glScalef(5, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
+	glPopMatrix();
+
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -0.7, 0);
+	glutSolidCube(0.7);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -179,6 +190,17 @@ void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement)
 		head_rotation--;
 }
 
+void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement, float angle)
+{
+	if (movement == ROBOT_HEAD_UP)
+		head_lift=angle;
+	if (movement == ROBOT_HEAD_DOWN)
+		head_lift=angle;
+	if (movement == ROBOT_HEAD_RIGHT)
+		head_rotation = angle;
+	if (movement == ROBOT_HEAD_LEFT)
+		head_rotation = angle;
+}
 
 void Robot::draw() {
 	
@@ -224,14 +246,6 @@ void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 		glTranslatef(palm_position_to_robot.x, palm_position_to_robot.y, palm_position_to_robot.z);
 		break;
 	};
-}
-
-void Robot::applyHeadRotationAndLift()
-{
-	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	glRotatef(head_rotation, 0, 1, 0);
-	glRotatef(head_lift, -1, 0, 0);
-	glTranslatef(head_position.x, head_position.y, head_position.z);
 }
 
 void Robot::applyMaterial(materialStruct maaterial, float emmision)

@@ -14,6 +14,7 @@ using namespace std;
 #include <stb_image.h>
 #include "../third-party/imgui/imgui_impl_glut.h"
 #include "../third-party/imgui/imgui_impl_opengl3.h"
+#include "../third-party/imgui/imgui.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -30,6 +31,14 @@ bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
 
 std::list<Button> buttons;
+
+static bool show_menu = true;
+
+int isFirstPerson = 0;
+float rotate_head_left;
+float rotate_head_right;
+float rotate_head_up;
+float rotate_head_down;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -58,6 +67,47 @@ void drawAxis() {
 
 }
 
+void createMenu(){
+
+    //ImGui::Begin("Opengl Dog Scene", &show_menu);
+   // if (ImGui::Begin("Opengl Dog Scene"))
+    //{
+        
+    float try1;
+        ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);
+        //ImGui::TreePop();
+        int t;
+       // ImGui::RadioButton("external view", &t, 0); ImGui::SameLine();
+        
+        /*if (ImGui::TreeNode("tv")) {
+                }       */
+        float my_color[4];
+        ImGui::ColorEdit4("Color", my_color);
+        if (ImGui::CollapsingHeader("Robot")) {
+            ImGui::SliderFloat("Rotate head right", &rotate_head_right, 0.0f, 360.0f);           
+            //ImGui::SliderFloat("Rotate head left", &rotate_head_left, 0.0f, 360.0f);
+           // if(rotate_head_right>0)
+            scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right);
+           // scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_left);
+
+            ImGui::SliderFloat("Rotate head up", &rotate_head_up, 0.0f, 180.0f);  
+            ImGui::SliderFloat("Rotate head down", &rotate_head_down, 0.0f, 180.0f);
+
+            scene.moveRobotHead(ROBOT_HEAD_DOWN, rotate_head_up - rotate_head_down);
+
+            //ImGui::SliderFloat("Rotate shoulder up", &rotate_head_down, 0.0f, 180.0f);
+
+        }
+        if (ImGui::CollapsingHeader("Camera")) {
+            
+            ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
+            ImGui::RadioButton("robot view", &isFirstPerson, 1);
+            scene.setIFirstPerson(isFirstPerson);
+        }
+   // }
+        //ImGui::SetNextWindowPos();
+}
+
 void display() {
     //Clears
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -69,10 +119,7 @@ void display() {
     ImGui_ImplGLUT_NewFrame();
     //ImGui::NewFrame();
 
-    ImGui::Text("Hello, world %d", 123);
-    if (ImGui::Button("Save"))
-        printf("saved");
-
+    createMenu();
 
     ImGui::Render();
     ImGuiIO& io = ImGui::GetIO();

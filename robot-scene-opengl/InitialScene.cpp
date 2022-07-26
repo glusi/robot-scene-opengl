@@ -165,3 +165,13 @@ void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement)
 {
 	robot->moveHead(movement);
 }
+
+void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle)
+{
+	robot->moveHead(movement, angle);
+}
+
+void InitialScene::setIFirstPerson(int isFirstPerson)
+{
+	camera->setIFirstPerson(isFirstPerson);
+}

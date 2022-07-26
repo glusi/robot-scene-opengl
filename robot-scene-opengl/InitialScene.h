@@ -17,6 +17,7 @@ class InitialScene
 	Texture texture;
 	Gui gui;
 public:
+
 	InitialScene();
 	InitialScene(std::list<Button> buttons);
 	void draw();
@@ -27,5 +28,7 @@ public:
 	void rotateRobotHand(ROBOT_JOINT joint);
 	void liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement);
+	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle);
+	void setIFirstPerson(int isFirstPerson);
 };
 

@@ -66,6 +66,7 @@ class Robot : SceneItem
 	public:
 		Robot();
 		void moveHead(ROBOT_HEAD_MOVEMENT movement);
+		void moveHead(ROBOT_HEAD_MOVEMENT movement, float angle);
 		void draw();
 		void move(ROBOT_MOVE_DIRECTION direction);
 		void rotateHandJoint(ROBOT_JOINT joint);
