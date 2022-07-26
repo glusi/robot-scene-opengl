@@ -16,6 +16,9 @@ class InitialScene
 	void addDecorations();
 	Texture texture;
 	Gui gui;
+	void buildEatingCorner();
+	void buildTVCorner();
+	void buildChair();
 public:
 
 	InitialScene();

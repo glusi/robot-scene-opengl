@@ -3,8 +3,14 @@
 
 void InitialScene::addDecorations()
 {
+	buildEatingCorner();
+	buildTVCorner();
+}
+
+void InitialScene::buildEatingCorner()
+{
 	glPushMatrix();
-	glTranslatef(-2, 0, -6);
+	glTranslatef(-2, 0, -9);
 	//Table top
 	glColor3f(0.5f, 0.35f, 0.05f);
 	glPushMatrix();
@@ -65,7 +71,7 @@ void InitialScene::addDecorations()
 	glPushMatrix();
 	glTranslatef(-2, 5, 0);
 	glRotatef(90, 1, 0, 0);
-	Tools::drawCylinder(0.25,1,100);
+	Tools::drawCylinder(0.25, 1, 100);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -76,9 +82,46 @@ void InitialScene::addDecorations()
 	glDisable(GL_BLEND);
 	glDisable(GL_COLOR_MATERIAL);
 
+	buildChair();
+
+	glPushMatrix();
+	glTranslatef(8, 0, 0);
+	buildChair();
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void InitialScene::buildTVCorner()
+{
+	glPushMatrix();
+	glTranslatef(13, 0, 11);
+
+	//TV table
+	glPushMatrix();
+	glTranslatef(0, 1, 0);
+	glRotatef(90, 0, 1, 0);
+	glScalef(6, 2, 3);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//TV
+	glPushMatrix();
+	glTranslatef(0, 3, 0);
+	glRotatef(90, 0, 1, 0);
+	glScalef(6, 5, 0.2);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void InitialScene::buildChair()
+{
+	Tools::assignMaterial(silver);
 	//Chair legs
 	glPushMatrix();
-	glTranslatef(-4,0,0);
+	glTranslatef(-4, 0, 0);
 	glPushMatrix();
 	glTranslatef(-1.5, 0, -1);
 	glRotatef(90, 0, 0, 1);
@@ -106,6 +149,8 @@ void InitialScene::addDecorations()
 	glPopMatrix();
 
 	//chair top
+	glDisable(GL_BLEND);
+	glDisable(GL_COLOR_MATERIAL);
 	glColor3f(0.5f, 0.35f, 0.05f);
 	glPushMatrix();
 	glTranslatef(-4.75, 2, 0);
@@ -113,18 +158,8 @@ void InitialScene::addDecorations()
 	glutSolidCube(1);
 	glPopMatrix();
 
-	texture.bindTexture(TEXTURE_TABLE);
-	glEnable(GL_TEXTURE_2D);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
-	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
-	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
-	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-	Tools::assignMaterial(silver);
-
-	glPopMatrix();
+	
+	
 }
 
 InitialScene::InitialScene()

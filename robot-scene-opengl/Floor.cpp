@@ -3,8 +3,8 @@
 
 
 void Floor::draw() {
-	int grid_size_x = 10;
-	int grid_size_y = 10;
+	int grid_size_x = 4;
+	int grid_size_y = 4;
 	int tile_size_x = 4;
 	int tile_size_y = 4;
 	GLfloat color[4] = { 0,0,1,1 };
