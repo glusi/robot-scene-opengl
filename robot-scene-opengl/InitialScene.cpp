@@ -76,6 +76,54 @@ void InitialScene::addDecorations()
 	glDisable(GL_BLEND);
 	glDisable(GL_COLOR_MATERIAL);
 
+	//Chair legs
+	glPushMatrix();
+	glTranslatef(-4,0,0);
+	glPushMatrix();
+	glTranslatef(-1.5, 0, -1);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 2, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0, 0, -1);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 2, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-1.5, 0, 1);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 2, 10, 5);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0, 0, 1);
+	glRotatef(90, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glutSolidCylinder(0.1, 2, 10, 5);
+	glPopMatrix();
+	glPopMatrix();
+
+	//chair top
+	glColor3f(0.5f, 0.35f, 0.05f);
+	glPushMatrix();
+	glTranslatef(-4.75, 2, 0);
+	glScalef(2, 0.2, 2.2);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	texture.bindTexture(TEXTURE_TABLE);
+	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
+	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
+	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
+	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	Tools::assignMaterial(silver);
+
 	glPopMatrix();
 }
 
@@ -184,4 +232,9 @@ void InitialScene::setIFirstPerson(int isFirstPerson)
 Vector3 InitialScene::getCameraPosition()
 {
 	return camera->getCameraPosition();
+}
+
+Vector3 InitialScene::getHeadPosition()
+{
+	return robot->getHeadPosition();
 }

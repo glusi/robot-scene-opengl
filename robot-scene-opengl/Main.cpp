@@ -69,6 +69,8 @@ void drawAxis() {
 }
 
 void getInitialValues() {
+    //rotate_head_right_left = scene.getHeadPosition().x;
+    //rotate_head_up_down = scene.getHeadPosition().;
     rotate_camera_right_left = scene.getCameraPosition().x;
     rotate_camera_up_down = scene.getCameraPosition().y;
     rotate_camera_front_back = scene.getCameraPosition().z;
@@ -76,10 +78,6 @@ void getInitialValues() {
 
 void createMenu(){
     getInitialValues();
-
-    //ImGui::Begin("Opengl Dog Scene", &show_menu);
-   // if (ImGui::Begin("Opengl Dog Scene"))
-    //{
         
     float try1;
         ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);

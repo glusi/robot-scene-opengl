@@ -314,3 +314,8 @@ void Robot::rotate()
 	move_direction = Vector3(sin(angle*(M_PI / 180)), 0, cos(angle * (M_PI / 180)));
 	move_direction.normalize();
 }
+
+Vector3 Robot::getHeadPosition()
+{
+	return head_position;
+}

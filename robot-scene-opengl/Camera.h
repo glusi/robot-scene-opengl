@@ -29,5 +29,6 @@ public:
 	void setIFirstPerson(int is_first_person);
 	void setFirstPersonCamera(Vector3 translate_position);
 	Vector3 getCameraPosition();
+	
 };
 

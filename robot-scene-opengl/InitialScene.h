@@ -32,5 +32,6 @@ public:
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle);
 	void setIFirstPerson(int isFirstPerson);
 	Vector3 getCameraPosition();
+	Vector3 getHeadPosition();
 };
 
