@@ -35,10 +35,8 @@ std::list<Button> buttons;
 static bool show_menu = true;
 
 int isFirstPerson = 0;
-float rotate_head_left;
-float rotate_head_right;
-float rotate_head_up;
-float rotate_head_down;
+float rotate_head_right_left;
+float rotate_head_up_down;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -84,18 +82,19 @@ void createMenu(){
         float my_color[4];
         ImGui::ColorEdit4("Color", my_color);
         if (ImGui::CollapsingHeader("Robot")) {
-            ImGui::SliderFloat("Rotate head right", &rotate_head_right, 0.0f, 360.0f);           
-            //ImGui::SliderFloat("Rotate head left", &rotate_head_left, 0.0f, 360.0f);
-           // if(rotate_head_right>0)
-            scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right);
-           // scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_left);
+            ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
+            //Rotate head right and left
+            if(rotate_head_right_left >0)
+                scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right_left);
+            else
+                scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
 
-            ImGui::SliderFloat("Rotate head up", &rotate_head_up, 0.0f, 180.0f);  
-            ImGui::SliderFloat("Rotate head down", &rotate_head_down, 0.0f, 180.0f);
-
-            scene.moveRobotHead(ROBOT_HEAD_DOWN, rotate_head_up - rotate_head_down);
-
-            //ImGui::SliderFloat("Rotate shoulder up", &rotate_head_down, 0.0f, 180.0f);
+            ImGui::SliderFloat("Rotate head", &rotate_head_up_down, -180.0f, 180.0f);  
+            //Rotate head up and down
+            if(rotate_head_up_down >= 0)
+                scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
+            else
+                scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
 
         }
         if (ImGui::CollapsingHeader("Camera")) {

@@ -77,8 +77,6 @@ void Robot::drawHead()
 	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
 	glutSolidCube(1.1);
 
-	
-
 	applyMaterial(material3,1);
 	glPushMatrix();
 	glTranslatef(0.3, 0.1, 0.5);
@@ -101,14 +99,15 @@ void Robot::drawHead()
 
 	glPopMatrix();
 
+	//neck
+	applyMaterial(material1, 1);
 	glPushMatrix();
 	glTranslatef(0, -0.7, 0);
-	glutSolidCube(0.7);
+	glutSolidCube(0.5);
 	glPopMatrix();
 
 	glPopMatrix();
 
-	applyMaterial(material1, 1);
 }
 
 void Robot::drawBody()
