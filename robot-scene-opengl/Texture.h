@@ -6,7 +6,7 @@
 #include <iostream>
 class Texture
 {
-	GLuint textures[3];
+	GLuint textures[NUM_OF_TEXTURES];
 	void loadTexture(unsigned int texture, const char* texture_path);
 public:
 	Texture();

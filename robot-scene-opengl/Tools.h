@@ -12,5 +12,6 @@ public:
 	static void drawCylinder(float radius, float halfLength, int slices);
 	static void rotate(float angle, ROTATION_TYPE rotation_type);
 	static void assignMaterial(materialStruct  material);
+	static void copyColor(float** ambient_color, float* new_color);
 };
 

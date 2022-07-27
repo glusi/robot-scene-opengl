@@ -40,6 +40,7 @@ float rotate_head_up_down = 0;
 float rotate_camera_right_left;
 float rotate_camera_up_down;
 float rotate_camera_front_back;
+float* ambient_color;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -74,65 +75,70 @@ void getInitialValues() {
     rotate_camera_right_left = scene.getCameraPosition().x;
     rotate_camera_up_down = scene.getCameraPosition().y;
     rotate_camera_front_back = scene.getCameraPosition().z;
+
+    Tools::copyColor(&ambient_color, scene.getAmbientColor());
 }
 
 void createMenu(){
     getInitialValues();
         
     float try1;
-        ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);
-        //ImGui::TreePop();
-        int t;
-       // ImGui::RadioButton("external view", &t, 0); ImGui::SameLine();
+    ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);
+    //ImGui::TreePop();
+    int t;
+    // ImGui::RadioButton("external view", &t, 0); ImGui::SameLine();
         
-        /*if (ImGui::TreeNode("tv")) {
-                }       */
-        float my_color[4];
-        ImGui::ColorEdit4("Color", my_color);
-        if (ImGui::CollapsingHeader("Robot")) {
-            ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
-            //Rotate head right and left
-            if(rotate_head_right_left >0)
-                scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right_left);
-            else
-                scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
+    /*if (ImGui::TreeNode("tv")) {
+            }       */
 
-            ImGui::SliderFloat("Rotate head", &rotate_head_up_down, -180.0f, 180.0f);  
-            //Rotate head up and down
-            if(rotate_head_up_down >= 0)
-                scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
-            else
-                scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
-            //
+    //Adjust ambient color
+    ImGui::ColorEdit4("Ambient color", ambient_color);
+    scene.adjustAmbientLight(ambient_color);
+
+    if (ImGui::CollapsingHeader("Robot")) {
+        ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
+        //Rotate head right and left
+        if(rotate_head_right_left >0)
+            scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right_left);
+        else
+            scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
+
+        ImGui::SliderFloat("Rotate head", &rotate_head_up_down, -180.0f, 180.0f);  
+        //Rotate head up and down
+        if(rotate_head_up_down >= 0)
+            scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
+        else
+            scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
+        //
             
-        }
-        if (ImGui::CollapsingHeader("Camera")) {
+    }
+    if (ImGui::CollapsingHeader("Camera")) {
             
-            ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
-            ImGui::RadioButton("robot view", &isFirstPerson, 1);
-            scene.setIFirstPerson(isFirstPerson);
+        ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
+        ImGui::RadioButton("robot view", &isFirstPerson, 1);
+        scene.setIFirstPerson(isFirstPerson);
 
-            //Move camera right and left
-            ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
-            if (rotate_camera_right_left > 0)
-                scene.moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
-            else
-                scene.moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
+        //Move camera right and left
+        ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
+        if (rotate_camera_right_left > 0)
+            scene.moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
+        else
+            scene.moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
 
-            //Move camera up and down
-            ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
-            if (rotate_camera_up_down > 0)
-                scene.moveCamera(CAMERA_UP, rotate_camera_up_down);
-            else
-                scene.moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
+        //Move camera up and down
+        ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
+        if (rotate_camera_up_down > 0)
+            scene.moveCamera(CAMERA_UP, rotate_camera_up_down);
+        else
+            scene.moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
 
-            //Move camera front and back
-            ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
-            if (rotate_camera_front_back > 0)
-                scene.moveCamera(CAMERA_FRONT, rotate_camera_front_back);
-            else
-                scene.moveCamera(CAMERA_BACK, -rotate_camera_front_back);
-        }
+        //Move camera front and back
+        ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
+        if (rotate_camera_front_back > 0)
+            scene.moveCamera(CAMERA_FRONT, rotate_camera_front_back);
+        else
+            scene.moveCamera(CAMERA_BACK, -rotate_camera_front_back);
+    }
    // }
         //ImGui::SetNextWindowPos();
 }
@@ -336,7 +342,7 @@ void Init() {
     buttons = makeButtons();
     scene = InitialScene(buttons);
 
-    
+    ambient_color = new float[4];
 }
 
 int main(int argc, char** argv)

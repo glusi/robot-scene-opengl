@@ -21,3 +21,11 @@ void Tools::assignMaterial(materialStruct  material) {
 	glMaterialfv(GL_FRONT, GL_SPECULAR, material.Ks);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material.Kd);
 }
+
+void Tools::copyColor(float **ambient_color, float* new_color)
+{
+	for (int i = 0; i < 4; i++) {
+		(*ambient_color)[i] = new_color[i];
+	}
+}
+

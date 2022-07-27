@@ -27,10 +27,11 @@ void Texture::loadTexture(unsigned int texture, const char* texture_path)
 Texture::Texture()
 {
     
-    glGenTextures(3, textures);
+    glGenTextures(NUM_OF_TEXTURES, textures);
     loadTexture(textures[0], FLOOR_TEXTURE_PATH);
     loadTexture(textures[1], TABLE_TEXTURE_PATH);
     loadTexture(textures[2], BACKGROUND_TEXTURE_PATH);
+    loadTexture(textures[3], TV_TEXTURE_PATH);
 }
 
 void Texture::bindTexture(TEXTURE_TYPE texture)
@@ -40,6 +41,7 @@ void Texture::bindTexture(TEXTURE_TYPE texture)
     case TEXTURE_FLOOR: glBindTexture(GL_TEXTURE_2D, textures[0]); break;
     case TEXTURE_TABLE: glBindTexture(GL_TEXTURE_2D, textures[1]); break;
     case TEXTURE_BACKGROUND: glBindTexture(GL_TEXTURE_2D, textures[2]); break;
+    case TEXTURE_TV: glBindTexture(GL_TEXTURE_2D, textures[3]); break;
     default:
         break;
     }

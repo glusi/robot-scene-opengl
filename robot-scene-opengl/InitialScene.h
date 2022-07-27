@@ -20,7 +20,6 @@ class InitialScene
 	void buildTVCorner();
 	void buildChair();
 public:
-
 	InitialScene();
 	InitialScene(std::list<Button> buttons);
 	void draw();
@@ -36,5 +35,7 @@ public:
 	void setIFirstPerson(int isFirstPerson);
 	Vector3 getCameraPosition();
 	Vector3 getHeadPosition();
+	void adjustAmbientLight(float* color);
+	float* getAmbientColor();
 };
 

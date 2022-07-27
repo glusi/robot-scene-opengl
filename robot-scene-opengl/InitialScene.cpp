@@ -109,9 +109,25 @@ void InitialScene::buildTVCorner()
 	glPushMatrix();
 	glTranslatef(0, 3, 0);
 	glRotatef(90, 0, 1, 0);
-	glScalef(6, 5, 0.2);
+	glScalef(6, 6, 0.2);
 	glutSolidCube(1);
 	glPopMatrix();
+
+	texture.bindTexture(TEXTURE_TV);
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(-4.25, 4, 0);
+	glRotatef(90, 0, 1, 0);
+	glRotatef(90, 1, 0, 0);
+	//glScalef(6, 5, 0.2);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
+	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
+	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
+	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
+	glEnd();
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
 }
@@ -272,4 +288,14 @@ Vector3 InitialScene::getCameraPosition()
 Vector3 InitialScene::getHeadPosition()
 {
 	return robot->getHeadPosition();
+}
+
+void InitialScene::adjustAmbientLight(float* color)
+{
+	lights->adjustAmbientLight(color);
+}
+
+float* InitialScene::getAmbientColor()
+{
+	return lights->getAmbientColor();
 }

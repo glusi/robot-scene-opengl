@@ -1,10 +1,13 @@
 #include "Lights.h"
 
 Lights::Lights() :
-	light_ambient {1.0, 1.0, 1.0, 1.0},
 	light_diffuse { 0.8, 0.8, 0.8, 1.0 },
 	color{ 0.9f, 0.9f, 0.3f , 1.0f },
-	position{ 0.0f, 3.0f, -1.0f , 0.0f } {}
+	position{ 0.0f, 3.0f, -1.0f , 0.0f } {
+	light_ambient = new GLfloat[4];
+	for (int i=0; i<4; i++)
+		light_ambient[i] = 1.0;
+}
 
 
 void Lights::draw() {
@@ -16,13 +19,13 @@ void Lights::draw() {
 	GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
 	GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
 	GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
-	GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
+	//GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
 //	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, position0);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient0);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
 
 	/*GLfloat diffu[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	GLfloat spec[] = { 0.5f, 0.5f, 0.5f, 0.5f };
@@ -33,4 +36,14 @@ void Lights::draw() {
 	glEnable(GL_LIGHT1);*/
 
 	glShadeModel(GL_SMOOTH);
+}
+
+void Lights::adjustAmbientLight(float* color)
+{
+	Tools::copyColor(&light_ambient, color);
+}
+
+float* Lights::getAmbientColor()
+{
+	return light_ambient;
 }
