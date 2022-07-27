@@ -6,15 +6,16 @@ Lights::Lights() :
 	position{ 0.0f, 3.0f, -1.0f , 0.0f } {
 	light_ambient = new GLfloat[4];
 	for (int i=0; i<4; i++)
-		light_ambient[i] = 1.0;
+		light_ambient[i] = 0.7;
 }
 
 
 void Lights::draw() {
 	GLfloat light_pos[] = { 0.0, 2.0, 9.0, 1.0 };
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+	//glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
 	GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
 	GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
@@ -25,7 +26,7 @@ void Lights::draw() {
 	glLightfv(GL_LIGHT1, GL_POSITION, position0);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+	//glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
 
 	/*GLfloat diffu[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	GLfloat spec[] = { 0.5f, 0.5f, 0.5f, 0.5f };
