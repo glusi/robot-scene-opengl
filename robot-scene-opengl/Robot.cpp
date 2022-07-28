@@ -327,9 +327,8 @@ void Robot::applyCameraRotation()
 	rotateToNewAngle();
 
 	//glPushMatrix();
-	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	//glRotatef(head_lift, 1, 0, 0);
-	/*glTranslatef(head_position.x, head_position.y, head_position.z);*/
+
+	glRotatef(head_lift, 1, 0, 0);
 	//glPopMatrix();
 	
 	//glPushMatrix();

@@ -215,7 +215,7 @@ InitialScene::InitialScene(std::list<Button> buttons) {
 
 void InitialScene::draw() {
 	camera->draw();
-	glPushMatrix();
+	//glPushMatrix();
 	if(camera->getIFirstPerson())
 		robot->applyCameraRotation();
 	lights->draw();
@@ -232,6 +232,7 @@ void InitialScene::draw() {
 	//ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
 	//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 	glPopMatrix();
+
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)
