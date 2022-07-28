@@ -319,3 +319,22 @@ Vector3 Robot::getHeadPosition()
 {
 	return head_position;
 }
+
+void Robot::applyCameraRotation()
+{
+	translateToNewPosition();
+	glScalef(1, 1, -1);
+	rotateToNewAngle();
+
+	//glPushMatrix();
+	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	//glRotatef(head_lift, 1, 0, 0);
+	/*glTranslatef(head_position.x, head_position.y, head_position.z);*/
+	//glPopMatrix();
+	
+	//glPushMatrix();
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glRotatef(head_rotation, 0, 1, 0);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
+	//glPopMatrix();
+}

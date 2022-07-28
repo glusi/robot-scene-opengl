@@ -27,6 +27,7 @@ public:
 	void moveCamera(USER_ACTION_CAMERA action, float angle);
 	void rotateCamera(int mouseX, int mouseY);
 	void setIFirstPerson(int is_first_person);
+	bool getIFirstPerson();
 	void setFirstPersonCamera(Vector3 translate_position);
 	Vector3 getCameraPosition();
 	

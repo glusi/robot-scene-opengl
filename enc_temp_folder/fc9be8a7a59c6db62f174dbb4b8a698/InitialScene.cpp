@@ -215,10 +215,10 @@ InitialScene::InitialScene(std::list<Button> buttons) {
 
 void InitialScene::draw() {
 	camera->draw();
-	glPushMatrix();
+	
+	lights->draw();glPushMatrix();
 	if(camera->getIFirstPerson())
 		robot->applyCameraRotation();
-	lights->draw();
 	texture.bindTexture(TEXTURE_FLOOR);
 	floor->draw();
 	robot->draw();
