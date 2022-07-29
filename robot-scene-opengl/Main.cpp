@@ -41,6 +41,8 @@ float rotate_camera_right_left;
 float rotate_camera_up_down;
 float rotate_camera_front_back;
 float* ambient_color;
+float move_robot_foward_back = 0;
+float rotate_robot = 0;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -77,6 +79,8 @@ void getInitialValues() {
     rotate_camera_front_back = scene.getCameraPosition().z;
 
     Tools::copyColor(&ambient_color, scene.getAmbientColor());
+
+   // move_robot_foward_back = scene.getRobotPosition();
 }
 
 void createMenu(){
@@ -109,7 +113,12 @@ void createMenu(){
             scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
         else
             scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
-        //
+        
+        //Move robot
+        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
+        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
+        scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
+        scene.rotateRobot(rotate_robot);
             
     }
     if (ImGui::CollapsingHeader("Camera")) {

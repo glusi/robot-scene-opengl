@@ -27,7 +27,9 @@ public:
 	void moveCamera(USER_ACTION_CAMERA action, float angle);
 	void rotateCamera(int mouseX, int mouseY);
 	void moveRobot(ROBOT_MOVE_DIRECTION direction);
+	void moveRobot(ROBOT_MOVE_DIRECTION direction, float amount);
 	void rotateRobot();
+	void rotateRobot(float angle);
 	void rotateRobotHand(ROBOT_JOINT joint);
 	void liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement);

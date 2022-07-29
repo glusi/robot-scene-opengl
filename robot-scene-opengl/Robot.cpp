@@ -221,6 +221,14 @@ void Robot::move(ROBOT_MOVE_DIRECTION direction)
 		translated_position -= move_direction;
 }
 
+void Robot::move(ROBOT_MOVE_DIRECTION direction, float amount)
+{
+	if (direction == ROBOT_MOVE_FRONT)
+		translated_position = move_direction*amount;
+	else
+		translated_position = move_direction*(-amount);
+}
+
 void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 {
 	switch (joint) {
@@ -312,6 +320,13 @@ void Robot::rotate()
 {
 	angle++;
 	move_direction = Vector3(sin(angle*(M_PI / 180)), 0, cos(angle * (M_PI / 180)));
+	move_direction.normalize();
+}
+
+void Robot::rotate(float angle_new)
+{
+	angle = angle_new;
+	move_direction = Vector3(sin(angle * (M_PI / 180)), 0, cos(angle * (M_PI / 180)));
 	move_direction.normalize();
 }
 

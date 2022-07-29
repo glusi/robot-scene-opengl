@@ -255,9 +255,19 @@ void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction)
 	robot->move(direction);
 }
 
+void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction, float amount)
+{
+	robot->move(direction, amount);
+}
+
 void InitialScene::rotateRobot()
 {
 	robot->rotate();
+}
+
+void InitialScene::rotateRobot(float angle)
+{
+	robot->rotate(angle);
 }
 
 void InitialScene::rotateRobotHand(ROBOT_JOINT joint)
