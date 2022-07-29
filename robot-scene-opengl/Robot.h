@@ -36,7 +36,7 @@ class Robot : SceneItem
 	};
 	Vector3 translated_position;
 	Vector3 move_direction;
-	float angle;
+	float angle = 0;
 
 	Vector3 shoulder_position_to_robot;
 	float shoulder_rotation;

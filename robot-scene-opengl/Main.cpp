@@ -117,10 +117,13 @@ void createMenu(){
             scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
         
         //Move robot
+        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
         ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
         ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
-        scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
-        scene.rotateRobot(rotate_robot);
+        if (move_robot_foward_back_new != move_robot_foward_back)
+            scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
+        if (rotate_robot_new != rotate_robot)
+            scene.rotateRobot(rotate_robot);
             
     }
     if (ImGui::CollapsingHeader("Camera")) {
