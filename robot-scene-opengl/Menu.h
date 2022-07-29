@@ -1,9 +1,7 @@
 #pragma once
 #include "Tools.h"
 #include "Initialscene.h"
-#include "../third-party/imgui/imgui_impl_glut.h"
-#include "../third-party/imgui/imgui_impl_opengl3.h"
-#include "../third-party/imgui/imgui.h"
+
 
 class Menu
 {
@@ -25,6 +23,7 @@ class Menu
 	InitialScene* scene;
 	void getInitialValues();
 	void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name);
+	void MyHelpFunction();
 public:
 	Menu();
 	Menu(InitialScene* scene);

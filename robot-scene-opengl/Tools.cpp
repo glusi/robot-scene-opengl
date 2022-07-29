@@ -38,3 +38,11 @@ std::string Tools::concatStrings(const char* one, const char* two)
 	return buf;
 }
 
+void Tools::AlignForWidth(float width, float alignment)
+{
+	ImGuiStyle& style = ImGui::GetStyle();
+	float avail = ImGui::GetContentRegionAvail().x;
+	float off = (avail - width) * alignment;
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+}

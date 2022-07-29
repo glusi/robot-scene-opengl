@@ -6,6 +6,9 @@
 #include "Constants.h"
 #include "Materials.h"
 #include <string>
+#include "../third-party/imgui/imgui_impl_glut.h"
+#include "../third-party/imgui/imgui_impl_opengl3.h"
+#include "../third-party/imgui/imgui.h"
 
 static class Tools
 {
@@ -15,5 +18,6 @@ public:
 	static void assignMaterial(materialStruct  material);
 	static void copyColor(float** ambient_color, float* new_color);
 	static std::string concatStrings(const char* one, const char* two);
+	static void AlignForWidth(float width, float alignment = 0.5f);
 };
 

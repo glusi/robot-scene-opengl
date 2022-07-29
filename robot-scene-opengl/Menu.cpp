@@ -35,7 +35,7 @@ void Menu::getInitialValues() {
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
     //Move shoulder
     float lift_new = lift;
-    ImGui::SliderFloat(Tools::concatStrings("Move robot ", name).c_str(), &lift, -90.0f, 90.0f);
+    ImGui::SliderFloat(Tools::concatStrings("Move ", name).c_str(), &lift, -90.0f, 90.0f);
     if (lift_new != lift)
         if (lift > 0)
             scene->liftRobotHand(robot_joint, ROBOT_HAND_UP);
@@ -44,12 +44,16 @@ void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, c
 
     //Rotate shoulder
     float rotation_new = rotation;
-    ImGui::SliderFloat(Tools::concatStrings("Rotate robot ", name).c_str(), &rotation, -180.0f, 180.0f);
+    ImGui::SliderFloat(Tools::concatStrings("Rotate ", name).c_str(), &rotation, -180.0f, 180.0f);
     if (rotation_new != rotation)
         if (move_shoulder > 0)
             scene->rotateRobotHand(robot_joint, rotation);
         else
             scene->rotateRobotHand(robot_joint, rotation);
+}
+
+void Menu::MyHelpFunction()
+{
 }
 
 void Menu::createMenu() {
@@ -64,10 +68,10 @@ void Menu::createMenu() {
     /*if (ImGui::TreeNode("tv")) {
             }       */
 
-            //Adjust ambient color
+    //Adjust ambient color
     ImGui::ColorEdit4("Ambient color", ambient_color);
     scene->adjustAmbientLight(ambient_color);
-
+   
     if (ImGui::CollapsingHeader("Robot")) {
 
         //Move robot
@@ -98,13 +102,10 @@ void Menu::createMenu() {
             else
                 scene->moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
 
-
-
         ImGui::Text("Robot hand");
         moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
         moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
         moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
-        //makeRotationSlider(rotate_shoulder, "Rotate shoulder", -180, 180, scene->rotateRobotHand, ROBOT_SHOULDER);
     }
     if (ImGui::CollapsingHeader("Camera")) {
 
@@ -139,6 +140,24 @@ void Menu::createMenu() {
             else
                 scene->moveCamera(CAMERA_BACK, -rotate_camera_front_back);
     }
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    float width = 0.0f;
+    width += ImGui::CalcTextSize("Hello").x;
+    width += style.ItemSpacing.x;
+    width += ImGui::CalcTextSize("World!").x;
+    Tools::AlignForWidth(width);
+
+    ImGui::Button("Help");
+    ImGui::SameLine();
+    ImGui::Button("Exit");
+
+    /*if (Tools::ButtonCenteredOnLine("Help", 0.5))
+        MyHelpFunction();
+    ImGui::SameLine();
+    if (ImGui::Button("Exit"))
+        exit(0);*/
+
     // }
          //ImGui::SetNextWindowPos();
 }
