@@ -1,4 +1,6 @@
 #include "Tools.h"
+#include <string>
+#include <iostream>
 
 void Tools::drawCylinder(float radius, float height, int slices) {
 	GLUquadricObj* IDquadric = gluNewQuadric();
@@ -27,5 +29,12 @@ void Tools::copyColor(float **ambient_color, float* new_color)
 	for (int i = 0; i < 4; i++) {
 		(*ambient_color)[i] = new_color[i];
 	}
+}
+
+std::string Tools::concatStrings(const char* one, const char* two)
+{
+	std::string buf(one);
+	buf.append(two);
+	return buf;
 }
 

@@ -26,7 +26,7 @@ Camera::Camera()
 	angle_x = 0.0;
 	angle_y = 0.0;
 
-	eye_robot = Vector3(0,5,0);
+	eye_robot = Vector3(0,4.5,2.5);
 	center_robot = Vector3(0,5,10);
 	upz_robot = Vector3(0.0, 1.0, 0.0);
 }

@@ -72,12 +72,20 @@ class Robot : SceneItem
 		void move(ROBOT_MOVE_DIRECTION direction);
 		void move(ROBOT_MOVE_DIRECTION direction, float amount);
 		void rotateHandJoint(ROBOT_JOINT joint);
+		void rotateHandJoint(ROBOT_JOINT joint, float amount);
 		void liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
+		void liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount);
 		void rotate();
 		void rotate(float angle_new);
 		Vector3 getHeadPosition();
 		void applyCameraRotation();
 		float getRobotRotation();
 		float getRobotPosition();
+		float getShoulderLift();
+		float getShoulderRotation();
+		float getElbowLift();
+		float getElbowRotation();;
+		float getPalmLift();
+		float getPalmRotation();;
 };
 

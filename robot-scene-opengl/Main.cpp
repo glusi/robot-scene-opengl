@@ -43,6 +43,12 @@ float rotate_camera_front_back;
 float* ambient_color;
 float move_robot_foward_back;
 float rotate_robot = 0;
+float move_shoulder;
+float rotate_shoulder;
+float move_elbow;
+float rotate_elbow;
+float move_palm;
+float rotate_palm;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -83,6 +89,41 @@ void getInitialValues() {
     move_robot_foward_back = scene.getRobotPosition();
     rotate_robot = scene.getRobotRotation();
    // move_robot_foward_back = scene.getRobotPosition();
+
+    move_shoulder = scene.getShoulderLift();
+    rotate_shoulder = scene.getShoulderRotation();
+    move_elbow = scene.getElbowLift();
+    rotate_elbow = scene.getElbowRotation();;
+    move_palm = scene.getPalmLift();
+    rotate_palm = scene.getPalmRotation();
+}
+
+
+/*void makeRotationSlider(float value, const char* name, float min_value, float max_value, void(*func)(int, float), int param1) {
+    float value_new = value;
+    ImGui::SliderFloat(name, &value, min_value, max_value);
+    if (value != value)
+        func(param1, value);
+}*/
+
+void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
+    //Move shoulder
+    float lift_new = lift;
+    ImGui::SliderFloat(Tools::concatStrings("Move robot ", name).c_str(), &lift, -90.0f, 90.0f);
+    if (lift_new != lift)
+        if (lift > 0)
+            scene.liftRobotHand(robot_joint, ROBOT_HAND_UP);
+        else
+            scene.liftRobotHand(robot_joint, ROBOT_HAND_DOWN);
+
+    //Rotate shoulder
+    float rotation_new = rotation;
+    ImGui::SliderFloat(Tools::concatStrings("Rotate robot ",name).c_str(), &rotation, -180.0f, 180.0f);
+    if (rotation_new != rotation)
+        if (move_shoulder > 0)
+            scene.rotateRobotHand(robot_joint, rotation);
+        else
+            scene.rotateRobotHand(robot_joint, rotation);
 }
 
 void createMenu(){
@@ -102,6 +143,17 @@ void createMenu(){
     scene.adjustAmbientLight(ambient_color);
 
     if (ImGui::CollapsingHeader("Robot")) {
+
+        //Move robot
+        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
+        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
+        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
+        if (move_robot_foward_back_new != move_robot_foward_back)
+            scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
+        if (rotate_robot_new != rotate_robot)
+            scene.rotateRobot(rotate_robot);
+         
+        ImGui::Text("Robot head");
         float rotate_head_right_left_new = rotate_head_right_left;
         ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
         //Rotate head right and left
@@ -112,7 +164,7 @@ void createMenu(){
                 scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
 
         float rotate_head_up_down_new = rotate_head_up_down;
-        ImGui::SliderFloat("Rotate head", &rotate_head_up_down, -180.0f, 180.0f);  
+        ImGui::SliderFloat("Rotate head up down", &rotate_head_up_down, -180.0f, 180.0f);  
         //Rotate head up and down
         if(rotate_head_up_down_new != rotate_head_up_down)
             if(rotate_head_up_down >= 0)
@@ -120,15 +172,13 @@ void createMenu(){
             else
                 scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
         
-        //Move robot
-        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
-        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
-        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
-        if (move_robot_foward_back_new != move_robot_foward_back)
-            scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
-        if (rotate_robot_new != rotate_robot)
-            scene.rotateRobot(rotate_robot);
-            
+        
+
+        ImGui::Text("Robot hand");
+        moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
+        moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
+        moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
+        //makeRotationSlider(rotate_shoulder, "Rotate shoulder", -180, 180, scene.rotateRobotHand, ROBOT_SHOULDER);
     }
     if (ImGui::CollapsingHeader("Camera")) {
             

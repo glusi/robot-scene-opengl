@@ -275,9 +275,19 @@ void InitialScene::rotateRobotHand(ROBOT_JOINT joint)
 	robot->rotateHandJoint(joint);
 }
 
+void InitialScene::rotateRobotHand(ROBOT_JOINT joint, float amount)
+{
+	robot->rotateHandJoint(joint, amount);
+}
+
 void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	robot->liftHandJoint(joint, action);
+}
+
+void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount)
+{
+	robot->liftHandJoint(joint, action, amount);
 }
 
 void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement)
@@ -323,4 +333,34 @@ float InitialScene::getRobotRotation()
 float InitialScene::getRobotPosition()
 {
 	return robot->getRobotPosition();
+}
+
+float InitialScene::getShoulderLift()
+{
+	return robot->getShoulderLift();
+}
+
+float InitialScene::getShoulderRotation()
+{
+	return robot->getShoulderRotation();
+}
+
+float InitialScene::getElbowLift()
+{
+	return robot->getElbowLift();
+}
+
+float InitialScene::getElbowRotation()
+{
+	return robot->getElbowRotation();
+}
+
+float InitialScene::getPalmLift()
+{
+	return robot->getPalmLift();
+}
+
+float InitialScene::getPalmRotation()
+{
+	return robot->getPalmRotation();
 }

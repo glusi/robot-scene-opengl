@@ -31,7 +31,9 @@ public:
 	void rotateRobot();
 	void rotateRobot(float angle);
 	void rotateRobotHand(ROBOT_JOINT joint);
+	void rotateRobotHand(ROBOT_JOINT joint, float amount);
 	void liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
+	void liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount);
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement);
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle);
 	void setIFirstPerson(int isFirstPerson);
@@ -41,5 +43,11 @@ public:
 	float* getAmbientColor();
 	float getRobotRotation();
 	float getRobotPosition();
+	float getShoulderLift();
+	float getShoulderRotation();
+	float getElbowLift();
+	float getElbowRotation();;
+	float getPalmLift();
+	float getPalmRotation();;
 };
 

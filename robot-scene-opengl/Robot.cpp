@@ -288,6 +288,21 @@ void Robot::rotateHandJoint(ROBOT_JOINT joint)
 	};
 }
 
+void Robot::rotateHandJoint(ROBOT_JOINT joint, float amount)
+{
+	switch (joint) {
+	case ROBOT_SHOULDER:
+		shoulder_rotation = amount;
+		break;
+	case ROBOT_ELBOW:
+		elbow_rotation = amount;
+		break;
+	case ROBOT_PALM:
+		palm_rotation = amount;
+		break;
+	};
+}
+
 void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	switch (joint) {
@@ -319,6 +334,42 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 				palm_lift++;
 			else
 				palm_lift--;
+		}
+		break;
+	};
+}
+
+void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount)
+{
+	switch (joint) {
+	case ROBOT_SHOULDER:
+		if ((shoulder_lift + INITIAL_SHOULDER_ROTATION > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift + INITIAL_SHOULDER_ROTATION < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			shoulder_lift = shoulder_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				shoulder_lift = amount;
+			else
+				shoulder_lift = -amount;
+		}
+		break;
+	case ROBOT_ELBOW:
+		if ((elbow_lift > 180 - ELBOW_DOWN_OFFSET - INITIAL_ELBOW_ROTATION && action == ROBOT_HAND_UP) || (elbow_lift < -INITIAL_ELBOW_ROTATION - 90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			elbow_lift = elbow_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				elbow_lift = amount;
+			else
+				elbow_lift = -amount;
+		}
+		break;
+	case ROBOT_PALM:
+		if ((palm_lift > 180 - PALM_DOWN_OFFSET - INITIAL_PALM_ROTATION && action == ROBOT_HAND_UP) || (palm_lift < -INITIAL_PALM_ROTATION - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
+			palm_lift = palm_lift;
+		else {
+			if (action == ROBOT_HAND_UP)
+				palm_lift = amount;
+			else
+				palm_lift = -amount;
 		}
 		break;
 	};
@@ -370,4 +421,34 @@ float Robot::getRobotRotation()
 float Robot::getRobotPosition()
 {
 	return amount_move;
+}
+
+float Robot::getShoulderLift()
+{
+	return shoulder_lift;
+}
+
+float Robot::getShoulderRotation()
+{
+	return shoulder_rotation;
+}
+
+float Robot::getElbowLift()
+{
+	return elbow_lift;
+}
+
+float Robot::getElbowRotation()
+{
+	return elbow_rotation;
+}
+
+float Robot::getPalmLift()
+{
+	return palm_lift;
+}
+
+float Robot::getPalmRotation()
+{
+	return palm_rotation;
 }
