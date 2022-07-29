@@ -320,7 +320,7 @@ float InitialScene::getRobotRotation()
 	return robot->getRobotRotation();
 }
 
-Vector3 InitialScene::getRobotPosition()
+float InitialScene::getRobotPosition()
 {
 	return robot->getRobotPosition();
 }

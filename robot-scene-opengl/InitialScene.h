@@ -40,6 +40,6 @@ public:
 	void adjustAmbientLight(float* color);
 	float* getAmbientColor();
 	float getRobotRotation();
-	Vector3 getRobotPosition();
+	float getRobotPosition();
 };
 

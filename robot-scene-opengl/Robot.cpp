@@ -215,18 +215,26 @@ void Robot::draw() {
 
 void Robot::move(ROBOT_MOVE_DIRECTION direction)
 {
-	if(direction == ROBOT_MOVE_FRONT)
+	if (direction == ROBOT_MOVE_FRONT) {
 		translated_position += move_direction;
-	else
+		amount_move++;
+	} else {
 		translated_position -= move_direction;
+		amount_move--;
+	}
 }
 
 void Robot::move(ROBOT_MOVE_DIRECTION direction, float amount)
 {
-	if (direction == ROBOT_MOVE_FRONT)
-		translated_position = move_direction*amount;
-	else
-		translated_position = move_direction*(-amount);
+
+	if (direction == ROBOT_MOVE_FRONT) {
+		translated_position = move_direction * amount;
+		amount_move = amount;
+	} else {
+		translated_position = move_direction * (-amount);
+		amount_move = -amount;
+	}
+	
 }
 
 void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
@@ -358,7 +366,7 @@ float Robot::getRobotRotation()
 	return angle;
 }
 
-Vector3 Robot::getRobotPosition()
+float Robot::getRobotPosition()
 {
-	return translated_position;
+	return amount_move;
 }

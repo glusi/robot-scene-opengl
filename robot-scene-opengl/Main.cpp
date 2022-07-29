@@ -80,7 +80,7 @@ void getInitialValues() {
 
     Tools::copyColor(&ambient_color, scene.getAmbientColor());
 
-    move_robot_foward_back = scene.getRobotPosition().x;
+    move_robot_foward_back = scene.getRobotPosition();
     rotate_robot = scene.getRobotRotation();
    // move_robot_foward_back = scene.getRobotPosition();
 }
