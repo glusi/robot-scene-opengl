@@ -8,13 +8,10 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#include "InitialScene.h"
 #include "Gui.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-#include "../third-party/imgui/imgui_impl_glut.h"
-#include "../third-party/imgui/imgui_impl_opengl3.h"
-#include "../third-party/imgui/imgui.h"
+//#include <stb_image.h>
+#include "Menu.h"
 
 //Default values for initial window
 constexpr auto WINDOW_WIDTH = 800;
@@ -26,6 +23,7 @@ constexpr auto WINDOW_POSITION_Y = 50;
 //the current width and height of the window
 GLsizei new_width, new_height;
 InitialScene scene;
+Menu menu;
 
 bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
@@ -33,22 +31,6 @@ float xlast_mouse =0.0, ylast_mouse =0.0;
 std::list<Button> buttons;
 
 static bool show_menu = true;
-
-int isFirstPerson = 0;
-float rotate_head_right_left = 0;
-float rotate_head_up_down = 0;
-float rotate_camera_right_left;
-float rotate_camera_up_down;
-float rotate_camera_front_back;
-float* ambient_color;
-float move_robot_foward_back;
-float rotate_robot = 0;
-float move_shoulder;
-float rotate_shoulder;
-float move_elbow;
-float rotate_elbow;
-float move_palm;
-float rotate_palm;
 
 // Set Perspective projection
 void setPrespProjection() {
@@ -77,146 +59,6 @@ void drawAxis() {
 
 }
 
-void getInitialValues() {
-    //rotate_head_right_left = scene.getHeadPosition().x;
-    //rotate_head_up_down = scene.getHeadPosition().;
-    rotate_camera_right_left = scene.getCameraPosition().x;
-    rotate_camera_up_down = scene.getCameraPosition().y;
-    rotate_camera_front_back = scene.getCameraPosition().z;
-
-    Tools::copyColor(&ambient_color, scene.getAmbientColor());
-
-    move_robot_foward_back = scene.getRobotPosition();
-    rotate_robot = scene.getRobotRotation();
-   // move_robot_foward_back = scene.getRobotPosition();
-
-    move_shoulder = scene.getShoulderLift();
-    rotate_shoulder = scene.getShoulderRotation();
-    move_elbow = scene.getElbowLift();
-    rotate_elbow = scene.getElbowRotation();;
-    move_palm = scene.getPalmLift();
-    rotate_palm = scene.getPalmRotation();
-}
-
-
-/*void makeRotationSlider(float value, const char* name, float min_value, float max_value, void(*func)(int, float), int param1) {
-    float value_new = value;
-    ImGui::SliderFloat(name, &value, min_value, max_value);
-    if (value != value)
-        func(param1, value);
-}*/
-
-void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
-    //Move shoulder
-    float lift_new = lift;
-    ImGui::SliderFloat(Tools::concatStrings("Move robot ", name).c_str(), &lift, -90.0f, 90.0f);
-    if (lift_new != lift)
-        if (lift > 0)
-            scene.liftRobotHand(robot_joint, ROBOT_HAND_UP);
-        else
-            scene.liftRobotHand(robot_joint, ROBOT_HAND_DOWN);
-
-    //Rotate shoulder
-    float rotation_new = rotation;
-    ImGui::SliderFloat(Tools::concatStrings("Rotate robot ",name).c_str(), &rotation, -180.0f, 180.0f);
-    if (rotation_new != rotation)
-        if (move_shoulder > 0)
-            scene.rotateRobotHand(robot_joint, rotation);
-        else
-            scene.rotateRobotHand(robot_joint, rotation);
-}
-
-void createMenu(){
-    getInitialValues();
-        
-    float try1;
-    ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);
-    //ImGui::TreePop();
-    int t;
-    // ImGui::RadioButton("external view", &t, 0); ImGui::SameLine();
-        
-    /*if (ImGui::TreeNode("tv")) {
-            }       */
-
-    //Adjust ambient color
-    ImGui::ColorEdit4("Ambient color", ambient_color);
-    scene.adjustAmbientLight(ambient_color);
-
-    if (ImGui::CollapsingHeader("Robot")) {
-
-        //Move robot
-        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
-        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
-        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
-        if (move_robot_foward_back_new != move_robot_foward_back)
-            scene.moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
-        if (rotate_robot_new != rotate_robot)
-            scene.rotateRobot(rotate_robot);
-         
-        ImGui::Text("Robot head");
-        float rotate_head_right_left_new = rotate_head_right_left;
-        ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
-        //Rotate head right and left
-        if(rotate_head_right_left_new != rotate_head_right_left)
-            if(rotate_head_right_left >0)
-                scene.moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right_left);
-            else
-                scene.moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
-
-        float rotate_head_up_down_new = rotate_head_up_down;
-        ImGui::SliderFloat("Rotate head up down", &rotate_head_up_down, -180.0f, 180.0f);  
-        //Rotate head up and down
-        if(rotate_head_up_down_new != rotate_head_up_down)
-            if(rotate_head_up_down >= 0)
-                scene.moveRobotHead(ROBOT_HEAD_UP, -rotate_head_up_down);
-            else
-                scene.moveRobotHead(ROBOT_HEAD_DOWN, -rotate_head_up_down);
-        
-        
-
-        ImGui::Text("Robot hand");
-        moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
-        moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
-        moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
-        //makeRotationSlider(rotate_shoulder, "Rotate shoulder", -180, 180, scene.rotateRobotHand, ROBOT_SHOULDER);
-    }
-    if (ImGui::CollapsingHeader("Camera")) {
-            
-        ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
-        ImGui::RadioButton("robot view", &isFirstPerson, 1);
-        scene.setIFirstPerson(isFirstPerson);
-
-        //Move camera right and left
-        float rotate_camera_right_left_new = rotate_camera_right_left;
-        ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
-        if(rotate_camera_right_left != rotate_camera_right_left_new)
-            if (rotate_camera_right_left > 0)
-                scene.moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
-            else
-                scene.moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
-
-        //Move camera up and down
-        float rotate_camera_up_down_new = rotate_camera_up_down;
-        ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
-        if(rotate_camera_up_down != rotate_camera_up_down_new)
-            if (rotate_camera_up_down > 0)
-                scene.moveCamera(CAMERA_UP, rotate_camera_up_down);
-            else
-                scene.moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
-
-        //Move camera front and back
-        float rotate_camera_front_back_new = rotate_camera_front_back;
-        ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
-        if(rotate_camera_front_back != rotate_camera_front_back)
-            if (rotate_camera_front_back > 0)
-                scene.moveCamera(CAMERA_FRONT, rotate_camera_front_back);
-            else
-                scene.moveCamera(CAMERA_BACK, -rotate_camera_front_back);
-    }
-   // }
-        //ImGui::SetNextWindowPos();
-}
-
 void display() {
     //Clears
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -228,7 +70,7 @@ void display() {
     ImGui_ImplGLUT_NewFrame();
     //ImGui::NewFrame();
 
-    createMenu();
+    menu.createMenu();
 
     ImGui::Render();
     ImGuiIO& io = ImGui::GetIO();
@@ -415,8 +257,8 @@ void Init() {
    // glEnable(GL_CULL_FACE);
     buttons = makeButtons();
     scene = InitialScene(buttons);
-
-    ambient_color = new float[4];
+    menu = Menu(&scene);
+    
 }
 
 int main(int argc, char** argv)

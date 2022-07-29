@@ -75,6 +75,9 @@
     <ClCompile Include="..\third-party\imgui\imgui_impl_glut.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Floor.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="..\third-party\imgui\imgui_impl_glut.h">
       <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

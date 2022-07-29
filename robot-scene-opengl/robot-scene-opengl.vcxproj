@@ -163,6 +163,7 @@
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="SceneItem.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="Materials.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SceneItem.h" />

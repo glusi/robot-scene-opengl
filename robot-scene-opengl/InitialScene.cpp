@@ -1,4 +1,4 @@
-#include "InitialScene.h"
+#include "Initialscene.h"
 #include "../third-party/imgui/imgui_impl_glut.h"
 
 void InitialScene::addDecorations()
