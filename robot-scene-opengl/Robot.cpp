@@ -352,3 +352,13 @@ void Robot::applyCameraRotation()
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 	//glPopMatrix();
 }
+
+float Robot::getRobotRotation()
+{
+	return angle;
+}
+
+Vector3 Robot::getRobotPosition()
+{
+	return translated_position;
+}

@@ -76,5 +76,7 @@ class Robot : SceneItem
 		void rotate(float angle_new);
 		Vector3 getHeadPosition();
 		void applyCameraRotation();
+		float getRobotRotation();
+		Vector3 getRobotPosition();
 };
 

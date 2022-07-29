@@ -41,7 +41,7 @@ float rotate_camera_right_left;
 float rotate_camera_up_down;
 float rotate_camera_front_back;
 float* ambient_color;
-float move_robot_foward_back = 0;
+float move_robot_foward_back;
 float rotate_robot = 0;
 
 // Set Perspective projection
@@ -80,6 +80,8 @@ void getInitialValues() {
 
     Tools::copyColor(&ambient_color, scene.getAmbientColor());
 
+    move_robot_foward_back = scene.getRobotPosition().x;
+    rotate_robot = scene.getRobotRotation();
    // move_robot_foward_back = scene.getRobotPosition();
 }
 

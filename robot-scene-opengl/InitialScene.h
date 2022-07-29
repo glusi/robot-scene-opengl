@@ -39,5 +39,7 @@ public:
 	Vector3 getHeadPosition();
 	void adjustAmbientLight(float* color);
 	float* getAmbientColor();
+	float getRobotRotation();
+	Vector3 getRobotPosition();
 };
 

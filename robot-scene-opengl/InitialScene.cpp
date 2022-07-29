@@ -314,3 +314,13 @@ float* InitialScene::getAmbientColor()
 {
 	return lights->getAmbientColor();
 }
+
+float InitialScene::getRobotRotation()
+{
+	return robot->getRobotRotation();
+}
+
+Vector3 InitialScene::getRobotPosition()
+{
+	return robot->getRobotPosition();
+}
