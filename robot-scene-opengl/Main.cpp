@@ -269,6 +269,7 @@ void Init() {
     scene = InitialScene(buttons);
     menu = Menu(&scene);
     
+
 }
 
 int main(int argc, char** argv)

@@ -23,7 +23,9 @@ void Floor::draw() {
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{
+			//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			glEnable(GL_TEXTURE_2D);
+			//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0); glVertex3f(x * tile_size_x,0, y * tile_size_y);
 			glTexCoord2f(0.0, 1.0); glVertex3f((x + 1) * tile_size_x, 0, y * tile_size_y);
