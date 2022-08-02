@@ -11,5 +11,6 @@ class Texture
 public:
 	Texture();
 	void bindTexture(TEXTURE_TYPE texture);
+	GLuint getTextureId(TEXTURE_TYPE texture);
 };
 

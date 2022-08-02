@@ -57,6 +57,7 @@ void Menu::MyHelpFunction()
 }
 
 void Menu::createMenu() {
+    ImGui::Begin("Menu");
     getInitialValues();
 
     float try1;
@@ -148,9 +149,11 @@ void Menu::createMenu() {
     width += ImGui::CalcTextSize("World!").x;
     Tools::AlignForWidth(width);
 
-    ImGui::Button("Help");
+    if (ImGui::Button("Help"))
+        helpFunc();
     ImGui::SameLine();
-    ImGui::Button("Exit");
+    if (ImGui::Button("Exit"))
+        exit(0);
 
     /*if (Tools::ButtonCenteredOnLine("Help", 0.5))
         MyHelpFunction();
@@ -160,4 +163,26 @@ void Menu::createMenu() {
 
     // }
          //ImGui::SetNextWindowPos();
+    ImGui::End();
+    static bool x_pressable = true;
+    if (help_window_open) {
+        ImGui::OpenPopup("help");
+        
+        ImGui::BeginPopupModal("help", &x_pressable, 0);
+        if (x_pressable) {
+            ImGui::Text("nana");
+            GLvoid* pixels;
+            glGetTexImage(scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), &pixels);
+            ImGui::Image(pixels, ImVec2(120, 120));
+            ImGui::EndPopup();
+        }
+        else {
+            help_window_open = false;
+            x_pressable = true;
+        }
+    }
+}
+
+void Menu::helpFunc() {
+    help_window_open = true;    
 }

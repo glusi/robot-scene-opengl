@@ -21,9 +21,11 @@ class Menu
 	float move_palm;
 	float rotate_palm;
 	InitialScene* scene;
+	bool help_window_open = false;
 	void getInitialValues();
 	void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name);
 	void MyHelpFunction();
+	void helpFunc();
 public:
 	Menu();
 	Menu(InitialScene* scene);

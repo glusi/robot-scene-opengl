@@ -48,3 +48,19 @@ void Texture::bindTexture(TEXTURE_TYPE texture)
     
 }
 
+GLuint Texture::getTextureId(TEXTURE_TYPE texture)
+{
+    int res;
+    switch (texture)
+    {
+    case TEXTURE_FLOOR: res = textures[0]; break;
+    case TEXTURE_TABLE: res = textures[1]; break;
+    case TEXTURE_BACKGROUND: res = textures[2]; break;
+    case TEXTURE_TV: res = textures[3]; break;
+    default:
+        res = -1;
+        break;
+    }
+    return res;
+}
+

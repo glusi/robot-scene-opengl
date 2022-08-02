@@ -364,3 +364,11 @@ float InitialScene::getPalmRotation()
 {
 	return robot->getPalmRotation();
 }
+
+GLuint InitialScene::getTextureId(TEXTURE_TYPE texture)
+{
+	GLuint res = this->texture.getTextureId(texture);
+	return res;
+}
+
+

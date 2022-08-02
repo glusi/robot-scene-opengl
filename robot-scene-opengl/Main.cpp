@@ -214,7 +214,15 @@ void exitFunc() {
 }
 
 void helpFunc() {
-   
+    if (!ImGui::Begin("My Window Name"))
+    {
+        ImGui::End();
+    }
+    else
+    {
+        ImGui::Text("your content here");
+        ImGui::End();
+    }
 }
 
 std::list<Button> makeButtons() {
@@ -238,6 +246,8 @@ void initImgui() {
     // Setup style
     ImGui::StyleColorsClassic();
 
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.2, 0.2, 0.2, 0.8);
 }
 
 //The Initialize function, called once:    

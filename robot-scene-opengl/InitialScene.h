@@ -48,6 +48,7 @@ public:
 	float getElbowLift();
 	float getElbowRotation();;
 	float getPalmLift();
-	float getPalmRotation();;
+	float getPalmRotation();
+	GLuint getTextureId(TEXTURE_TYPE texture);
 };
 
