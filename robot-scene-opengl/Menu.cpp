@@ -171,9 +171,10 @@ void Menu::createMenu() {
         ImGui::BeginPopupModal("help", &x_pressable, 0);
         if (x_pressable) {
             ImGui::Text("nana");
-            GLvoid* pixels;
-            glGetTexImage(scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), scene->getTextureId(TEXTURE_TV), &pixels);
-            ImGui::Image(pixels, ImVec2(120, 120));
+           // GLvoid* pixels;
+           // bool ret = LoadTextureFromFile("C:\\Users\\User\\Desktop\\MyImage01.png", &my_texture, &my_image_width, &my_image_height);
+           // ImGui::Image(pixels, ImVec2(120, 120));
+            ImGui::Image((void*)(intptr_t)scene->getgetHelpImageTexture(), ImVec2(scene->getHelpImageWidth(), scene->getHelpImageHeight()));
             ImGui::EndPopup();
         }
         else {

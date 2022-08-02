@@ -50,5 +50,8 @@ public:
 	float getPalmLift();
 	float getPalmRotation();
 	GLuint getTextureId(TEXTURE_TYPE texture);
+	int getHelpImageWidth();
+	int getHelpImageHeight();
+	GLuint getgetHelpImageTexture();
 };
 

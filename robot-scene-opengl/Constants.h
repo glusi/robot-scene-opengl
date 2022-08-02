@@ -32,6 +32,7 @@ static const char* FLOOR_TEXTURE_PATH = "..//Assets//floor-tiles.jpg";
 static const char* TABLE_TEXTURE_PATH = "..//Assets//wood.jpg";
 static const char* BACKGROUND_TEXTURE_PATH = "..//Assets//background.jpg";
 static const char* TV_TEXTURE_PATH = "..//Assets//tv_screen.jpg";
+static const char* HELP_TEXTURE_PATH = "..//Assets//help.png";
 
 static const int NUM_OF_TEXTURES = 4;
 

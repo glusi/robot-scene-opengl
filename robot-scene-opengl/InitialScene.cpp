@@ -371,4 +371,19 @@ GLuint InitialScene::getTextureId(TEXTURE_TYPE texture)
 	return res;
 }
 
+int InitialScene::getHelpImageWidth()
+{
+	return texture.getHelpImageWidth();
+}
+
+int InitialScene::getHelpImageHeight()
+{
+	return texture.getHelpImageHeight();
+}
+
+GLuint InitialScene::getgetHelpImageTexture()
+{
+	return texture.getgetHelpImageTexture();
+}
+
 
