@@ -15,10 +15,10 @@ void Floor::draw() {
 	//glEnable(GL_NORMALIZE);
 
 	glColor3f(0, 0, 1);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, floor_material.Ka);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, floor_material.Ka);
 	glMaterialf(GL_FRONT, GL_SHININESS, floor_material.n);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, floor_material.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, floor_material.Kd);
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, floor_material.Kd);
 
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
