@@ -6,8 +6,8 @@
 class Robot : SceneItem
 {
 	const float ROBOT_HAND_SIZE = 0.25;
-	const float INITIAL_SHOULDER_ROTATION = 45;
-	const float INITIAL_ELBOW_ROTATION = 15;
+	const float INITIAL_SHOULDER_ROTATION = 0;
+	const float INITIAL_ELBOW_ROTATION = 0;
 	const int HAND_UP_OFFSET = 18;
 	const int HAND_DOWN_OFFSET = 10;
 	const int ELBOW_UP_OFFSET = 10;
