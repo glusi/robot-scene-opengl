@@ -27,11 +27,11 @@ void Robot::drawHand()
 	//glLoadIdentity();
 	drawJoint(shoulder_position_to_robot);
 	applyJointRotationAndLift(ROBOT_SHOULDER);
-	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_SHOULDER_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
+	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, Vector3(1, 0, 0), 1);
 	drawJoint(elbow_position_to_robot);
 	glPushMatrix();
 	applyJointRotationAndLift(ROBOT_ELBOW);
-	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, INITIAL_ELBOW_ROTATION, ROTATED_AROUND_Z, Vector3(1, 0, 0), 0.8);
+	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, Vector3(1, 0, 0), 0.8);
 	drawJoint(palm_position_to_robot);
 	glPushMatrix();
 	applyJointRotationAndLift(ROBOT_PALM);
@@ -48,12 +48,12 @@ void Robot::drawHand()
 	glPopMatrix();
 }
 
-void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, float angle2, ROTATION_TYPE rotation_type2, Vector3 color, float length)
+void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, Vector3 color, float length)
 {
 	glColor3f(color.x, color.y, color.z);
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
-	Tools::rotate(angle2, rotation_type2);
+	//Tools::rotate(angle2, rotation_type2);
 	Tools::rotate(angle1, rotation_type1);
 	Tools::drawCylinder(ROBOT_HAND_SIZE, length, 100);
 	glPopMatrix();
