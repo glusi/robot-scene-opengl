@@ -8,6 +8,7 @@ void Floor::draw() {
 	int tile_size_x = 4;
 	int tile_size_y = 4;
 	GLfloat color[4] = { 0,0,1,1 };
+	
 
 	glPushMatrix();
 	//glBegin(GL_QUADS);
@@ -37,4 +38,21 @@ void Floor::draw() {
 	//glEnd();
 	glPopMatrix();
 
+	glPushMatrix();
+	//Build Walls
+	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, grid_size_x * tile_size_x, -grid_size_y * tile_size_y);
+	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, -grid_size_x * tile_size_x, grid_size_y * tile_size_y);
+	createWall(grid_size_x * tile_size_x, grid_size_y * tile_size_y, -grid_size_x * tile_size_x, grid_size_y * tile_size_y);
+	createWall(grid_size_x * tile_size_x, grid_size_y * tile_size_y, grid_size_x * tile_size_x, -grid_size_y * tile_size_y);
+	glPopMatrix();
+}
+
+void Floor::createWall(float x1, float y1, float x2, float y2)
+{
+	glBegin(GL_QUADS);
+	glVertex3f(x1, 0, y1);
+	glVertex3f(x2, 0, y2);
+	glVertex3f(x2, WALL_HIGHT, y2);
+	glVertex3f(x1, WALL_HIGHT, y1);
+	glEnd();
 }
