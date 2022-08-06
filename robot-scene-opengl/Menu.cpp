@@ -38,9 +38,9 @@ void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, c
     ImGui::SliderFloat(Tools::concatStrings("Move ", name).c_str(), &lift, -90.0f, 90.0f);
     if (lift_new != lift)
         if (lift > 0)
-            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP);
+            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, lift);
         else
-            scene->liftRobotHand(robot_joint, ROBOT_HAND_DOWN);
+            scene->liftRobotHand(robot_joint, ROBOT_HAND_DOWN, -lift);
 
     //Rotate shoulder
     float rotation_new = rotation;
