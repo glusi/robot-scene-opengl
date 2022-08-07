@@ -4,6 +4,7 @@ Robot::Robot()
 {
 	move_direction = Vector3(0, 0, 1);
 	translated_position = Vector3::zeroVector();
+	translated_position_old = Vector3::zeroVector();
 	angle = 0.0;
 	shoulder_position_to_robot = Vector3(-0.8, 3.5, 0);//Vector3(-0.8, 3.5, 0);
 	shoulder_lift = 45;
@@ -216,10 +217,10 @@ void Robot::draw() {
 void Robot::move(ROBOT_MOVE_DIRECTION direction)
 {
 	if (direction == ROBOT_MOVE_FRONT) {
-		translated_position += move_direction;
+		translated_position += move_direction ;
 		amount_move++;
 	} else {
-		translated_position -= move_direction;
+		translated_position -= move_direction ;
 		amount_move--;
 	}
 }
@@ -228,10 +229,10 @@ void Robot::move(ROBOT_MOVE_DIRECTION direction, float amount)
 {
 
 	if (direction == ROBOT_MOVE_FRONT) {
-		translated_position = move_direction * amount;
+		translated_position = move_direction * amount * 0.1;
 		amount_move = amount;
 	} else {
-		translated_position = move_direction * (-amount);
+		translated_position = move_direction * (-amount) * 0.1;
 		amount_move = -amount;
 	}
 	
@@ -384,21 +385,44 @@ Vector3 Robot::getHeadPosition()
 
 void Robot::applyCameraRotation()
 {
-	//translateToNewPosition();
+	glPushMatrix();
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
+	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
+	glRotatef(-angle, 0, 1, 0);
+	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
+	//glTranslatef(head_position.x, head_position.y, head_position.z);*/
+	//glScalef(-1, 1, -1);
+	glPushMatrix();
+	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+
+	glPushMatrix();
+	//glRotatef(head_lift, 1, 0, 0);
+	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	//glRotatef(head_rotation, 0, 1, 0);
+
+	//glTranslatef(head_position.x, head_position.y, head_position.z);
+
+	glPushMatrix();
+
+	//translateToNewPosition();
+	//glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	//glScalef(-1, 1, -1);
 	//rotateToNewAngle();
-	glRotatef(-angle, 0, 1, 0);
+	//glRotatef(-angle, 0, 1, 0);
+
 	//glPushMatrix();
-	
+	/*glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glRotatef(-head_lift, 1, 0, 0);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
 	//glPopMatrix();
 	
 	//glPushMatrix();
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glRotatef(-head_rotation, 0, 1, 0);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
-	//glPopMatrix();
+	//glPopMatrix();*/
+	
 }
 
 float Robot::getRobotRotation()
@@ -439,4 +463,19 @@ float Robot::getPalmLift()
 float Robot::getPalmRotation()
 {
 	return palm_rotation;
+}
+
+float Robot::getHeadRotation()
+{
+	return head_rotation;
+}
+
+float Robot::getHeadLift()
+{
+	return head_lift;
+}
+
+void Robot::updateOldPosition()
+{
+	translated_position_old = translated_position;
 }

@@ -1,6 +1,7 @@
 #include "Initialscene.h"
 #include "../third-party/imgui/imgui_impl_glut.h"
 
+
 void InitialScene::addDecorations()
 {
 	buildEatingCorner();
@@ -90,6 +91,8 @@ void InitialScene::buildEatingCorner()
 	glPopMatrix();
 
 	glPopMatrix();
+
+	
 }
 
 void InitialScene::buildTVCorner()
@@ -221,6 +224,8 @@ void InitialScene::draw() {
 	lights->draw();
 	texture.bindTexture(TEXTURE_FLOOR);
 	floor->draw();
+	texture.bindTexture(TEXTURE_WALL);
+	floor->buildWalls();
 	robot->draw();
 	addDecorations();
 	texture.bindTexture(TEXTURE_BACKGROUND);
@@ -232,7 +237,15 @@ void InitialScene::draw() {
 	//ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
 	//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 	glPopMatrix();
-
+	if (camera->getIFirstPerson())
+	{
+		glPopMatrix();
+		glPopMatrix();
+		glPopMatrix();
+		glPopMatrix();
+	}
+	robot->updateOldPosition();
+	
 }
 
 void InitialScene::moveCamera(USER_ACTION_CAMERA action)
@@ -384,6 +397,16 @@ int InitialScene::getHelpImageHeight()
 GLuint InitialScene::getgetHelpImageTexture()
 {
 	return texture.getgetHelpImageTexture();
+}
+
+float InitialScene::getHeadRotation()
+{
+	return robot->getHeadRotation();
+}
+
+float InitialScene::getHeadLift()
+{
+	return robot->getHeadLift();
 }
 
 

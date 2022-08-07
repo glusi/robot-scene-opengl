@@ -12,8 +12,8 @@ Menu::Menu(InitialScene* scene_new)
 }
 
 void Menu::getInitialValues() {
-    //rotate_head_right_left = scene->getHeadPosition().x;
-    //rotate_head_up_down = scene->getHeadPosition().;
+    rotate_head_right_left = scene->getHeadRotation();
+    rotate_head_up_down = scene->getHeadLift();
     rotate_camera_right_left = scene->getCameraPosition().x;
     rotate_camera_up_down = scene->getCameraPosition().y;
     rotate_camera_front_back = scene->getCameraPosition().z;

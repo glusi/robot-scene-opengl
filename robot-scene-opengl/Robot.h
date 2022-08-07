@@ -35,6 +35,7 @@ class Robot : SceneItem
 	2 // n
 	};
 	Vector3 translated_position;
+	Vector3 translated_position_old;
 	Vector3 move_direction;
 	float angle = 0;
 
@@ -86,6 +87,9 @@ class Robot : SceneItem
 		float getElbowLift();
 		float getElbowRotation();;
 		float getPalmLift();
-		float getPalmRotation();;
+		float getPalmRotation();
+		float getHeadRotation();
+		float getHeadLift();
+		void updateOldPosition();
 };
 

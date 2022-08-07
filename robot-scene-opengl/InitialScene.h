@@ -53,5 +53,7 @@ public:
 	int getHelpImageWidth();
 	int getHelpImageHeight();
 	GLuint getgetHelpImageTexture();
+	float getHeadRotation();
+	float getHeadLift();
 };
 
