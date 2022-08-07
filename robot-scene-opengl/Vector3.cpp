@@ -48,7 +48,7 @@ Vector3 Vector3::operator+=(Vector3 other)
 	return *this;
 }*/
 
-Vector3 Vector3::operator-=(Vector3& other)
+Vector3 Vector3::operator-=(Vector3 other)
 {
 	// Guard self assignment
 	if (this == &other)

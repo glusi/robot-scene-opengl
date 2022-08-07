@@ -82,7 +82,7 @@ void display() {
     glLoadIdentity();
 
     scene.draw();
-    drawAxis();
+    //drawAxis();
 
     //ImGui_ImplGLUT_RenderDrawData();
  
