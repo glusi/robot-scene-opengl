@@ -394,14 +394,17 @@ void Robot::applyCameraRotation()
 	//glTranslatef(head_position.x, head_position.y, head_position.z);*/
 	//glScalef(-1, 1, -1);
 	glPushMatrix();
-	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 
 	glPushMatrix();
-	//glRotatef(head_lift, 1, 0, 0);
-	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	//glRotatef(head_rotation, 0, 1, 0);
-
-	//glTranslatef(head_position.x, head_position.y, head_position.z);
+	/*glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glRotatef(head_lift, 1, 0, 0);
+	glTranslatef(head_position.x, head_position.y, head_position.z);*/
+	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
+	glRotatef(-head_rotation, 0, 1, 0);
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 
 	glPushMatrix();
 
