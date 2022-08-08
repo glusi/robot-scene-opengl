@@ -7,10 +7,21 @@ void InitialScene::addDecorations()
 	buildEatingCorner();
 	buildTVCorner();
 
+	//Door
 	glPushMatrix();
-	glTranslatef(-16, 0, 0);
-	glScalef(0.25, 18, 5);
+	glTranslatef(-16.1, 0, 0);
+
+	glPushMatrix();
+	glScalef(0.25, 19, 5);
 	drawTexturedObject(TEXTURE_TABLE);
+	glPopMatrix();
+
+	glPushMatrix();
+	Tools::assignMaterial(silver);
+	glTranslatef(1, 5, 1.8);
+	glutSolidSphere(0.2, 10, 10);
+	glPopMatrix();
+
 	glPopMatrix();
 }
 
