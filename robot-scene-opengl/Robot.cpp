@@ -208,9 +208,29 @@ void Robot::draw() {
 	glPushMatrix();
 	translateToNewPosition();
 	rotateToNewAngle();
+	glPushMatrix();
+	glTranslatef(0, 0.4, 0);
 	drawHead();
 	drawBody();
 	drawHand();
+	glPopMatrix();
+	glPushMatrix();
+	Tools::assignMaterial(black_rubber);
+	glTranslatef(-0.5,0,-0.5);
+	glutSolidSphere(0.2, 20, 20);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.5, 0, -0.5);
+	glutSolidSphere(0.2, 20, 20);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-0.5, 0, 0.5);
+	glutSolidSphere(0.2, 20, 20);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.5, 0, 0.5);
+	glutSolidSphere(0.2, 20, 20);
+	glPopMatrix();
 	glPopMatrix();
 }
 

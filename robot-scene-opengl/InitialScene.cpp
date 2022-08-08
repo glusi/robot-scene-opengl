@@ -26,9 +26,24 @@ void InitialScene::addDecorations()
 
 	//ball
 	glPushMatrix();
-	Tools::assignMaterial(glass);
+	Tools::assignMaterial(green_plastic);
+	glTranslatef(-11, 1, 14);
+	glutSolidSphere(1, 50, 50);
+	glPopMatrix();
+
+	glPushMatrix();
+	Tools::assignMaterial(blue_rubber);
 	glTranslatef(-14, 1, 14);
-	glutSolidSphere(1, 10, 10);
+	glutSolidCube(2);
+	glPopMatrix();
+
+
+	glPushMatrix();
+	Tools::assignMaterial(jade);
+	glTranslatef(-12, 2.85, 14);
+	glRotatef(45, 0, 0, 1);
+	glScalef(0.75, 0.75, 0.75);
+	glutSolidDodecahedron();
 	glPopMatrix();
 
 	Tools::assignMaterial(silver);

@@ -31,12 +31,13 @@ float xlast_mouse =0.0, ylast_mouse =0.0;
 std::list<Button> buttons;
 
 static bool show_menu = true;
+float aspect = 1;
 
 // Set Perspective projection
 void setPrespProjection() {
     glMatrixMode(GL_PROJECTION); // Set projection
     glLoadIdentity();
-    gluPerspective(65, new_width / new_height, 1.0, 150.0);
+    gluPerspective(65, aspect, 1.0, 150.0);
 }
 
 //Draw axises X,Y and Z for reference and as shown in the assignment
@@ -94,23 +95,10 @@ void display() {
 
     glFlush();
     glutSwapBuffers();
-    glutPostRedisplay();
+   // glutPostRedisplay();
     
 }
 
-// handles window reshape	
-void windowResize(int width, int height) {
-    //calculate scene  new scale width and hight
-    float scale_width = width / (float)WINDOW_WIDTH;
-    float scale_height = height / (float)WINDOW_HEIGHT;
-    //find the deciding scale
-    float scale = (scale_width > scale_height) ? scale_height : scale_width;
-    //calculate new window's scale width and hight
-    new_width = scale * WINDOW_WIDTH;
-    new_height = scale * WINDOW_HEIGHT;
-    //Set new viewport
-    glViewport(0, height - new_height, new_width, new_height);
-}
 
 void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
@@ -272,20 +260,38 @@ void Init() {
 
 }
 
+void idleFucn() {
+    display();
+}
+
+void reshapeFunc(GLint w, GLint h)
+{
+    // imgui reshape func
+    ImGui_ImplGLUT_ReshapeFunc(w, h);
+    new_width = w;
+    new_height = h;
+    glViewport(0, 0, w, h);
+    aspect = float(w / h);
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE | GLUT_STENCIL);
     //Set initial parameters for the window
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(WINDOW_POSITION_X, WINDOW_POSITION_Y);
     glutCreateWindow("robot-scene");
     Init();
+    glutIdleFunc(idleFucn);
     glutDisplayFunc(display);
     initImgui();
+    glutReshapeFunc(reshapeFunc);
     //glutReshapeFunc(windowResize);
     glutKeyboardFunc(MyKeyboardFunc);
     glutSpecialUpFunc(MyGlutSpecialFunc);
+    
     /*glutMouseFunc(MyMouseFunc);
     */
     glutMainLoop();
