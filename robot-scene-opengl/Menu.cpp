@@ -89,10 +89,10 @@ void Menu::createMenu() {
         ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
         //Rotate head right and left
         if (rotate_head_right_left_new != rotate_head_right_left)
-            if (rotate_head_right_left > 0)
-                scene->moveRobotHead(ROBOT_HEAD_RIGHT, rotate_head_right_left);
-            else
-                scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
+         //   if (rotate_head_right_left > 0)
+                scene->moveRobotHead(ROBOT_HEAD_RIGHT_LEFT, rotate_head_right_left);
+           // else
+             //   scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
 
         float rotate_head_up_down_new = rotate_head_up_down;
         ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -60.0f, 200.0f);

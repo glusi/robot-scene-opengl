@@ -185,19 +185,17 @@ void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement)
 	if (movement == ROBOT_HEAD_DOWN)
 		head_lift--;
 	if (movement == ROBOT_HEAD_RIGHT)
-		head_rotation--;
-	if (movement == ROBOT_HEAD_LEFT)
 		head_rotation++;
+	if (movement == ROBOT_HEAD_LEFT)
+		head_rotation--;
 }
 
 void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 {
 	if (movement == ROBOT_HEAD_UP_DOWN )
 		head_lift = angle;
-	if (movement == ROBOT_HEAD_RIGHT)
-		head_rotation = -angle;
-	if (movement == ROBOT_HEAD_LEFT)
-		head_rotation = -angle;
+	if (movement == ROBOT_HEAD_RIGHT_LEFT)
+		head_rotation = angle;
 }
 
 void Robot::draw() {
@@ -423,9 +421,9 @@ void Robot::applyCameraRotation()
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 	
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
-	glTranslatef(head_position.x, head_position.y, head_position.z+ FP_CAMERA_OFFSET);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
 	glRotatef(-head_rotation, 0, 1, 0);
-	glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 
 	glPushMatrix();
