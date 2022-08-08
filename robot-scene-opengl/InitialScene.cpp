@@ -12,7 +12,8 @@ void InitialScene::addDecorations()
 	glTranslatef(-16.1, 0, 0);
 
 	glPushMatrix();
-	glScalef(0.25, 19, 5);
+	glTranslatef(0, 4.55, 0);
+	glScalef(0.25, 9, 5);
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 

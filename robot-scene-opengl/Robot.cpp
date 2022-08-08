@@ -246,10 +246,10 @@ void Robot::move(ROBOT_MOVE_DIRECTION direction, float amount)
 {
 
 	if (direction == ROBOT_MOVE_FRONT) {
-		translated_position = move_direction * amount * 0.1;
+		translated_position = translated_position_old + move_direction * (amount - amount_move_old) * 0.1;
 		amount_move = amount;
 	} else {
-		translated_position = move_direction * (-amount) * 0.1;
+		translated_position = translated_position_old + move_direction * (-amount + amount_move_old) * 0.1;
 		amount_move = -amount;
 	}
 	
@@ -405,6 +405,7 @@ void Robot::applyCameraRotation()
 	glPushMatrix();
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glPushMatrix();
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glRotatef(-angle, 0, 1, 0);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
@@ -425,27 +426,6 @@ void Robot::applyCameraRotation()
 	glRotatef(-head_rotation, 0, 1, 0);
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
-
-	glPushMatrix();
-
-	//translateToNewPosition();
-	//glTranslatef(translated_position.x, translated_position.y, translated_position.z);
-	//glScalef(-1, 1, -1);
-	//rotateToNewAngle();
-	//glRotatef(-angle, 0, 1, 0);
-
-	//glPushMatrix();
-	/*glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	glRotatef(-head_lift, 1, 0, 0);
-	glTranslatef(head_position.x, head_position.y, head_position.z);
-	//glPopMatrix();
-	
-	//glPushMatrix();
-	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	glRotatef(-head_rotation, 0, 1, 0);
-	glTranslatef(head_position.x, head_position.y, head_position.z);
-	//glPopMatrix();*/
-	
 }
 
 float Robot::getRobotRotation()
@@ -501,4 +481,5 @@ float Robot::getHeadLift()
 void Robot::updateOldPosition()
 {
 	translated_position_old = translated_position;
+	amount_move_old = amount_move;
 }

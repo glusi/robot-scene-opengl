@@ -15,8 +15,8 @@ void Camera::updateCamera() {
 
 Camera::Camera()
 {
-	eye = Vector3(-4.0, 10.0, 8.0);
-	center = Vector3();
+	eye = Vector3(-2.0, 12.0, 6.0);
+	center = Vector3(0, 2 ,0);
 	upz = Vector3(0.0, 1.0, 0.0);
 
 	direction_foward = eye-center;

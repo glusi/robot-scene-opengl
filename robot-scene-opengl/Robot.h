@@ -53,6 +53,7 @@ class Robot : SceneItem
 	float head_lift;
 	Vector3 head_position;
 	float amount_move = 0;
+	float amount_move_old = 0;
 
 	void drawHand();
 	void drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type1, Vector3 color, float length);
