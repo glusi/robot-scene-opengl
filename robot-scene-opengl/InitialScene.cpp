@@ -139,14 +139,20 @@ void InitialScene::buildTVCorner()
 	glTranslatef(-10, 0, 0);
 
 	glPushMatrix();
-	glScalef(0.5,9,9);
+	glScalef(0.25,9,9);
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(2, 0, 0);
+	glTranslatef(2.1, 0, 0);
 	glScalef(4, 3, 9);
-	drawTexturedObject(TEXTURE_FLOOR);
+	drawTexturedObject(TEXTURE_FABRIC);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.6, 3, 0);
+	glScalef(1, 3, 9);
+	drawTexturedObject(TEXTURE_FABRIC);
 	glPopMatrix();
 
 	glPopMatrix();
