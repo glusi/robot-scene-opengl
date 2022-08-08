@@ -19,5 +19,8 @@ public:
 	static void copyColor(float** ambient_color, float* new_color);
 	static std::string concatStrings(const char* one, const char* two);
 	static void AlignForWidth(float width, float alignment = 0.5f);
+	static void drawBox(GLfloat size, GLenum type);
+	static void APIENTRY glutSolidCube(GLdouble size);
+	
 };
 
