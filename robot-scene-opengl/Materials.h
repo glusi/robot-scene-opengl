@@ -35,4 +35,12 @@ static const materialStruct floor_material{
   128.0
 };
 
+// PEWTER
+static const materialStruct pewter_material{
+	{0.105882, 0.058824, 0.113725, 1.000000},
+	{ 0.427451, 0.470588, 0.541176, 1.000000 },
+	{ 0.333333, 0.333333, 0.521569, 1.000000 },
+	51.2
+};
+
 

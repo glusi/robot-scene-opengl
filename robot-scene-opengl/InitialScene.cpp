@@ -23,6 +23,17 @@ void InitialScene::addDecorations()
 	glPopMatrix();
 
 	glPopMatrix();
+
+	//ball
+	glPushMatrix();
+	Tools::assignMaterial(glass);
+	glTranslatef(-14, 1, 14);
+	glutSolidSphere(1, 10, 10);
+	glPopMatrix();
+
+	Tools::assignMaterial(silver);
+
+	
 }
 
 void InitialScene::buildEatingCorner()
@@ -74,7 +85,7 @@ void InitialScene::buildEatingCorner()
 	glutSolidCylinder(0.1, 4, 10, 5);
 	glPopMatrix();
 	//Teapot
-	Tools::assignMaterial(polished_copper);
+	Tools::assignMaterial(pewter_material);
 	glPushMatrix();
 	glTranslatef(1, 5, 0);
 	glRotatef(-200, 0, 1, 0);
