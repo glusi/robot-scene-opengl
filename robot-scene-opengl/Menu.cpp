@@ -95,7 +95,7 @@ void Menu::createMenu() {
                 scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
 
         float rotate_head_up_down_new = rotate_head_up_down;
-        ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -30.0f, 150.0f);
+        ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -60.0f, 200.0f);
         //Rotate head up and down
         if (rotate_head_up_down_new != rotate_head_up_down)
                 scene->moveRobotHead(ROBOT_HEAD_UP_DOWN, rotate_head_up_down);
