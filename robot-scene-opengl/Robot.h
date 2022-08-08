@@ -15,6 +15,7 @@ class Robot : SceneItem
 	const int PALM_DOWN_OFFSET = 5;
 	const int PALM_UP_OFFSET = 5;
 	const float INITIAL_PALM_ROTATION = 0;
+	const float FP_CAMERA_OFFSET = 0.5;
 
 	materialStruct material1{
 		{0.33, 0.22, 0.03, 1.0}, // Ka
