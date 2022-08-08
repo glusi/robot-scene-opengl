@@ -6,6 +6,12 @@ void InitialScene::addDecorations()
 {
 	buildEatingCorner();
 	buildTVCorner();
+
+	glPushMatrix();
+	glTranslatef(-16, 0, 0);
+	glScalef(0.25, 18, 5);
+	drawTexturedObject(TEXTURE_TABLE);
+	glPopMatrix();
 }
 
 void InitialScene::buildEatingCorner()
@@ -111,10 +117,11 @@ void InitialScene::buildTVCorner()
 	glPopMatrix();
 
 	//TV
+	Tools::assignMaterial(silver);
 	glPushMatrix();
-	glTranslatef(0, 3, 0);
+	glTranslatef(0, 4, 0);
 	glRotatef(90, 0, 1, 0);
-	glScalef(6, 6, 0.2);
+	glScalef(6, 4, 0.2);
 	glutSolidCube(1);
 	glPopMatrix();
 
@@ -262,9 +269,10 @@ InitialScene::InitialScene(std::list<Button> buttons) {
 void InitialScene::draw() {
 	camera->draw();
 	//glPushMatrix();
+	lights->draw();
 	if(camera->getIFirstPerson())
 		robot->applyCameraRotation();
-	lights->draw();
+	
 	texture.bindTexture(TEXTURE_FLOOR);
 	floor->draw();
 	texture.bindTexture(TEXTURE_WALL);
