@@ -209,12 +209,13 @@ void Robot::draw() {
 	translateToNewPosition();
 	rotateToNewAngle();
 	glPushMatrix();
-	glTranslatef(0, 0.4, 0);
+	glTranslatef(0, 0.475, 0);
 	drawHead();
 	drawBody();
 	drawHand();
 	glPopMatrix();
 	glPushMatrix();
+	//Wheels
 	Tools::assignMaterial(black_rubber);
 	glTranslatef(-0.6,0.2,-0.6);
 	glutSolidSphere(0.2, 20, 20);
