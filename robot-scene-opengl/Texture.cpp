@@ -36,6 +36,7 @@ Texture::Texture()
     loadTexture(textures[3], TV_TEXTURE_PATH);
     loadTexture(textures[4], WALL_TEXTURE_PATH);
     loadTexture(textures[5], FABRIC_TEXTURE_PATH);
+    loadTexture(textures[6], WINDOW_TEXTURE_PATH);
     bool ret = LoadHelpTexture(HELP_TEXTURE_PATH, &help_image_texture, &help_image_width, &help_image_height);
     //
 }
@@ -50,6 +51,7 @@ void Texture::bindTexture(TEXTURE_TYPE texture)
     case TEXTURE_TV: glBindTexture(GL_TEXTURE_2D, textures[3]); break;
     case TEXTURE_WALL: glBindTexture(GL_TEXTURE_2D, textures[4]); break;
     case TEXTURE_FABRIC: glBindTexture(GL_TEXTURE_2D, textures[5]); break;
+    case TEXTURE_WINDOW: glBindTexture(GL_TEXTURE_2D, textures[6]); break;
     default:
         break;
     }
@@ -67,6 +69,7 @@ GLuint Texture::getTextureId(TEXTURE_TYPE texture)
     case TEXTURE_TV: res = textures[3]; break;
     case TEXTURE_WALL: res = textures[4]; break;
     case TEXTURE_FABRIC: res = textures[5]; break;
+    case TEXTURE_WINDOW: res = textures[6]; break;
     default:
         res = -1;
         break;

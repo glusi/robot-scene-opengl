@@ -89,7 +89,7 @@ void Robot::drawHead()
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
 
-	applyMaterial(material2,0);
+	applyMaterial(materialTV,0);
 
 	glPushMatrix();
 	glTranslatef(0, -0.3, 0.55);

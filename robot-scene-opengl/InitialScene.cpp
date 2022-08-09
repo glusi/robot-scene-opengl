@@ -14,7 +14,7 @@ void InitialScene::addDecorations()
 	glPushMatrix();
 	glTranslatef(0, 4.55, 0);
 	glScalef(0.25, 9, 5);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -49,7 +49,22 @@ void InitialScene::addDecorations()
 
 	Tools::assignMaterial(silver);
 
-	
+	//Window
+	Tools::assignMaterial(materialTV);
+	texture.bindTexture(TEXTURE_WINDOW);
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(12.95, 6, -4);
+	glRotatef(90, 0, 1, 0);
+	glRotatef(90, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 3, -2);
+	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 3, 2);
+	glTexCoord2f(1.0, 1.0); glVertex3f(3, 3, 2);
+	glTexCoord2f(1.0, 0.0); glVertex3f(3, 3, -2);
+	glEnd();
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 void InitialScene::buildEatingCorner()
@@ -61,7 +76,7 @@ void InitialScene::buildEatingCorner()
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glScalef(6, 0.2, 4);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 	
 
@@ -151,7 +166,7 @@ void InitialScene::buildTVCorner()
 	glTranslatef(0, 1, 0);
 	glRotatef(90, 0, 1, 0);
 	glScalef(6, 2, 3);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 
 	//TV
@@ -163,6 +178,7 @@ void InitialScene::buildTVCorner()
 	glutSolidCube(1);
 	glPopMatrix();
 
+	Tools::assignMaterial(materialTV);
 	texture.bindTexture(TEXTURE_TV);
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
@@ -185,19 +201,19 @@ void InitialScene::buildTVCorner()
 
 	glPushMatrix();
 	glScalef(0.25,9,9);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(2.1, 0, 0);
 	glScalef(4, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC, material2);
+	drawTexturedObject(TEXTURE_FABRIC, silver);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0.6, 3, 0);
 	glScalef(1, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC, material2);
+	drawTexturedObject(TEXTURE_FABRIC, silver);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -257,14 +273,14 @@ void InitialScene::buildChair()
 	glPushMatrix();
 	glTranslatef(-4.75, 2, 0);
 	glScalef(2, 0.2, 2.2);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 
 	//Chair back
 	glPushMatrix();
 	glTranslatef(-5.5, 4, 0);
 	glScalef(0.2, 1 , 2.2);
-	drawTexturedObject(TEXTURE_TABLE, material2);
+	drawTexturedObject(TEXTURE_TABLE, silver);
 	glPopMatrix();
 	
 }
@@ -285,23 +301,7 @@ InitialScene::InitialScene(std::list<Button> buttons) {
 	lights = new Lights();
 	robot = new Robot();
 	gui = Gui(buttons);
-	/*glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-	glFrontFace(GL_CCW);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);*/
-	//glEnable(GL_CULL_FACE); //<-- missing
-	//glCullFace(GL_BACK);
-
-	//glEnable(GL_LIGHTING); //<-- missing
-	//glEnable(GL_LIGHT0);
-	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0); //Despite culling is on anyway,
-											  //the back faces of 'solid' meshes don't
-											  //need illumination
-
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LESS);
+	
 }
 
 void InitialScene::draw() {

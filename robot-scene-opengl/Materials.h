@@ -16,11 +16,11 @@ static const materialStruct material1{
 		{0.99, 0.91, 0.81, 0.5}, // Ks
 		27.8 // n
 };
-static const materialStruct material2{
-	{1.0, 1.0, 1.0, 0.5}, // Ka
-	{1.0, 1.0, 1.0, 0.5}, // Kd
-	{1.0, 1.0, 1.0, 0.5}, // Ks
-	50 // n
+static const materialStruct materialTV{
+	{1.0, 1.0, 1.0, 1.0}, // Ka
+	{1.0, 1.0, 1.0, 1.0}, // Kd
+	{1.0, 1.0, 1.0, 1.0}, // Ks
+	5 // n
 };
 static const materialStruct material3{
 {0.0, 1.0, 1.0, 1.0}, // Ka

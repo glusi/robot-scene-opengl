@@ -25,7 +25,7 @@ typedef enum {
 }ROBOT_HEAD_MOVEMENT;
 
 typedef enum {
-	TEXTURE_FLOOR, TEXTURE_TABLE, TEXTURE_BACKGROUND, TEXTURE_TV, TEXTURE_WALL, TEXTURE_FABRIC
+	TEXTURE_FLOOR, TEXTURE_TABLE, TEXTURE_BACKGROUND, TEXTURE_TV, TEXTURE_WALL, TEXTURE_FABRIC, TEXTURE_WINDOW
 }TEXTURE_TYPE;
 
 typedef enum {
@@ -39,8 +39,9 @@ static const char* TV_TEXTURE_PATH = "..//Assets//tv_screen.jpg";
 static const char* HELP_TEXTURE_PATH = "..//Assets//help.png";
 static const char* WALL_TEXTURE_PATH = "..//Assets//wall.jpg";
 static const char* FABRIC_TEXTURE_PATH = "..//Assets//fabric.jpg";
+static const char* WINDOW_TEXTURE_PATH = "..//Assets//window.jpg";
 
-static const int NUM_OF_TEXTURES = 6;
+static const int NUM_OF_TEXTURES = 7;
 const static double cube[] =
 {
     // x,   y,   z,  s,  t,
