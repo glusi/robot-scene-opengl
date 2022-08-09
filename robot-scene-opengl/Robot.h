@@ -15,7 +15,7 @@ class Robot : SceneItem
 	const int PALM_DOWN_OFFSET = 5;
 	const int PALM_UP_OFFSET = 5;
 	const float INITIAL_PALM_ROTATION = 0;
-	const float FP_CAMERA_OFFSET = 0.5;
+	const float FP_CAMERA_OFFSET = 0.55;
 
 	
 	Vector3 translated_position;

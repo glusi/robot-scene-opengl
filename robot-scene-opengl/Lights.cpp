@@ -29,11 +29,7 @@ void Lights::draw() {
 //	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, point_light_poistion);
-	//draw orb
-	glPushMatrix();
-	glTranslatef(point_light_poistion[0], point_light_poistion[1], point_light_poistion[2]);
-	glutWireSphere(0.5,10,10);
-	glPopMatrix();
+	
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
 	//glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
@@ -90,4 +86,14 @@ GLfloat* Lights::getPointLightColor()
 void Lights::adjustPointLight(float* color)
 {
 	Tools::copyColor(&point_light_color, color);
+}
+
+void Lights::drawOrb()
+{
+	//draw orb
+	glPushMatrix();
+	Tools::assignMaterial(glass);
+	glTranslatef(point_light_poistion[0] - 0.25, point_light_poistion[1] - 0.25, point_light_poistion[2] - 0.25);
+	glutSolidSphere(0.5, 20, 20);
+	glPopMatrix();
 }
