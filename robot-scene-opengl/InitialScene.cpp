@@ -318,6 +318,7 @@ void InitialScene::draw() {
 	robot->draw();
 	addDecorations();
 	texture.bindTexture(TEXTURE_BACKGROUND);
+	lights->drawOrb();
 	//gui.draw();
 
 	/*ImGui::Text("Hello, world %d", 123);

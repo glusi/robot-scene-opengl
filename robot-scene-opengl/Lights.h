@@ -16,5 +16,6 @@ public:
 	void applyPointLightPos(Vector3 point_light_position);
 	GLfloat* getPointLightColor();
 	void adjustPointLight(float* color);
+	void drawOrb();
 };
 
