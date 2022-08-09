@@ -201,7 +201,7 @@ void Menu::cameraMenu()
         //Move camera front and back
         float rotate_camera_front_back_new = rotate_camera_front_back;
         ImGui::InputFloat("Move camera front and back", &rotate_camera_front_back, 1.0f);
-        if (rotate_camera_front_back != rotate_camera_front_back)
+        if (rotate_camera_front_back != rotate_camera_front_back_new)
             if (rotate_camera_front_back > 0)
                 scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);
             else

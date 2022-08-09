@@ -3,15 +3,15 @@
 Lights::Lights() :
 	//light_diffuse { 0.8, 0.8, 0.8, 1.0 },
 	//point_light_color{ 0.9f, 0.9f, 0.3f , 1.0f },
-	point_light_poistion{ 0.0f, 3.0f, -1.0f , 0.0f } {
+	point_light_poistion{ 0.0f, 12.0f, -1.0f , 1.0f } {
 	light_ambient = new GLfloat[4];
 	point_light_color = new GLfloat[4];
 	for (int i=0; i<4; i++)
-		light_ambient[i] = 0.7;
+		light_ambient[i] = 0.5;
 	point_light_color[0] = 0.9;
 	point_light_color[1] = 0.9;
 	point_light_color[2] = 0.3;
-	point_light_color[3] = 1.0;
+	point_light_color[3] = 0.5;
 }
 
 
@@ -20,18 +20,22 @@ void Lights::draw() {
 	//glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	//glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+	light_ambient[3] = 1.0;
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
 	//GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
-	GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
-	GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
+	//GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
+	//GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
 	//GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
 //	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
+	point_light_poistion[3] = 1.0;
 	glLightfv(GL_LIGHT1, GL_POSITION, point_light_poistion);
-	
+	point_light_color[3] = 1.0;
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
+	
+
 	//glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	//glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
 	//glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);

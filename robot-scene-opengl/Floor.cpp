@@ -12,13 +12,16 @@ void Floor::draw() {
 	glNormal3d(0, 1, 0);
 	//glEnable(GL_NORMALIZE);
 
-	glColor3f(0, 0, 1);
+	//glColor3f(0, 0, 1);
 	//Tools::assignMaterial(material2);
 	//glMaterialfv(GL_FRONT, GL_AMBIENT, floor_material.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, floor_material.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, floor_material.Ks);
+	//glMaterialf(GL_FRONT, GL_SHININESS, floor_material.n);
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, floor_material.Ks);
 	//glMaterialfv(GL_FRONT, GL_DIFFUSE, floor_material.Kd);
-
+	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0 };
+	GLfloat shininess = 128.0f;
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialf(GL_FRONT, GL_SHININESS, shininess); // make the floor shiny
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{
