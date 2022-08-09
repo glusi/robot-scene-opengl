@@ -64,8 +64,13 @@ void Menu::MyHelpFunction()
 }
 
 void Menu::createMenu() {
-    ImGui::Begin("Menu", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysUseWindowPadding);
+    ImGui::Begin("Menu", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | 
+        ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_MenuBar);
     getInitialValues();
+
+    ImGui::BeginMenuBar();
+    ImGui::Text("Welcome to my Robot OpenGl Simulation!");
+    ImGui::EndMenuBar();
 
     lightMenu();   
     robotMenu();
