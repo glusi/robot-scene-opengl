@@ -18,10 +18,11 @@ void Floor::draw() {
 	//glMaterialf(GL_FRONT, GL_SHININESS, floor_material.n);
 	//glMaterialfv(GL_FRONT, GL_SPECULAR, floor_material.Ks);
 	//glMaterialfv(GL_FRONT, GL_DIFFUSE, floor_material.Kd);
-	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0 };
+	Tools::assignMaterial(floor_material);
+	/*GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0 };
 	GLfloat shininess = 128.0f;
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, shininess); // make the floor shiny
+	glMaterialf(GL_FRONT, GL_SHININESS, shininess); // make the floor shiny*/
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{

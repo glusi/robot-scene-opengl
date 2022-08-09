@@ -49,9 +49,9 @@ static const materialStruct silver{
 };
 
 static const materialStruct floor_material{
-	{0.2, 0.2, 0.2, 0.5},
-  {1.0, 0.8, 0.8, 0.5},
-  {1.0, 1.0, 1.0, 0.5},
+	{0.1f,0.19f,0.17f,0.8f}, // Ka
+	{0.4f,0.4f,0.49f,0.8f}, // Kd
+  {1.0, 1.0, 1.0, 1.0},
   128.0
 };
 
