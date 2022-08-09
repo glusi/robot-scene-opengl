@@ -528,4 +528,26 @@ void InitialScene::adjustPointLight(float* color)
 	lights->adjustPointLight(color);
 }
 
+void InitialScene::setWidth(float width)
+{
+	this->width = width;
+}
+
+void InitialScene::setHeight(float height)
+{
+	this->height = height;
+}
+
+float InitialScene::getWidth()
+{
+	return width;
+}
+
+float InitialScene::getHeight()
+{
+	return height;
+}
+
+
+
 

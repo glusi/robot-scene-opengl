@@ -16,6 +16,8 @@ class InitialScene
 	void addDecorations();
 	Texture texture;
 	Gui gui;
+	float width = 500;
+	float height = 500;
 	void buildEatingCorner();
 	void buildTVCorner();
 	void buildChair();
@@ -60,5 +62,9 @@ public:
 	void applyPointLightPos(Vector3 point_light_position);
 	float* getPointLightColor();
 	void adjustPointLight(float* color);
+	void setWidth(float width);
+	void setHeight(float height);
+	float getWidth();
+	float getHeight();
 };
 

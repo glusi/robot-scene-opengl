@@ -95,7 +95,7 @@ void display() {
 
     glFlush();
     glutSwapBuffers();
-   // glutPostRedisplay();
+    glutPostRedisplay();
     
 }
 
@@ -272,6 +272,8 @@ void reshapeFunc(GLint w, GLint h)
     new_height = h;
     glViewport(0, 0, w, h);
     aspect = float(w / h);
+    scene.setWidth(w);
+    scene.setHeight(h);
 }
 
 int main(int argc, char** argv)
