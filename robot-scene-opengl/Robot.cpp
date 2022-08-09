@@ -406,9 +406,9 @@ void Robot::applyCameraRotation()
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glPushMatrix();
-	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
+	glTranslatef(translated_position.x, translated_position.y, translated_position.z - FP_CAMERA_OFFSET);
 	glRotatef(-angle, 0, 1, 0);
-	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
+	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z + FP_CAMERA_OFFSET);
 	//glTranslatef(head_position.x, head_position.y, head_position.z);*/
 	//glScalef(-1, 1, -1);
 	glPushMatrix();
