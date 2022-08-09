@@ -402,16 +402,13 @@ Vector3 Robot::getHeadPosition()
 
 void Robot::applyCameraRotation()
 {
-	glPushMatrix();glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
-	
-	glPushMatrix();glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z - FP_CAMERA_OFFSET);
-	//
-	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	
-	//glTranslatef(head_position.x, head_position.y, head_position.z);*/
-	//glScalef(-1, 1, -1);
 	glPushMatrix();
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
+	
+	glPushMatrix();
+	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z - FP_CAMERA_OFFSET);
 
+	glPushMatrix();
 	
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);

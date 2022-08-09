@@ -73,9 +73,9 @@ void Menu::createMenu() {
 
     ImGuiStyle& style = ImGui::GetStyle();
     float width = 0.0f;
-    width += ImGui::CalcTextSize("Hello").x;
+    width += ImGui::CalcTextSize("Help").x;
     width += style.ItemSpacing.x;
-    width += ImGui::CalcTextSize("World!").x;
+    width += ImGui::CalcTextSize("Exit").x;
     Tools::AlignForWidth(width);
 
     if (ImGui::Button("Help"))
@@ -124,9 +124,9 @@ void Menu::lightMenu()
         ImGui::ColorEdit4("Ambient color", ambient_color);
         scene->adjustAmbientLight(ambient_color);
         ImGui::Text("Adjust point light");
-        ImGui::SliderFloat("Position X", &point_light_position.x, -20.0f, 20.0f);
-        ImGui::SliderFloat("Position Y", &point_light_position.y, -20.0f, 20.0f);
-        ImGui::SliderFloat("Position Z", &point_light_position.z, -20.0f, 20.0f);
+        ImGui::InputFloat("Position X", &point_light_position.x, 1.0f);
+        ImGui::InputFloat("Position Y", &point_light_position.y, 1.0f);
+        ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);
         scene->applyPointLightPos(point_light_position);
         ImGui::ColorEdit4("Point light color", point_color);
         scene->adjustPointLight(point_color);
@@ -139,7 +139,7 @@ void Menu::robotMenu()
 
         //Move robot
         float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
-        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
+        ImGui::InputFloat("Move robot", &move_robot_foward_back, 1.0f);
         ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
         if (move_robot_foward_back_new != move_robot_foward_back)
             scene->moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
@@ -179,7 +179,7 @@ void Menu::cameraMenu()
 
         //Move camera right and left
         float rotate_camera_right_left_new = rotate_camera_right_left;
-        ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
+        ImGui::InputFloat("Move camera right and left", &rotate_camera_right_left, 1.0f);
         if (rotate_camera_right_left != rotate_camera_right_left_new)
             if (rotate_camera_right_left > 0)
                 scene->moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
@@ -188,7 +188,7 @@ void Menu::cameraMenu()
 
         //Move camera up and down
         float rotate_camera_up_down_new = rotate_camera_up_down;
-        ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
+        ImGui::InputFloat("Move camera up and down", &rotate_camera_up_down, 1.0f);
         if (rotate_camera_up_down != rotate_camera_up_down_new)
             if (rotate_camera_up_down > 0)
                 scene->moveCamera(CAMERA_UP, rotate_camera_up_down);
@@ -197,7 +197,7 @@ void Menu::cameraMenu()
 
         //Move camera front and back
         float rotate_camera_front_back_new = rotate_camera_front_back;
-        ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
+        ImGui::InputFloat("Move camera front and back", &rotate_camera_front_back, 1.0f);
         if (rotate_camera_front_back != rotate_camera_front_back)
             if (rotate_camera_front_back > 0)
                 scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);
