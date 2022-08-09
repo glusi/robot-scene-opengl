@@ -64,7 +64,7 @@ void Menu::MyHelpFunction()
 }
 
 void Menu::createMenu() {
-    ImGui::Begin("Menu");
+    ImGui::Begin("Menu", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysUseWindowPadding);
     getInitialValues();
 
     lightMenu();   
