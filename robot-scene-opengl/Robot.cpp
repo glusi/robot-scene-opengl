@@ -402,25 +402,31 @@ Vector3 Robot::getHeadPosition()
 
 void Robot::applyCameraRotation()
 {
-	glPushMatrix();
-	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
+	glPushMatrix();glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
+	
+	glPushMatrix();glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z - FP_CAMERA_OFFSET);
+	//
 	//glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	glPushMatrix();
-	glTranslatef(translated_position.x, translated_position.y, translated_position.z - FP_CAMERA_OFFSET);
-	glRotatef(-angle, 0, 1, 0);
-	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z + FP_CAMERA_OFFSET);
+	
 	//glTranslatef(head_position.x, head_position.y, head_position.z);*/
 	//glScalef(-1, 1, -1);
 	glPushMatrix();
-	glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
 
-	glPushMatrix();
+	
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 	glRotatef(head_lift, 1, 0, 0);
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
+
+	glPushMatrix();
+	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
+	glTranslatef(head_position.x, head_position.y, head_position.z);
+	glRotatef(-angle, 0, 1, 0);
+	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 	
+	glPushMatrix();
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 	glRotatef(-head_rotation, 0, 1, 0);

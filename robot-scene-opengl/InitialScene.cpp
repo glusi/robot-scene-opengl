@@ -332,6 +332,7 @@ void InitialScene::draw() {
 		glPopMatrix();
 		glPopMatrix();
 		glPopMatrix();
+		glPopMatrix();
 	}
 	robot->updateOldPosition();
 	
