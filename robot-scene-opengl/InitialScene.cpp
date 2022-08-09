@@ -14,7 +14,7 @@ void InitialScene::addDecorations()
 	glPushMatrix();
 	glTranslatef(0, 4.55, 0);
 	glScalef(0.25, 9, 5);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -61,7 +61,7 @@ void InitialScene::buildEatingCorner()
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glScalef(6, 0.2, 4);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 	
 
@@ -108,9 +108,9 @@ void InitialScene::buildEatingCorner()
 	glutSolidTeapot(1);
 	glPopMatrix();
 
-	//Glasses
+	//material2es
 	glEnable(GL_COLOR_MATERIAL);
-	//Tools::assignMaterial(glass);
+	//Tools::assignMaterial(material2);
 	glColor4f(0.0f, 1.0f, 1.0f, 0.4);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -151,7 +151,7 @@ void InitialScene::buildTVCorner()
 	glTranslatef(0, 1, 0);
 	glRotatef(90, 0, 1, 0);
 	glScalef(6, 2, 3);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 
 	//TV
@@ -185,19 +185,19 @@ void InitialScene::buildTVCorner()
 
 	glPushMatrix();
 	glScalef(0.25,9,9);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(2.1, 0, 0);
 	glScalef(4, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC);
+	drawTexturedObject(TEXTURE_FABRIC, material2);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0.6, 3, 0);
 	glScalef(1, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC);
+	drawTexturedObject(TEXTURE_FABRIC, material2);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -257,14 +257,14 @@ void InitialScene::buildChair()
 	glPushMatrix();
 	glTranslatef(-4.75, 2, 0);
 	glScalef(2, 0.2, 2.2);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 
 	//Chair back
 	glPushMatrix();
 	glTranslatef(-5.5, 4, 0);
 	glScalef(0.2, 1 , 2.2);
-	drawTexturedObject(TEXTURE_TABLE);
+	drawTexturedObject(TEXTURE_TABLE, material2);
 	glPopMatrix();
 	
 }
@@ -498,8 +498,9 @@ float InitialScene::getHeadLift()
 	return robot->getHeadLift();
 }
 
-void InitialScene::drawTexturedObject(TEXTURE_TYPE tex)
+void InitialScene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material)
 {
+	//Tools::assignMaterial(material);
 	texture.bindTexture(tex);
 	glEnable(GL_TEXTURE_2D);
 	Tools::glutSolidCube(1);

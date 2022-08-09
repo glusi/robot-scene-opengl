@@ -9,6 +9,26 @@ typedef struct materialStruct {
 	GLfloat n;
 } materialStruct;
 
+
+static const materialStruct material1{
+		{0.33, 0.22, 0.03, 0.5}, // Ka
+		{0.78, 0.57, 0.11, 0.5}, // Kd
+		{0.99, 0.91, 0.81, 0.5}, // Ks
+		27.8 // n
+};
+static const materialStruct material2{
+	{1.0, 1.0, 1.0, 0.5}, // Ka
+	{1.0, 1.0, 1.0, 0.5}, // Kd
+	{1.0, 1.0, 1.0, 0.5}, // Ks
+	50 // n
+};
+static const materialStruct material3{
+{0.0, 1.0, 1.0, 1.0}, // Ka
+{0.0, 1.0, 1.0, 1.0}, // Kd
+{0.0, 1.0, 1.0, 1.0}, // Ks
+2 // n
+};
+
 static const materialStruct glass{
 	{0.1f,0.19f,0.17f,0.8f}, // Ka
 	{0.4f,0.74f,0.69f,0.8f}, // Kd

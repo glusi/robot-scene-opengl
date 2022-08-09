@@ -13,6 +13,7 @@ void Floor::draw() {
 	//glEnable(GL_NORMALIZE);
 
 	glColor3f(0, 0, 1);
+	//Tools::assignMaterial(material2);
 	//glMaterialfv(GL_FRONT, GL_AMBIENT, floor_material.Ka);
 	glMaterialf(GL_FRONT, GL_SHININESS, floor_material.n);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, floor_material.Ks);
@@ -40,6 +41,7 @@ void Floor::draw() {
 
 void Floor::buildWalls() {
 	glPushMatrix();
+	//Tools::assignMaterial(material2);
 	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, grid_size_x * tile_size_x, -grid_size_y * tile_size_y);
 	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, -grid_size_x * tile_size_x, grid_size_y * tile_size_y);
 	createWall(grid_size_x * tile_size_x, grid_size_y * tile_size_y, -grid_size_x * tile_size_x, grid_size_y * tile_size_y);

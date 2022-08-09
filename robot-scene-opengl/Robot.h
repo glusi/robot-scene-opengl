@@ -17,24 +17,7 @@ class Robot : SceneItem
 	const float INITIAL_PALM_ROTATION = 0;
 	const float FP_CAMERA_OFFSET = 0.5;
 
-	materialStruct material1{
-		{0.33, 0.22, 0.03, 1.0}, // Ka
-		{0.78, 0.57, 0.11, 1.0}, // Kd
-		{0.99, 0.91, 0.81, 1.0}, // Ks
-		27.8 // n
-			};
-	materialStruct material2{
-		{1.0, 1.0, 1.0, 1.0}, // Ka
-		{1.0, 1.0, 1.0, 1.0}, // Kd
-		{1.0, 1.0, 1.0, 1.0}, // Ks
-		2 // n
-	};
-	materialStruct material3{
-	{0.0, 1.0, 1.0, 1.0}, // Ka
-	{0.0, 1.0, 1.0, 1.0}, // Kd
-	{0.0, 1.0, 1.0, 1.0}, // Ks
-	2 // n
-	};
+	
 	Vector3 translated_position;
 	Vector3 translated_position_old;
 	Vector3 move_direction;

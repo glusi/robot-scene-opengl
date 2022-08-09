@@ -55,6 +55,6 @@ public:
 	GLuint getgetHelpImageTexture();
 	float getHeadRotation();
 	float getHeadLift();
-	void drawTexturedObject(TEXTURE_TYPE tex);
+	void drawTexturedObject(TEXTURE_TYPE tex, materialStruct material);
 };
 
