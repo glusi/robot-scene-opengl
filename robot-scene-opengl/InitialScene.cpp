@@ -507,4 +507,24 @@ void InitialScene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material
 	glDisable(GL_TEXTURE_2D);
 }
 
+float InitialScene::getPointLightPosition(POINT_LIGHT_POS axis)
+{
+	return lights->getPointLightPosition(axis);
+}
+
+void InitialScene::applyPointLightPos(Vector3 point_light_position)
+{
+	lights->applyPointLightPos(point_light_position);
+}
+
+float* InitialScene::getPointLightColor()
+{
+	return lights->getPointLightColor();
+}
+
+void InitialScene::adjustPointLight(float* color)
+{
+	lights->adjustPointLight(color);
+}
+
 

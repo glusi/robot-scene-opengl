@@ -28,6 +28,10 @@ typedef enum {
 	TEXTURE_FLOOR, TEXTURE_TABLE, TEXTURE_BACKGROUND, TEXTURE_TV, TEXTURE_WALL, TEXTURE_FABRIC
 }TEXTURE_TYPE;
 
+typedef enum {
+    POINT_LIGHT_X, POINT_LIGHT_Y, POINT_LIGHT_Z
+}POINT_LIGHT_POS;
+
 static const char* FLOOR_TEXTURE_PATH = "..//Assets//floor-tiles.jpg";
 static const char* TABLE_TEXTURE_PATH = "..//Assets//wood.jpg";
 static const char* BACKGROUND_TEXTURE_PATH = "..//Assets//background.jpg";

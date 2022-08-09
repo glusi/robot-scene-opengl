@@ -12,6 +12,8 @@ class Menu
 	float rotate_camera_up_down;
 	float rotate_camera_front_back;
 	float* ambient_color;
+	float* point_color;
+	Vector3 point_light_position;
 	float move_robot_foward_back;
 	float rotate_robot = 0;
 	float move_shoulder;
@@ -26,6 +28,9 @@ class Menu
 	void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name);
 	void MyHelpFunction();
 	void helpFunc();
+	void lightMenu();
+	void robotMenu();
+	void cameraMenu();
 public:
 	Menu();
 	Menu(InitialScene* scene);

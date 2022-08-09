@@ -3,11 +3,13 @@
 Menu::Menu()
 {
     ambient_color = new float[4];
+    point_color = new float[4];
 }
 
 Menu::Menu(InitialScene* scene_new)
 {
     ambient_color = new float[4];
+    point_color = new float[4];
     scene = scene_new;
 }
 
@@ -30,6 +32,11 @@ void Menu::getInitialValues() {
     rotate_elbow = scene->getElbowRotation();;
     move_palm = scene->getPalmLift();
     rotate_palm = scene->getPalmRotation();
+
+    point_light_position.x = scene->getPointLightPosition(POINT_LIGHT_X);
+    point_light_position.y = scene->getPointLightPosition(POINT_LIGHT_Y);
+    point_light_position.z = scene->getPointLightPosition(POINT_LIGHT_Z);
+    Tools::copyColor(&point_color, scene->getPointLightColor());
 }
 
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
@@ -60,84 +67,9 @@ void Menu::createMenu() {
     ImGui::Begin("Menu");
     getInitialValues();
 
-    float try1;
-    ImGui::SliderFloat("Adjust ambient", &try1, 0.0f, 3.0f);
-    //ImGui::TreePop();
-    int t;
-    // ImGui::RadioButton("external view", &t, 0); ImGui::SameLine();
-
-    /*if (ImGui::TreeNode("tv")) {
-            }       */
-
-    //Adjust ambient color
-    ImGui::ColorEdit4("Ambient color", ambient_color);
-    scene->adjustAmbientLight(ambient_color);
-   
-    if (ImGui::CollapsingHeader("Robot")) {
-
-        //Move robot
-        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
-        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
-        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
-        if (move_robot_foward_back_new != move_robot_foward_back)
-            scene->moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
-        if (rotate_robot_new != rotate_robot)
-            scene->rotateRobot(rotate_robot);
-
-        ImGui::Text("Robot head");
-        float rotate_head_right_left_new = rotate_head_right_left;
-        ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
-        //Rotate head right and left
-        if (rotate_head_right_left_new != rotate_head_right_left)
-         //   if (rotate_head_right_left > 0)
-                scene->moveRobotHead(ROBOT_HEAD_RIGHT_LEFT, rotate_head_right_left);
-           // else
-             //   scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
-
-        float rotate_head_up_down_new = rotate_head_up_down;
-        ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -60.0f, 200.0f);
-        //Rotate head up and down
-        if (rotate_head_up_down_new != rotate_head_up_down)
-                scene->moveRobotHead(ROBOT_HEAD_UP_DOWN, rotate_head_up_down);
-
-        ImGui::Text("Robot hand");
-        moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
-        moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
-        moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
-    }
-    if (ImGui::CollapsingHeader("Camera")) {
-
-        ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
-        ImGui::RadioButton("robot view", &isFirstPerson, 1);
-        scene->setIFirstPerson(isFirstPerson);
-
-        //Move camera right and left
-        float rotate_camera_right_left_new = rotate_camera_right_left;
-        ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
-        if (rotate_camera_right_left != rotate_camera_right_left_new)
-            if (rotate_camera_right_left > 0)
-                scene->moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
-            else
-                scene->moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
-
-        //Move camera up and down
-        float rotate_camera_up_down_new = rotate_camera_up_down;
-        ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
-        if (rotate_camera_up_down != rotate_camera_up_down_new)
-            if (rotate_camera_up_down > 0)
-                scene->moveCamera(CAMERA_UP, rotate_camera_up_down);
-            else
-                scene->moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
-
-        //Move camera front and back
-        float rotate_camera_front_back_new = rotate_camera_front_back;
-        ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
-        if (rotate_camera_front_back != rotate_camera_front_back)
-            if (rotate_camera_front_back > 0)
-                scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);
-            else
-                scene->moveCamera(CAMERA_BACK, -rotate_camera_front_back);
-    }
+    lightMenu();   
+    robotMenu();
+    cameraMenu();
 
     ImGuiStyle& style = ImGui::GetStyle();
     float width = 0.0f;
@@ -183,4 +115,93 @@ void Menu::createMenu() {
 
 void Menu::helpFunc() {
     help_window_open = true;    
+}
+
+void Menu::lightMenu()
+{
+    if (ImGui::CollapsingHeader("Lights")) {
+        ImGui::Text("Adjust ambient Light");
+        ImGui::ColorEdit4("Ambient color", ambient_color);
+        scene->adjustAmbientLight(ambient_color);
+        ImGui::Text("Adjust point light");
+        ImGui::SliderFloat("Position X", &point_light_position.x, -20.0f, 20.0f);
+        ImGui::SliderFloat("Position Y", &point_light_position.y, -20.0f, 20.0f);
+        ImGui::SliderFloat("Position Z", &point_light_position.z, -20.0f, 20.0f);
+        scene->applyPointLightPos(point_light_position);
+        ImGui::ColorEdit4("Point light color", point_color);
+        scene->adjustPointLight(point_color);
+    }
+}
+
+void Menu::robotMenu()
+{
+    if (ImGui::CollapsingHeader("Robot")) {
+
+        //Move robot
+        float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
+        ImGui::SliderFloat("Move robot", &move_robot_foward_back, -180.0f, 180.0f);
+        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
+        if (move_robot_foward_back_new != move_robot_foward_back)
+            scene->moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
+        if (rotate_robot_new != rotate_robot)
+            scene->rotateRobot(rotate_robot);
+
+        ImGui::Text("Robot head");
+        float rotate_head_right_left_new = rotate_head_right_left;
+        ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
+        //Rotate head right and left
+        if (rotate_head_right_left_new != rotate_head_right_left)
+            //   if (rotate_head_right_left > 0)
+            scene->moveRobotHead(ROBOT_HEAD_RIGHT_LEFT, rotate_head_right_left);
+        // else
+          //   scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
+
+        float rotate_head_up_down_new = rotate_head_up_down;
+        ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -60.0f, 200.0f);
+        //Rotate head up and down
+        if (rotate_head_up_down_new != rotate_head_up_down)
+            scene->moveRobotHead(ROBOT_HEAD_UP_DOWN, rotate_head_up_down);
+
+        ImGui::Text("Robot hand");
+        moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
+        moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
+        moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
+    }
+}
+
+void Menu::cameraMenu()
+{
+    if (ImGui::CollapsingHeader("Camera")) {
+
+        ImGui::RadioButton("external view", &isFirstPerson, 0); ImGui::SameLine();
+        ImGui::RadioButton("robot view", &isFirstPerson, 1);
+        scene->setIFirstPerson(isFirstPerson);
+
+        //Move camera right and left
+        float rotate_camera_right_left_new = rotate_camera_right_left;
+        ImGui::SliderFloat("Move camera right and left", &rotate_camera_right_left, -100.0f, 100.0f);
+        if (rotate_camera_right_left != rotate_camera_right_left_new)
+            if (rotate_camera_right_left > 0)
+                scene->moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
+            else
+                scene->moveCamera(CAMERA_LEFT, -rotate_camera_right_left);
+
+        //Move camera up and down
+        float rotate_camera_up_down_new = rotate_camera_up_down;
+        ImGui::SliderFloat("Move camera up and down", &rotate_camera_up_down, -100.0f, 100.0f);
+        if (rotate_camera_up_down != rotate_camera_up_down_new)
+            if (rotate_camera_up_down > 0)
+                scene->moveCamera(CAMERA_UP, rotate_camera_up_down);
+            else
+                scene->moveCamera(CAMERA_DOWN, -rotate_camera_up_down);
+
+        //Move camera front and back
+        float rotate_camera_front_back_new = rotate_camera_front_back;
+        ImGui::SliderFloat("Move camera front and back", &rotate_camera_front_back, -100.0f, 100.0f);
+        if (rotate_camera_front_back != rotate_camera_front_back)
+            if (rotate_camera_front_back > 0)
+                scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);
+            else
+                scene->moveCamera(CAMERA_BACK, -rotate_camera_front_back);
+    }
 }

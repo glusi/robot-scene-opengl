@@ -56,5 +56,9 @@ public:
 	float getHeadRotation();
 	float getHeadLift();
 	void drawTexturedObject(TEXTURE_TYPE tex, materialStruct material);
+	float getPointLightPosition(POINT_LIGHT_POS axis);
+	void applyPointLightPos(Vector3 point_light_position);
+	float* getPointLightColor();
+	void adjustPointLight(float* color);
 };
 
