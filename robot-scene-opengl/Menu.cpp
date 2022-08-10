@@ -42,21 +42,15 @@ void Menu::getInitialValues() {
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
     //Move shoulder
     float lift_new = lift;
-    ImGui::SliderFloat(Tools::concatStrings("Move ", name).c_str(), &lift, -90.0f, 90.0f);
+    ImGui::SliderFloat(Tools::concatStrings("Lift ", name).c_str(), &lift, -85.0f, 85.0f);
     if (lift_new != lift)
-        if (lift > 0)
-            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, lift);
-        else
-            scene->liftRobotHand(robot_joint, ROBOT_HAND_DOWN, -lift);
+            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, -lift);
 
     //Rotate shoulder
     float rotation_new = rotation;
     ImGui::SliderFloat(Tools::concatStrings("Rotate ", name).c_str(), &rotation, -180.0f, 180.0f);
     if (rotation_new != rotation)
-        if (move_shoulder > 0)
-            scene->rotateRobotHand(robot_joint, rotation);
-        else
-            scene->rotateRobotHand(robot_joint, rotation);
+            scene->rotateRobotHand(robot_joint, -rotation);
 }
 
 void Menu::MyHelpFunction()
@@ -143,7 +137,7 @@ void Menu::robotMenu()
         //Move robot
         float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
         ImGui::InputFloat("Move robot", &move_robot_foward_back, 1.0f);
-        ImGui::SliderFloat("Rotate robot", &rotate_robot, 0.0f, 360.0f);
+        ImGui::SliderFloat("Rotate robot", &rotate_robot, -360.0f, 360.0f);
         if (move_robot_foward_back_new != move_robot_foward_back)
             scene->moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
         if (rotate_robot_new != rotate_robot)

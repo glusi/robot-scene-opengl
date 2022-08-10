@@ -361,22 +361,13 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float 
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
-			if (action == ROBOT_HAND_UP)
 				shoulder_lift = amount;
-			else
-				shoulder_lift = -amount;
 		break;
 	case ROBOT_ELBOW:
-			if (action == ROBOT_HAND_UP)
 				elbow_lift = amount;
-			else
-				elbow_lift = -amount;
 		break;
 	case ROBOT_PALM:
-			if (action == ROBOT_HAND_UP)
 				palm_lift = amount;
-			else
-				palm_lift = -amount;
 		break;
 	};
 }
