@@ -73,9 +73,6 @@ void Robot::drawHead()
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 
 	glPushMatrix();
-	//glTranslatef(head_position.x, head_position.y, head_position.z);
-	//glScalef(0.75, 0.75, 0.75);
-	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
 	glutSolidCube(1.1);
 
 	//Antenna
