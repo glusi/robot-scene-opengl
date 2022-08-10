@@ -35,7 +35,7 @@ void Gui::drawText(float x, float y, std::string text, Vector3 color) {
     glRasterPos2f(x, y);
     glTranslatef(x+0.5, y+2.5, 0);
     glScalef(0.05, 0.05, 0);
-    glLineWidth(1.5);
+    glLineWidth(1.7);
     glutStrokeString(GLUT_STROKE_ROMAN, (unsigned char*)text.c_str());
     glLoadIdentity();
     glPopMatrix();
