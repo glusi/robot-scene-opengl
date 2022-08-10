@@ -93,19 +93,75 @@ void Menu::createMenu() {
     ImGui::End();
     static bool x_pressable = true;
     if (help_window_open) {
-        ImGui::OpenPopup("help");
-        
+        ImGui::OpenPopup("help", ImGuiWindowFlags_AlwaysAutoResize);
+
         ImGui::BeginPopupModal("help", &x_pressable, 0);
-        if (x_pressable) {
-            float aspect = scene->getHelpImageHeight() / scene->getHelpImageWidth();
-            float width = scene->getWidth() / scene->getHelpImageWidth() ;
-            ImGui::Image((void*)(intptr_t)scene->getgetHelpImageTexture(), ImVec2(width * 300.0 , aspect * width * 300.0 ));
-            ImGui::EndPopup();
+        if (!next_pressed) {
+            ImGui::Text("You can move the robot and camera by Keyboard:");
+            if (x_pressable) {
+                float aspect = scene->getHelpImageHeight() / scene->getHelpImageWidth();
+                float width = scene->getWidth() / scene->getHelpImageWidth();
+                ImGui::Image((void*)(intptr_t)scene->getgetHelpImageTexture(), ImVec2(width * 700.0, aspect * width * 700.0));
+                ImGuiStyle& style = ImGui::GetStyle();
+                width = ImGui::CalcTextSize("next").x;
+                Tools::AlignForWidth(width);
+                if (ImGui::Button("next"))
+                    next_pressed = true;
+                ImGui::EndPopup();
+            }
+            else {
+                help_window_open = false;
+                x_pressable = true;
+            }
         }
         else {
-            help_window_open = false;
-            x_pressable = true;
+            if (x_pressable) {
+                ImGui::Text("You can also control everything from the menu.");
+                ImGui::Text("The menu is located in right top corner.");
+                ImGui::NewLine();
+                ImGui::Indent();
+                ImGui::Text("Lights");
+                ImGui::Text("In this section you can:");
+                ImGui::BulletText("Enable / Disable ambient light");
+                ImGui::BulletText("Choose color for ambient light");
+                ImGui::BulletText("Enable / Disable point light");
+                ImGui::BulletText("Choose color for point light");
+                ImGui::BulletText("Move point light on X, Y and Z");
+
+                ImGui::NewLine();
+                //ImGui::Indent();
+                ImGui::Text("Robot");
+                ImGui::Text("In this section you can:");
+                ImGui::BulletText("Move robot forward and backwards");
+                ImGui::BulletText("Rotate robot around itself right and left");
+                ImGui::BulletText("Rotate and lift robot head");
+                ImGui::BulletText("Rotate and lift robot shoulder");
+                ImGui::BulletText("Rotate and lift robot elbow");
+                ImGui::BulletText("Rotate and lift robot palm");
+
+                ImGui::NewLine();
+                //ImGui::Indent();
+                ImGui::Text("Camera");
+                ImGui::Text("In this section you can:");
+                ImGui::BulletText("Change the camera to robot eyes and back to external camera");
+                ImGui::Indent();
+                ImGui::Text("The current mode can be seen in the right top corner");
+                ImGui::Unindent();
+                ImGui::BulletText("Move camera on X, Y and Z");
+                ImGui::BulletText("Rotate camera around itself");
+                ImGui::BulletText("Lift camera up and down");
+                
+                ImGui::NewLine();
+                ImGui::Text("Pressing 'exit' will close the simulation");
+                ImGui::Text("Pressing 'help' will open this help window");
+                ImGui::EndPopup();
+            }
+            else {
+                help_window_open = false;
+                x_pressable = true;
+            }
         }
+        
     }
 }
 

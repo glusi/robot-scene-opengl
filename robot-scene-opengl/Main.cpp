@@ -120,6 +120,7 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
         case 'g': scene->moveRobot(ROBOT_MOVE_BACK); break;
         case 'r': scene->rotateRobot(ROBOT_ROTATE_RIGHT); break; //Rotate Robot
         case 'f': scene->rotateRobot(ROBOT_ROTATE_LEFT); break; //Rotate Robot
+
         case 'y': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
         case 'h': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
         case 'n': scene->rotateRobotHand(ROBOT_SHOULDER); break;
