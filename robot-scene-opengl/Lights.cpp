@@ -18,23 +18,31 @@ Lights::Lights() :
 void Lights::draw() {
 	GLfloat light_pos[] = { 0.0, 2.0, 9.0, 1.0 };
 	//glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-	light_ambient[3] = 1.0;
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-
+	if (ambient_enabled) {
+		glEnable(GL_LIGHT0);
+		light_ambient[3] = 1.0;
+		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	}
+	else {
+		glDisable(GL_LIGHT0);
+	}
 	//GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
 	//GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
 	//GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
 	//GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
 //	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT1);
-	point_light_poistion[3] = 1.0;
-	glLightfv(GL_LIGHT1, GL_POSITION, point_light_poistion);
-	point_light_color[3] = 1.0;
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
-	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 180.0f);
+	if (point_enabled) {
+		glEnable(GL_LIGHT1);
+		point_light_poistion[3] = 1.0;
+		glLightfv(GL_LIGHT1, GL_POSITION, point_light_poistion);
+		point_light_color[3] = 1.0;
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
+		glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
+		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 180.0f);
+	}
+	else {
+		glDisable(GL_LIGHT1);
+	}
 
 	//glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	//glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
@@ -100,4 +108,14 @@ void Lights::drawOrb()
 	glTranslatef(point_light_poistion[0] - 0.25, point_light_poistion[1] - 0.25, point_light_poistion[2] - 0.25);
 	glutSolidSphere(0.5, 20, 20);
 	glPopMatrix();
+}
+
+void Lights::disableAmbient(bool enabled)
+{
+	ambient_enabled = enabled;
+}
+
+void Lights::disablePoint(bool enabled)
+{
+	point_enabled = enabled;
 }

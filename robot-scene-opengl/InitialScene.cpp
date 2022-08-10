@@ -544,6 +544,16 @@ float InitialScene::getHeight()
 	return height;
 }
 
+void InitialScene::disableAmbient(bool enabled)
+{
+	lights->disableAmbient(enabled);
+}
+
+void InitialScene::disablePoint(bool enabled)
+{
+	lights->disablePoint(enabled);
+}
+
 
 
 

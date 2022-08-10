@@ -37,6 +37,7 @@ void Menu::getInitialValues() {
     point_light_position.y = scene->getPointLightPosition(POINT_LIGHT_Y);
     point_light_position.z = scene->getPointLightPosition(POINT_LIGHT_Z);
     Tools::copyColor(&point_color, scene->getPointLightColor());
+
 }
 
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
@@ -51,10 +52,6 @@ void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, c
     ImGui::SliderFloat(Tools::concatStrings("Rotate ", name).c_str(), &rotation, -180.0f, 180.0f);
     if (rotation_new != rotation)
             scene->rotateRobotHand(robot_joint, -rotation);
-}
-
-void Menu::MyHelpFunction()
-{
 }
 
 void Menu::createMenu() {
@@ -118,15 +115,22 @@ void Menu::lightMenu()
 {
     if (ImGui::CollapsingHeader("Lights")) {
         ImGui::Text("Adjust ambient Light");
+        ImGui::Checkbox("Enable ambient light", &ambient_enabled);
+        scene->disableAmbient(ambient_enabled);
         ImGui::ColorEdit4("Ambient color", ambient_color);
-        scene->adjustAmbientLight(ambient_color);
+        if (ambient_enabled)
+            scene->adjustAmbientLight(ambient_color);
         ImGui::Text("Adjust point light");
+        ImGui::Checkbox("Enable point light", &point_enabled);
+        scene->disablePoint(point_enabled);
         ImGui::InputFloat("Position X", &point_light_position.x, 1.0f);
         ImGui::InputFloat("Position Y", &point_light_position.y, 1.0f);
-        ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);
-        scene->applyPointLightPos(point_light_position);
+        ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);       
         ImGui::ColorEdit4("Point light color", point_color);
-        scene->adjustPointLight(point_color);
+        if (point_enabled) {
+            scene->applyPointLightPos(point_light_position);
+            scene->adjustPointLight(point_color);
+        }
     }
 }
 

@@ -65,5 +65,7 @@ public:
 	void setHeight(float height);
 	float getWidth();
 	float getHeight();
+	void disableAmbient(bool enabled);
+	void disablePoint(bool enabled);
 };
 

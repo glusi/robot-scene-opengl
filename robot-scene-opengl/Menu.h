@@ -23,7 +23,9 @@ class Menu
 	float move_palm;
 	float rotate_palm;
 	InitialScene* scene;
-	bool help_window_open = false;
+	bool help_window_open = false; 
+	bool ambient_enabled = true;
+	bool point_enabled = true;
 	void getInitialValues();
 	void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name);
 	void MyHelpFunction();
