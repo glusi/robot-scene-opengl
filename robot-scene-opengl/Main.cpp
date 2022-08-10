@@ -32,6 +32,8 @@ float xlast_mouse =0.0, ylast_mouse =0.0;
 static bool show_menu = true;
 float aspect = 1;
 
+bool is_ff = false;
+
 // Set Perspective projection
 void setPrespProjection() {
     glMatrixMode(GL_PROJECTION); // Set projection
@@ -103,24 +105,35 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
     switch (Key)
     { 
-    case 'w': scene->moveCamera(CAMERA_FRONT); break; //Camera front
-    case 'a': scene->moveCamera(CAMERA_LEFT); break; //Camera left
-    case 's': scene->moveCamera(CAMERA_BACK); break; //Camera back
-    case 'd': scene->moveCamera(CAMERA_RIGHT); break; //Camera right
-    case 'e': scene->moveCamera(CAMERA_UP); break; //Camera up
-    case 'q': scene->moveCamera(CAMERA_DOWN); break; //Camera down
-    case 'r': scene->rotateRobot(); break; //Rotate Robot
-    case 't': scene->rotateRobotHand(ROBOT_SHOULDER); break;
-    case 'y': scene->rotateRobotHand(ROBOT_ELBOW); break;
-    case 'u': scene->rotateRobotHand(ROBOT_PALM); break;
-    case 'f': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
-    case 'g': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
-    case 'h': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
-    case 'j': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
-    case 'c': scene->moveRobotHead(ROBOT_HEAD_UP); break;
-    case 'v': scene->moveRobotHead(ROBOT_HEAD_DOWN); break;
-    case 'b': scene->moveRobotHead(ROBOT_HEAD_RIGHT); break;
-    case 'n': scene->moveRobotHead(ROBOT_HEAD_LEFT); break;
+        //Camera
+        case 'w': scene->moveCamera(CAMERA_FRONT); break; //Camera front
+        case 's': scene->moveCamera(CAMERA_BACK); break; //Camera back
+        case 'a': scene->moveCamera(CAMERA_RIGHT); break; //Camera right
+        case 'd': scene->moveCamera(CAMERA_LEFT); break; //Camera left
+        case 'z': scene->moveCamera(CAMERA_UP); break; //Camera up
+        case 'x': scene->moveCamera(CAMERA_DOWN); break; //Camera down
+        case 'q': scene->rotateCamera(CAMERA_ROTATE); break; //Camera rotate
+        case 'e': scene->rotateCamera(CAMERA_LIFT); break; //Camera lift
+        case 'c': is_ff = !is_ff; scene->setIFirstPerson(is_ff); break; //Camera control
+        //Robot
+        case 't': scene->moveRobot(ROBOT_MOVE_FRONT); break;
+        case 'g': scene->moveRobot(ROBOT_MOVE_BACK); break;
+        case 'r': scene->rotateRobot(ROBOT_ROTATE_RIGHT); break; //Rotate Robot
+        case 'f': scene->rotateRobot(ROBOT_ROTATE_LEFT); break; //Rotate Robot
+        case 'y': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
+        case 'h': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
+        case 'n': scene->rotateRobotHand(ROBOT_SHOULDER); break;
+        case 'u': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
+        case 'j': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
+        case 'm': scene->rotateRobotHand(ROBOT_ELBOW); break;
+        case 'i': scene->liftRobotHand(ROBOT_PALM, ROBOT_HAND_UP); break;
+        case 'k': scene->liftRobotHand(ROBOT_PALM, ROBOT_HAND_DOWN); break;
+        case ',': scene->rotateRobotHand(ROBOT_PALM); break;
+        
+        case 'o': scene->moveRobotHead(ROBOT_HEAD_UP); break;
+        case 'l': scene->moveRobotHead(ROBOT_HEAD_DOWN); break;
+        case 'v': scene->moveRobotHead(ROBOT_HEAD_RIGHT); break;
+        case 'b': scene->moveRobotHead(ROBOT_HEAD_LEFT); break; 
     case 27:
         exit(1);
         break;

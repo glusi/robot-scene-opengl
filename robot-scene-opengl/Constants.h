@@ -36,6 +36,10 @@ typedef enum {
     CAMERA_ROTATE, CAMERA_LIFT
 }CAMERA_MOVE;
 
+typedef enum {
+    ROBOT_ROTATE_RIGHT, ROBOT_ROTATE_LEFT
+}ROBOT_ROTATION;
+
 static const char* FLOOR_TEXTURE_PATH = "..//Assets//floor-tiles.jpg";
 static const char* TABLE_TEXTURE_PATH = "..//Assets//wood.jpg";
 static const char* BACKGROUND_TEXTURE_PATH = "..//Assets//background.jpg";

@@ -372,14 +372,17 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float 
 	};
 }
 
-void Robot::rotate()
+void Robot::rotate(ROBOT_ROTATION rotation_type)
 {
-	angle++;
+	if (rotation_type == ROBOT_ROTATE_RIGHT)
+		angle++;
+	else
+		angle--;
 	move_direction = Vector3(sin(angle*(M_PI / 180)), 0, cos(angle * (M_PI / 180)));
 	move_direction.normalize();
 }
 
-void Robot::rotate(float angle_new)
+void Robot::rotate( float angle_new)
 {
 	angle = angle_new;
 	move_direction = Vector3(sin(angle * (M_PI / 180)), 0, cos(angle * (M_PI / 180)));

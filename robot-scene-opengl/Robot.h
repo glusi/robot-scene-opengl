@@ -61,7 +61,7 @@ class Robot : SceneItem
 		void rotateHandJoint(ROBOT_JOINT joint, float amount);
 		void liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action);
 		void liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount);
-		void rotate();
+		void rotate(ROBOT_ROTATION rotation_type);
 		void rotate(float angle_new);
 		Vector3 getHeadPosition();
 		void applyCameraRotation();

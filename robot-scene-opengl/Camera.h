@@ -29,7 +29,9 @@ public:
 	void moveCamera(USER_ACTION_CAMERA action);
 	void moveCamera(USER_ACTION_CAMERA action, float angle);
 	void rotateCamera(float angle);
+	void rotateCamera();
 	void liftCamera(float angle);
+	void liftCamera();
 	void setIFirstPerson(int is_first_person);
 	bool getIFirstPerson();
 	void setFirstPersonCamera(Vector3 translate_position);

@@ -47,21 +47,27 @@ void Camera::moveCamera(USER_ACTION_CAMERA action)
 	Vector3 eye_change = Vector3();
 	switch (action) {
 		case CAMERA_FRONT: 
-			eye_change.update(Vector3::zeroVector() - direction_foward);
+			//eye_change.update(Vector3::zeroVector() - direction_foward);
+			eye += Vector3(0, 0, -1);
 			break;
 		case CAMERA_BACK: 
-			eye_change.update(direction_foward);
+			eye += Vector3(0, 0, 1);
 			break;
-		case CAMERA_RIGHT: 
+		case CAMERA_RIGHT:
+			eye += Vector3(-1, 0, 0);
 			break;
 		case CAMERA_LEFT: 
+			eye += Vector3(1, 0, 0);
 			break;
-		case CAMERA_UP: break;
-		case CAMERA_DOWN: break;
+		case CAMERA_UP: 
+			eye += Vector3(0, -1, 0);
+			break;
+		case CAMERA_DOWN: 
+			eye += Vector3(0, 1, 0);
+			break;
 		default: break;
 	}
-	eye -= eye_change;
-	center -= eye_change;
+	center += direction_moving;
 }
 
 void Camera::moveCamera(USER_ACTION_CAMERA action, float amount)
@@ -110,6 +116,22 @@ void Camera::rotateCamera(float angle)
 	direction_moving.normalize();
 }
 
+void Camera::rotateCamera()
+{
+	double x1 = center.x - eye.x;
+	double z1 = center.z - eye.z;
+
+	double x2 = x1 * cos((M_PI / 180)) - z1 * sin((M_PI / 180));
+	double z2 = x1 * sin((M_PI / 180)) + z1 * cos((M_PI / 180));
+
+	center.x = x2 + eye.x;
+	center.z = z2 + eye.z;
+
+	camera_angle_z ++;
+	direction_moving = center - eye;
+	direction_moving.normalize();
+}
+
 void Camera::liftCamera(float angle)
 {
 	float angle_dif = angle - camera_lift;
@@ -122,6 +144,19 @@ void Camera::liftCamera(float angle)
 	center.z = z2 + eye.z;
 	center.y = y2 + eye.y;
 	camera_lift = angle;
+}
+
+void Camera::liftCamera()
+{
+	float z1 = center.z - eye.z;
+	float y1 = center.y - eye.y;
+
+	float z2 = z1 * cos( (M_PI / 180)) - y1 * sin((M_PI / 180));
+	float y2 = z1 * sin((M_PI / 180)) + y1 * cos((M_PI / 180));
+
+	center.z = z2 + eye.z;
+	center.y = y2 + eye.y;
+	camera_lift ++;
 }
 
 void Camera::setIFirstPerson(int is_first_person_int)
