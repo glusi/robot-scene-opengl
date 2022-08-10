@@ -310,7 +310,6 @@ void InitialScene::draw() {
 	floor->buildWalls();
 	robot->draw();
 	addDecorations();
-	texture.bindTexture(TEXTURE_BACKGROUND);
 	lights->drawOrb();
 	gui.draw();
 
