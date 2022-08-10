@@ -342,9 +342,12 @@ void InitialScene::moveCamera(USER_ACTION_CAMERA action, float amount)
 	camera->moveCamera(action, amount);
 }
 
-void InitialScene::rotateCamera(float angle)
+void InitialScene::rotateCamera(CAMERA_MOVE camera_type, float angle)
 {
-	camera->rotateCamera(angle);
+	if(camera_type == CAMERA_ROTATE)
+		camera->rotateCamera(angle);
+	else
+		camera->liftCamera(angle);
 }
 
 void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction)
@@ -559,6 +562,10 @@ float InitialScene::getCameraAngle()
 	return camera->getCameraAngle();
 }
 
+float InitialScene::getCameraLift()
+{
+	return camera->getCameraLift();
+}
 
 
 

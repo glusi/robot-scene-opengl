@@ -21,6 +21,7 @@ class Camera : SceneItem
 	Vector3 translate_position_camera_robot;
 	Vector3 direction_moving;
 	float camera_angle_z;
+	float camera_lift;
 	void updateCamera();
 public:
 	Camera();
@@ -28,10 +29,12 @@ public:
 	void moveCamera(USER_ACTION_CAMERA action);
 	void moveCamera(USER_ACTION_CAMERA action, float angle);
 	void rotateCamera(float angle);
+	void liftCamera(float angle);
 	void setIFirstPerson(int is_first_person);
 	bool getIFirstPerson();
 	void setFirstPersonCamera(Vector3 translate_position);
 	Vector3 getCameraPosition();
 	float getCameraAngle();
+	float getCameraLift();
 };
 

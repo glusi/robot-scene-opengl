@@ -26,7 +26,7 @@ public:
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
 	void moveCamera(USER_ACTION_CAMERA action, float angle);
-	void rotateCamera(float angle);
+	void rotateCamera(CAMERA_MOVE camera_type, float angle);
 	void moveRobot(ROBOT_MOVE_DIRECTION direction);
 	void moveRobot(ROBOT_MOVE_DIRECTION direction, float amount);
 	void rotateRobot();
@@ -68,5 +68,6 @@ public:
 	void disableAmbient(bool enabled);
 	void disablePoint(bool enabled);
 	float getCameraAngle();
+	float getCameraLift();
 };
 

@@ -39,6 +39,7 @@ void Menu::getInitialValues() {
     Tools::copyColor(&point_color, scene->getPointLightColor());
 
     rotate_camera_z = scene->getCameraAngle();
+    lift_camera = scene->getCameraLift();
 }
 
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
@@ -210,6 +211,12 @@ void Menu::cameraMenu()
         float rotate_camera_z_new = rotate_camera_z;
         ImGui::SliderFloat("Rotate camera around z", &rotate_camera_z, -360.0f, 360.0f);
         if (rotate_camera_z != rotate_camera_z_new)
-            scene->rotateCamera(rotate_camera_z);
+            scene->rotateCamera(CAMERA_ROTATE ,rotate_camera_z);
+
+        //Rotate camera around z
+        float lift_camera_new = lift_camera;
+        ImGui::SliderFloat("Lift camera up down", &lift_camera, -360.0f, 360.0f);
+        if (lift_camera_new != lift_camera)
+            scene->rotateCamera(CAMERA_LIFT, lift_camera);
     }
 }

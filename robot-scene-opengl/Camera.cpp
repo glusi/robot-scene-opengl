@@ -33,6 +33,7 @@ Camera::Camera()
 	direction_moving = center - eye;
 	direction_moving.normalize();
 	camera_angle_z = 33;
+	camera_lift = 33;
 }
 
 void Camera::draw()
@@ -109,6 +110,20 @@ void Camera::rotateCamera(float angle)
 	direction_moving.normalize();
 }
 
+void Camera::liftCamera(float angle)
+{
+	float angle_dif = angle - camera_lift;
+	float z1 = center.z - eye.z;
+	float y1 = center.y - eye.y;
+
+	float z2 = z1 * cos(angle_dif * (M_PI / 180)) - y1 * sin(angle_dif * (M_PI / 180));
+	float y2 = z1 * sin(angle_dif * (M_PI / 180)) + y1 * cos(angle_dif * (M_PI / 180));
+
+	center.z = z2 + eye.z;
+	center.y = y2 + eye.y;
+	camera_lift = angle;
+}
+
 void Camera::setIFirstPerson(int is_first_person_int)
 {
 	is_first_person = (is_first_person_int == 1) ? true : false;
@@ -134,5 +149,9 @@ float Camera::getCameraAngle()
 	return camera_angle_z;
 }
 
+float Camera::getCameraLift()
+{
+	return camera_lift;
+}
 
 
