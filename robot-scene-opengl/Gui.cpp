@@ -1,16 +1,13 @@
 #include "Gui.h"
-#include "../third-party/imagui/imgui.h"
 
-Gui::Gui()
-{
-}
 
 void Gui::draw()
 {
+    //Disable all 3D parameters - depth and lightning
     glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
 
+    //Create 2D view on the screen to project on
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(-100, 100, -100, 100);
@@ -18,10 +15,12 @@ void Gui::draw()
     glLoadIdentity();
     glColor3f(0.8, 0.8, 0.8);
     glNormal3d(0, 0, 1);
+    //Print current mode on the right left corner
     if (camera_mode)
         drawText(55, 90, "Camera Mode", color_font);
     else
         drawText(60, 90, "Robot Mode", color_font);
+    //Enable all 3D parameters - depth and lightning
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
 	
@@ -42,7 +41,11 @@ void Gui::drawText(float x, float y, std::string text, Vector3 color) {
 
 }
 
+/**
+ * setter for camera mode boolean
+ */
 void Gui::setMode(bool mode)
 {
     camera_mode = mode;
 }
+
