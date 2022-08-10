@@ -294,15 +294,8 @@ InitialScene::InitialScene()
 	robot = new Robot();
 }
 
-InitialScene::InitialScene(std::list<Button> buttons) {
-	texture = Texture();
-	camera = new Camera();
-	floor = new Floor();
-	lights = new Lights();
-	robot = new Robot();
-	gui = Gui(buttons);
-	
-}
+
+
 
 void InitialScene::draw() {
 	camera->draw();
@@ -319,7 +312,7 @@ void InitialScene::draw() {
 	addDecorations();
 	texture.bindTexture(TEXTURE_BACKGROUND);
 	lights->drawOrb();
-	//gui.draw();
+	gui.draw();
 
 	/*ImGui::Text("Hello, world %d", 123);
 	if (ImGui::Button("Save"))
@@ -407,6 +400,8 @@ void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 void InitialScene::setIFirstPerson(int isFirstPerson)
 {
 	camera->setIFirstPerson(isFirstPerson);
+	bool mode = (isFirstPerson == 0) ? true : false;
+	gui.setMode(mode);
 }
 
 Vector3 InitialScene::getCameraPosition()
@@ -548,6 +543,7 @@ float InitialScene::getHeight()
 {
 	return height;
 }
+
 
 
 

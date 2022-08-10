@@ -22,13 +22,12 @@ constexpr auto WINDOW_POSITION_Y = 50;
 
 //the current width and height of the window
 GLsizei new_width, new_height;
-InitialScene scene;
+InitialScene* scene;
 Menu menu;
 
 bool first_time_right_mouse = true;
 float xlast_mouse =0.0, ylast_mouse =0.0;
 
-std::list<Button> buttons;
 
 static bool show_menu = true;
 float aspect = 1;
@@ -82,7 +81,7 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    scene.draw();
+    scene->draw();
     //drawAxis();
 
     //ImGui_ImplGLUT_RenderDrawData();
@@ -104,24 +103,24 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
     switch (Key)
     { 
-    case 'w': scene.moveCamera(CAMERA_FRONT); break; //Camera front
-    case 'a': scene.moveCamera(CAMERA_LEFT); break; //Camera left
-    case 's': scene.moveCamera(CAMERA_BACK); break; //Camera back
-    case 'd': scene.moveCamera(CAMERA_RIGHT); break; //Camera right
-    case 'e': scene.moveCamera(CAMERA_UP); break; //Camera up
-    case 'q': scene.moveCamera(CAMERA_DOWN); break; //Camera down
-    case 'r': scene.rotateRobot(); break; //Rotate Robot
-    case 't': scene.rotateRobotHand(ROBOT_SHOULDER); break;
-    case 'y': scene.rotateRobotHand(ROBOT_ELBOW); break;
-    case 'u': scene.rotateRobotHand(ROBOT_PALM); break;
-    case 'f': scene.liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
-    case 'g': scene.liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
-    case 'h': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
-    case 'j': scene.liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
-    case 'c': scene.moveRobotHead(ROBOT_HEAD_UP); break;
-    case 'v': scene.moveRobotHead(ROBOT_HEAD_DOWN); break;
-    case 'b': scene.moveRobotHead(ROBOT_HEAD_RIGHT); break;
-    case 'n': scene.moveRobotHead(ROBOT_HEAD_LEFT); break;
+    case 'w': scene->moveCamera(CAMERA_FRONT); break; //Camera front
+    case 'a': scene->moveCamera(CAMERA_LEFT); break; //Camera left
+    case 's': scene->moveCamera(CAMERA_BACK); break; //Camera back
+    case 'd': scene->moveCamera(CAMERA_RIGHT); break; //Camera right
+    case 'e': scene->moveCamera(CAMERA_UP); break; //Camera up
+    case 'q': scene->moveCamera(CAMERA_DOWN); break; //Camera down
+    case 'r': scene->rotateRobot(); break; //Rotate Robot
+    case 't': scene->rotateRobotHand(ROBOT_SHOULDER); break;
+    case 'y': scene->rotateRobotHand(ROBOT_ELBOW); break;
+    case 'u': scene->rotateRobotHand(ROBOT_PALM); break;
+    case 'f': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
+    case 'g': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
+    case 'h': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_UP); break;
+    case 'j': scene->liftRobotHand(ROBOT_ELBOW, ROBOT_HAND_DOWN); break;
+    case 'c': scene->moveRobotHead(ROBOT_HEAD_UP); break;
+    case 'v': scene->moveRobotHead(ROBOT_HEAD_DOWN); break;
+    case 'b': scene->moveRobotHead(ROBOT_HEAD_RIGHT); break;
+    case 'n': scene->moveRobotHead(ROBOT_HEAD_LEFT); break;
     case 27:
         exit(1);
         break;
@@ -132,8 +131,8 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
 void MyGlutSpecialFunc(int Key, int x, int y) {
     switch (Key)
     {
-    case GLUT_KEY_UP: scene.moveRobot(ROBOT_MOVE_FRONT); break;
-    case GLUT_KEY_DOWN: scene.moveRobot(ROBOT_MOVE_BACK); break;
+    case GLUT_KEY_UP: scene->moveRobot(ROBOT_MOVE_FRONT); break;
+    case GLUT_KEY_DOWN: scene->moveRobot(ROBOT_MOVE_BACK); break;
     case GLUT_KEY_HOME:  break;
     case GLUT_KEY_END:  break;
     case 27:
@@ -152,7 +151,7 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
         int deltaY = -1 * (ypos - centerY);
 
         if (deltaX != 0 || deltaY != 0) {
-            scene.rotateCamera(deltaX, deltaY);
+            scene->rotateCamera(deltaX, deltaY);
         }
     }*/
 
@@ -167,7 +166,7 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
             float yoffset = ylast_mouse - ypos;
             xlast_mouse = xpos;
             ylast_mouse = ypos;
-            scene.rotateCamera(xoffset, yoffset);
+            scene->rotateCamera(xoffset, yoffset);
         }
         
     }*/
@@ -184,17 +183,7 @@ void MyMouseFunc(int button, int state, int xpos, int ypos) {
     printf("World coords at z = 0.0 are(% f, % f, % f)\n", wx, wy, wz);
 
 
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        for (Button button : buttons) {
-            //Check if the click was inside the 'exit' button
-            if (wx >= button.position.x && wx <= button.position.x+button.width && wy >= button.position.y && wy <= button.position.y+button.length)
-            {
-               cout<<"clicked "+ button.name<<endl;
-               button.function();
-            }
-        }
-    }
+    
 }
 
 void exitFunc() {
@@ -213,13 +202,7 @@ void helpFunc() {
     }
 }
 
-std::list<Button> makeButtons() {
-    list<Button> res = *(new list<Button>());
-    res.push_back(Button(Vector3(-85, -80, 0), 10.0, 11.0, "exit", exitFunc));
-    res.push_back(Button(Vector3(-85, 20, 0), 10.0, 13.0, "help", helpFunc));
-    res.push_back(Button(Vector3(-95, -50, 0), 20.0, 13.0, "Adjust ambient light", helpFunc));
-    return res;
-}
+
 
 void initImgui() {
     // Setup Dear ImGui context
@@ -253,9 +236,8 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
-    buttons = makeButtons();
-    scene = InitialScene(buttons);
-    menu = Menu(&scene);
+    scene = new InitialScene();
+    menu = Menu(scene);
     
 
 }
@@ -272,8 +254,8 @@ void reshapeFunc(GLint w, GLint h)
     new_height = h;
     glViewport(0, 0, w, h);
     aspect = float(w / h);
-    scene.setWidth(w);
-    scene.setHeight(h);
+    scene->setWidth(w);
+    scene->setHeight(h);
 }
 
 int main(int argc, char** argv)

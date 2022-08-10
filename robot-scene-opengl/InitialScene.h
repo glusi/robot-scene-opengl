@@ -23,7 +23,6 @@ class InitialScene
 	void buildChair();
 public:
 	InitialScene();
-	InitialScene(std::list<Button> buttons);
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
 	void moveCamera(USER_ACTION_CAMERA action, float angle);

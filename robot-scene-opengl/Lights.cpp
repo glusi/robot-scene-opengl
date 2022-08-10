@@ -34,7 +34,7 @@ void Lights::draw() {
 	point_light_color[3] = 1.0;
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
-	
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 180.0f);
 
 	//glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
 	//glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);

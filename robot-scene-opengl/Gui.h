@@ -2,18 +2,16 @@
 #include <GL/glut.h>
 #include <GL\freeglut_ext.h>
 #include <string>
-#include "Button.h"
-#include <list>
+#include "Vector3.h"
 
 class Gui
 {
-	std::list<Button> buttons;
-	void drawButton(Button button);
+	const Vector3 color_font = Vector3(0, 0, 0);
+	bool camera_mode = true;
 public:
 	Gui();
-	Gui(std::list<Button> new_list);
 	void draw();
 	void drawText(float x, float y, std::string text, Vector3 color);
-	void drawAllButtons();
+	void setMode(bool mode);
 };
 

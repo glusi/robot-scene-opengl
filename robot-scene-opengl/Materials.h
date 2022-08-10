@@ -95,3 +95,10 @@ static const materialStruct black_rubber{
 	50
 };
 
+// WALL
+static const materialStruct material_wall{
+	{ 0.25f, 0.20725f, 0.20725f, 0.922f },
+	{1.0f, 0.829f, 0.829f, 0.922f },
+	{0.296648f, 0.296648f, 0.296648f, 0.922f },
+	11.264f
+};
