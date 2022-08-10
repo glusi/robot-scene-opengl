@@ -1,11 +1,14 @@
 #pragma once
 #include <GL/glut.h>
 
+/**
+ * This file contains different materials values constructed in material struct
+ */
 
 typedef struct materialStruct {
-	GLfloat Ka[4];
-	GLfloat Kd[4];
-	GLfloat Ks[4];
+	GLfloat Ka[4]; //Ka -ambient
+	GLfloat Kd[4]; // Kd - diffusion
+	GLfloat Ks[4]; //Ks - specular
 	GLfloat n;
 } materialStruct;
 
