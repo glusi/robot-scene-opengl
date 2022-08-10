@@ -145,7 +145,7 @@ void Menu::createMenu() {
                 ImGui::Text("In this section you can:");
                 ImGui::BulletText("Change the camera to robot eyes and back to external camera");
                 ImGui::Indent();
-                ImGui::Text("The current mode can be seen in the right top corner");
+                ImGui::Text("The current mode can be seen in the right top corner.");
                 ImGui::Unindent();
                 ImGui::BulletText("Move camera on X, Y and Z");
                 ImGui::BulletText("Rotate camera around itself");
