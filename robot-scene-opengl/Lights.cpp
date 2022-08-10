@@ -1,9 +1,9 @@
 #include "Lights.h"
 
 Lights::Lights() :
-	//light_diffuse { 0.8, 0.8, 0.8, 1.0 },
-	//point_light_color{ 0.9f, 0.9f, 0.3f , 1.0f },
+	//point light initial position
 	point_light_poistion{ 0.0f, 12.0f, -1.0f , 1.0f } {
+	//initialize colors of lights
 	light_ambient = new GLfloat[4];
 	point_light_color = new GLfloat[4];
 	for (int i=0; i<4; i++)
@@ -16,8 +16,7 @@ Lights::Lights() :
 
 
 void Lights::draw() {
-	GLfloat light_pos[] = { 0.0, 2.0, 9.0, 1.0 };
-	//glEnable(GL_LIGHTING);
+	//Ambient light draw
 	if (ambient_enabled) {
 		glEnable(GL_LIGHT0);
 		light_ambient[3] = 1.0;
@@ -26,36 +25,22 @@ void Lights::draw() {
 	else {
 		glDisable(GL_LIGHT0);
 	}
-	//GLfloat position0[] = { 0.0, 5.0, 1.0, 1.0 };
-	//GLfloat diffuse0[] = { 0.5f, 0.5f, 0.5f };
-	//GLfloat specular0[] = { 1.0f, 1.0f, 1.0f };
-	//GLfloat ambient0[] = { 0.2f, 0.2f, 0.2f };
-//	glEnable(GL_LIGHTING);
+	//Point light draw
 	if (point_enabled) {
 		glEnable(GL_LIGHT1);
+		//Set alpha
 		point_light_poistion[3] = 1.0;
 		glLightfv(GL_LIGHT1, GL_POSITION, point_light_poistion);
+		//Set alpha
 		point_light_color[3] = 1.0;
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, point_light_color);
 		glLightfv(GL_LIGHT1, GL_SPECULAR, point_light_color);
+		//uniform light distribution
 		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 180.0f);
 	}
 	else {
 		glDisable(GL_LIGHT1);
 	}
-
-	//glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse0);
-	//glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
-	//glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
-
-	/*GLfloat diffu[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-	GLfloat spec[] = { 0.5f, 0.5f, 0.5f, 0.5f };
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffu);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, spec);
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT1);*/
-
 	glShadeModel(GL_SMOOTH);
 }
 
@@ -102,7 +87,7 @@ void Lights::adjustPointLight(float* color)
 
 void Lights::drawOrb()
 {
-	//draw orb
+	//draw orb in the place of point light
 	glPushMatrix();
 	Tools::assignMaterial(glass);
 	glTranslatef(point_light_poistion[0] - 0.25, point_light_poistion[1] - 0.25, point_light_poistion[2] - 0.25);
