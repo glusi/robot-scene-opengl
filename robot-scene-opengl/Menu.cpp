@@ -117,7 +117,7 @@ void Menu::lightMenu()
         ImGui::Text("Adjust ambient Light");
         ImGui::Checkbox("Enable ambient light", &ambient_enabled);
         scene->disableAmbient(ambient_enabled);
-        ImGui::ColorEdit4("Ambient color", ambient_color);
+        ImGui::ColorEdit3("Ambient color", ambient_color);
         if (ambient_enabled)
             scene->adjustAmbientLight(ambient_color);
         ImGui::Text("Adjust point light");
@@ -126,7 +126,7 @@ void Menu::lightMenu()
         ImGui::InputFloat("Position X", &point_light_position.x, 1.0f);
         ImGui::InputFloat("Position Y", &point_light_position.y, 1.0f);
         ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);       
-        ImGui::ColorEdit4("Point light color", point_color);
+        ImGui::ColorEdit3("Point light color", point_color);
         if (point_enabled) {
             scene->applyPointLightPos(point_light_position);
             scene->adjustPointLight(point_color);
