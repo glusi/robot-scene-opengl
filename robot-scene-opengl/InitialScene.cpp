@@ -342,9 +342,9 @@ void InitialScene::moveCamera(USER_ACTION_CAMERA action, float amount)
 	camera->moveCamera(action, amount);
 }
 
-void InitialScene::rotateCamera(int mouseX, int mouseY)
+void InitialScene::rotateCamera(float angle)
 {
-	camera->rotateCamera(mouseX, mouseY);
+	camera->rotateCamera(angle);
 }
 
 void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction)
@@ -552,6 +552,11 @@ void InitialScene::disableAmbient(bool enabled)
 void InitialScene::disablePoint(bool enabled)
 {
 	lights->disablePoint(enabled);
+}
+
+float InitialScene::getCameraAngle()
+{
+	return camera->getCameraAngle();
 }
 
 

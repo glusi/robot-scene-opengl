@@ -26,6 +26,7 @@ class Menu
 	bool help_window_open = false; 
 	bool ambient_enabled = true;
 	bool point_enabled = true;
+	float rotate_camera_z = 0;
 	void getInitialValues();
 	void moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name);
 	void MyHelpFunction();

@@ -38,6 +38,7 @@ void Menu::getInitialValues() {
     point_light_position.z = scene->getPointLightPosition(POINT_LIGHT_Z);
     Tools::copyColor(&point_color, scene->getPointLightColor());
 
+    rotate_camera_z = scene->getCameraAngle();
 }
 
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
@@ -204,5 +205,11 @@ void Menu::cameraMenu()
                 scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);
             else
                 scene->moveCamera(CAMERA_BACK, -rotate_camera_front_back);
+
+        //Rotate camera around z
+        float rotate_camera_z_new = rotate_camera_z;
+        ImGui::SliderFloat("Rotate camera around z", &rotate_camera_z, -360.0f, 360.0f);
+        if (rotate_camera_z != rotate_camera_z_new)
+            scene->rotateCamera(rotate_camera_z);
     }
 }

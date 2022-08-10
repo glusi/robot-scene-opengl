@@ -29,6 +29,10 @@ Camera::Camera()
 	eye_robot = Vector3(0,0,0);
 	center_robot = Vector3(0,0,10);
 	upz_robot = Vector3(0.0, 1.0, 0.0);
+
+	direction_moving = center - eye;
+	direction_moving.normalize();
+	camera_angle_z = 33;
 }
 
 void Camera::draw()
@@ -65,6 +69,7 @@ void Camera::moveCamera(USER_ACTION_CAMERA action, float amount)
 	switch (action) {
 	case CAMERA_FRONT:
 		eye = Vector3(eye.x, eye.y, 0) + (Vector3(0, 0, 1) * amount);
+		
 		break;
 	case CAMERA_BACK:
 		eye = Vector3(eye.x, eye.y, 0) + (Vector3(0, 0, 1) * (-amount));
@@ -84,11 +89,24 @@ void Camera::moveCamera(USER_ACTION_CAMERA action, float amount)
 		
 	default: break;
 	}
+	center += direction_moving;
 }
 
-void Camera::rotateCamera(int xoffset, int yoffset)
+void Camera::rotateCamera(float angle)
 {
-	
+	float angle_dif = angle - camera_angle_z;
+	double x1 = center.x - eye.x;
+	double z1 = center.z - eye.z;
+
+	double x2 = x1 * cos(angle_dif * (M_PI / 180)) - z1 * sin(angle_dif * (M_PI / 180));
+	double z2 = x1 * sin(angle_dif * (M_PI / 180)) + z1 * cos(angle_dif * (M_PI / 180));
+
+	center.x = x2 + eye.x;
+	center.z = z2 + eye.z;
+
+	camera_angle_z = angle;
+	direction_moving = center - eye;
+	direction_moving.normalize();
 }
 
 void Camera::setIFirstPerson(int is_first_person_int)
@@ -109,6 +127,11 @@ void Camera::setFirstPersonCamera(Vector3 translate_position)
 Vector3 Camera::getCameraPosition()
 {
 	return eye;
+}
+
+float Camera::getCameraAngle()
+{
+	return camera_angle_z;
 }
 
 
