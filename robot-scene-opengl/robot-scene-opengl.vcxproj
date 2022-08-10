@@ -160,7 +160,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Gui.cpp" />
-    <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -184,7 +184,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Gui.h" />
-    <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="Materials.h" />
     <ClInclude Include="Menu.h" />

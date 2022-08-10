@@ -1,6 +1,6 @@
 #pragma once
 #include "Tools.h"
-#include "Initialscene.h"
+#include "Scene.h"
 
 
 class Menu
@@ -22,7 +22,7 @@ class Menu
 	float rotate_elbow;
 	float move_palm;
 	float rotate_palm;
-	InitialScene* scene;
+	Scene* scene;
 	bool help_window_open = false; 
 	bool ambient_enabled = true;
 	bool point_enabled = true;
@@ -37,7 +37,7 @@ class Menu
 	void cameraMenu();
 public:
 	Menu();
-	Menu(InitialScene* scene);
+	Menu(Scene* scene);
 	void createMenu();
 };
 

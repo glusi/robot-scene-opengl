@@ -7,7 +7,7 @@
 #include "Texture.h"
 #include "Gui.h"
 
-class InitialScene
+class Scene
 {
 	Floor* floor;
 	Lights* lights;
@@ -22,7 +22,7 @@ class InitialScene
 	void buildTVCorner();
 	void buildChair();
 public:
-	InitialScene();
+	Scene();
 	void draw();
 	void moveCamera(USER_ACTION_CAMERA action);
 	void moveCamera(USER_ACTION_CAMERA action, float angle);

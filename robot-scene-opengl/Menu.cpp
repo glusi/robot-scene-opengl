@@ -6,7 +6,7 @@ Menu::Menu()
     point_color = new float[4];
 }
 
-Menu::Menu(InitialScene* scene_new)
+Menu::Menu(Scene* scene_new)
 {
     ambient_color = new float[4];
     point_color = new float[4];

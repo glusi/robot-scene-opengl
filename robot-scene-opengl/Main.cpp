@@ -22,7 +22,7 @@ constexpr auto WINDOW_POSITION_Y = 50;
 
 //the current width and height of the window
 GLsizei new_width, new_height;
-InitialScene* scene;
+Scene* scene;
 Menu menu;
 
 bool first_time_right_mouse = true;
@@ -190,7 +190,7 @@ void Init() {
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
    // glEnable(GL_CULL_FACE);
-    scene = new InitialScene();
+    scene = new Scene();
     menu = Menu(scene);
     
 

@@ -1,8 +1,8 @@
-#include "Initialscene.h"
+#include "Scene.h"
 #include "../third-party/imgui/imgui_impl_glut.h"
 
 
-void InitialScene::addDecorations()
+void Scene::addDecorations()
 {
 	buildEatingCorner();
 	buildTVCorner();
@@ -67,7 +67,7 @@ void InitialScene::addDecorations()
 	glDisable(GL_TEXTURE_2D);
 }
 
-void InitialScene::buildEatingCorner()
+void Scene::buildEatingCorner()
 {
 	glPushMatrix();
 	glTranslatef(-2, 0, -14);
@@ -156,7 +156,7 @@ void InitialScene::buildEatingCorner()
 	
 }
 
-void InitialScene::buildTVCorner()
+void Scene::buildTVCorner()
 {
 	glPushMatrix();
 	glTranslatef(15, 0, 11);
@@ -221,7 +221,7 @@ void InitialScene::buildTVCorner()
 	glPopMatrix();
 }
 
-void InitialScene::buildChair()
+void Scene::buildChair()
 {
 	Tools::assignMaterial(silver);
 	//Chair legs
@@ -285,7 +285,7 @@ void InitialScene::buildChair()
 	
 }
 
-InitialScene::InitialScene()
+Scene::Scene()
 {
 	texture = Texture();
 	camera = new Camera();
@@ -297,7 +297,7 @@ InitialScene::InitialScene()
 
 
 
-void InitialScene::draw() {
+void Scene::draw() {
 	camera->draw();
 	//glPushMatrix();
 	
@@ -331,17 +331,17 @@ void InitialScene::draw() {
 	
 }
 
-void InitialScene::moveCamera(USER_ACTION_CAMERA action)
+void Scene::moveCamera(USER_ACTION_CAMERA action)
 {
 	camera->moveCamera(action);
 }
 
-void InitialScene::moveCamera(USER_ACTION_CAMERA action, float amount)
+void Scene::moveCamera(USER_ACTION_CAMERA action, float amount)
 {
 	camera->moveCamera(action, amount);
 }
 
-void InitialScene::rotateCamera(CAMERA_MOVE camera_type)
+void Scene::rotateCamera(CAMERA_MOVE camera_type)
 {
 	if (camera_type == CAMERA_ROTATE)
 		camera->rotateCamera();
@@ -350,7 +350,7 @@ void InitialScene::rotateCamera(CAMERA_MOVE camera_type)
 }
 
 
-void InitialScene::rotateCamera(CAMERA_MOVE camera_type, float angle)
+void Scene::rotateCamera(CAMERA_MOVE camera_type, float angle)
 {
 	if(camera_type == CAMERA_ROTATE)
 		camera->rotateCamera(angle);
@@ -358,155 +358,155 @@ void InitialScene::rotateCamera(CAMERA_MOVE camera_type, float angle)
 		camera->liftCamera(angle);
 }
 
-void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction)
+void Scene::moveRobot(ROBOT_MOVE_DIRECTION direction)
 {
 	robot->move(direction);
 }
 
-void InitialScene::moveRobot(ROBOT_MOVE_DIRECTION direction, float amount)
+void Scene::moveRobot(ROBOT_MOVE_DIRECTION direction, float amount)
 {
 	robot->move(direction, amount);
 }
 
-void InitialScene::rotateRobot(ROBOT_ROTATION rotation_type)
+void Scene::rotateRobot(ROBOT_ROTATION rotation_type)
 {
 	robot->rotate(rotation_type);
 }
 
-void InitialScene::rotateRobot(float angle)
+void Scene::rotateRobot(float angle)
 {
 	robot->rotate(angle);
 }
 
-void InitialScene::rotateRobotHand(ROBOT_JOINT joint)
+void Scene::rotateRobotHand(ROBOT_JOINT joint)
 {
 	robot->rotateHandJoint(joint);
 }
 
-void InitialScene::rotateRobotHand(ROBOT_JOINT joint, float amount)
+void Scene::rotateRobotHand(ROBOT_JOINT joint, float amount)
 {
 	robot->rotateHandJoint(joint, amount);
 }
 
-void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
+void Scene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	robot->liftHandJoint(joint, action);
 }
 
-void InitialScene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount)
+void Scene::liftRobotHand(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action, float amount)
 {
 	robot->liftHandJoint(joint, action, amount);
 }
 
-void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement)
+void Scene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement)
 {
 	robot->moveHead(movement);
 }
 
-void InitialScene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle)
+void Scene::moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 {
 	robot->moveHead(movement, angle);
 }
 
-void InitialScene::setIFirstPerson(int isFirstPerson)
+void Scene::setIFirstPerson(int isFirstPerson)
 {
 	camera->setIFirstPerson(isFirstPerson);
 	bool mode = (isFirstPerson == 0) ? true : false;
 	gui.setMode(mode);
 }
 
-Vector3 InitialScene::getCameraPosition()
+Vector3 Scene::getCameraPosition()
 {
 	return camera->getCameraPosition();
 }
 
-Vector3 InitialScene::getHeadPosition()
+Vector3 Scene::getHeadPosition()
 {
 	return robot->getHeadPosition();
 }
 
-void InitialScene::adjustAmbientLight(float* color)
+void Scene::adjustAmbientLight(float* color)
 {
 	lights->adjustAmbientLight(color);
 }
 
-float* InitialScene::getAmbientColor()
+float* Scene::getAmbientColor()
 {
 	return lights->getAmbientColor();
 }
 
-float InitialScene::getRobotRotation()
+float Scene::getRobotRotation()
 {
 	return robot->getRobotRotation();
 }
 
-float InitialScene::getRobotPosition()
+float Scene::getRobotPosition()
 {
 	return robot->getRobotPosition();
 }
 
-float InitialScene::getShoulderLift()
+float Scene::getShoulderLift()
 {
 	return robot->getShoulderLift();
 }
 
-float InitialScene::getShoulderRotation()
+float Scene::getShoulderRotation()
 {
 	return robot->getShoulderRotation();
 }
 
-float InitialScene::getElbowLift()
+float Scene::getElbowLift()
 {
 	return robot->getElbowLift();
 }
 
-float InitialScene::getElbowRotation()
+float Scene::getElbowRotation()
 {
 	return robot->getElbowRotation();
 }
 
-float InitialScene::getPalmLift()
+float Scene::getPalmLift()
 {
 	return robot->getPalmLift();
 }
 
-float InitialScene::getPalmRotation()
+float Scene::getPalmRotation()
 {
 	return robot->getPalmRotation();
 }
 
-GLuint InitialScene::getTextureId(TEXTURE_TYPE texture)
+GLuint Scene::getTextureId(TEXTURE_TYPE texture)
 {
 	GLuint res = this->texture.getTextureId(texture);
 	return res;
 }
 
-int InitialScene::getHelpImageWidth()
+int Scene::getHelpImageWidth()
 {
 	return texture.getHelpImageWidth();
 }
 
-int InitialScene::getHelpImageHeight()
+int Scene::getHelpImageHeight()
 {
 	return texture.getHelpImageHeight();
 }
 
-GLuint InitialScene::getgetHelpImageTexture()
+GLuint Scene::getgetHelpImageTexture()
 {
 	return texture.getgetHelpImageTexture();
 }
 
-float InitialScene::getHeadRotation()
+float Scene::getHeadRotation()
 {
 	return robot->getHeadRotation();
 }
 
-float InitialScene::getHeadLift()
+float Scene::getHeadLift()
 {
 	return robot->getHeadLift();
 }
 
-void InitialScene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material)
+void Scene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material)
 {
 	//Tools::assignMaterial(material);
 	texture.bindTexture(tex);
@@ -515,62 +515,62 @@ void InitialScene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material
 	glDisable(GL_TEXTURE_2D);
 }
 
-float InitialScene::getPointLightPosition(POINT_LIGHT_POS axis)
+float Scene::getPointLightPosition(POINT_LIGHT_POS axis)
 {
 	return lights->getPointLightPosition(axis);
 }
 
-void InitialScene::applyPointLightPos(Vector3 point_light_position)
+void Scene::applyPointLightPos(Vector3 point_light_position)
 {
 	lights->applyPointLightPos(point_light_position);
 }
 
-float* InitialScene::getPointLightColor()
+float* Scene::getPointLightColor()
 {
 	return lights->getPointLightColor();
 }
 
-void InitialScene::adjustPointLight(float* color)
+void Scene::adjustPointLight(float* color)
 {
 	lights->adjustPointLight(color);
 }
 
-void InitialScene::setWidth(float width)
+void Scene::setWidth(float width)
 {
 	this->width = width;
 }
 
-void InitialScene::setHeight(float height)
+void Scene::setHeight(float height)
 {
 	this->height = height;
 }
 
-float InitialScene::getWidth()
+float Scene::getWidth()
 {
 	return width;
 }
 
-float InitialScene::getHeight()
+float Scene::getHeight()
 {
 	return height;
 }
 
-void InitialScene::disableAmbient(bool enabled)
+void Scene::disableAmbient(bool enabled)
 {
 	lights->disableAmbient(enabled);
 }
 
-void InitialScene::disablePoint(bool enabled)
+void Scene::disablePoint(bool enabled)
 {
 	lights->disablePoint(enabled);
 }
 
-float InitialScene::getCameraAngle()
+float Scene::getCameraAngle()
 {
 	return camera->getCameraAngle();
 }
 
-float InitialScene::getCameraLift()
+float Scene::getCameraLift()
 {
 	return camera->getCameraLift();
 }
