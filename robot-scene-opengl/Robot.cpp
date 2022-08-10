@@ -78,7 +78,19 @@ void Robot::drawHead()
 	//glColor3f(0.0f, 1.0f, 1.0f);//Blue
 	glutSolidCube(1.1);
 
-	applyMaterial(material3,1);
+	//Antenna
+	glPushMatrix();
+	glTranslatef(0, 1.3, 0);
+	glRotatef(90, 1, 0, 0);
+	Tools::drawCylinder(0.02, 1.3, 10);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0, 1.3, 0);
+	glutSolidSphere(0.1, 10, 10);
+	glPopMatrix();
+
+	//eyes
+	applyMaterial(robot_eye_material,1);
 	glPushMatrix();
 	glTranslatef(0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);

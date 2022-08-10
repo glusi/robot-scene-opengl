@@ -22,7 +22,7 @@ static const materialStruct materialTV{
 	{1.0, 1.0, 1.0, 1.0}, // Ks
 	5 // n
 };
-static const materialStruct material3{
+static const materialStruct robot_eye_material{
 {0.0, 1.0, 1.0, 1.0}, // Ka
 {0.0, 1.0, 1.0, 1.0}, // Kd
 {0.0, 1.0, 1.0, 1.0}, // Ks
