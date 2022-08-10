@@ -170,8 +170,8 @@ void Init() {
     glEnable(GL_DEPTH_TEST);                            // Depth Buffer Setup                       // Enables Depth Testing
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
     glEnable(GL_LIGHTING);
-    //glutIgnoreKeyRepeat(0);
-    //glutSetKeyRepeat(GLUT_KEY_REPEAT_ON);
+    glutIgnoreKeyRepeat(0);
+    glutSetKeyRepeat(GLUT_KEY_REPEAT_ON);
    // glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
    // glFrontFace(GL_CCW);
    // glCullFace(GL_BACK);
