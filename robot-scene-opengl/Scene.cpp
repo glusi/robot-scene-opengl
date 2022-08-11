@@ -475,12 +475,6 @@ float Scene::getPalmRotation()
 	return robot->getPalmRotation();
 }
 
-GLuint Scene::getTextureId(TEXTURE_TYPE texture)
-{
-	GLuint res = this->texture.getTextureId(texture);
-	return res;
-}
-
 int Scene::getHelpImageWidth()
 {
 	return texture.getHelpImageWidth();
@@ -493,7 +487,7 @@ int Scene::getHelpImageHeight()
 
 GLuint Scene::getgetHelpImageTexture()
 {
-	return texture.getgetHelpImageTexture();
+	return texture.getHelpImageTexture();
 }
 
 float Scene::getHeadRotation()

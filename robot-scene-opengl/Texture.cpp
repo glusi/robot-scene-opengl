@@ -1,8 +1,5 @@
 #include "Texture.h"
 
-
-
-
 void Texture::loadTexture(unsigned int texture, const char* texture_path)
 {
     
@@ -37,7 +34,9 @@ Texture::Texture()
     loadTexture(textures[4], FABRIC_TEXTURE_PATH);
     loadTexture(textures[5], WINDOW_TEXTURE_PATH);
     bool ret = LoadHelpTexture(HELP_TEXTURE_PATH, &help_image_texture, &help_image_width, &help_image_height);
-    //
+    if (!ret) {
+        std::cout << "Failed to load help texture" << std::endl;
+    }
 }
 
 void Texture::bindTexture(TEXTURE_TYPE texture)
@@ -56,23 +55,6 @@ void Texture::bindTexture(TEXTURE_TYPE texture)
     
 }
 
-GLuint Texture::getTextureId(TEXTURE_TYPE texture)
-{
-    int res;
-    switch (texture)
-    {
-    case TEXTURE_FLOOR: res = textures[0]; break;
-    case TEXTURE_TABLE: res = textures[1]; break;
-    case TEXTURE_TV: res = textures[2]; break;
-    case TEXTURE_WALL: res = textures[3]; break;
-    case TEXTURE_FABRIC: res = textures[4]; break;
-    case TEXTURE_WINDOW: res = textures[5]; break;
-    default:
-        res = -1;
-        break;
-    }
-    return res;
-}
 
 bool Texture::LoadHelpTexture(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
 {
@@ -118,7 +100,7 @@ int Texture::getHelpImageHeight()
     return help_image_height;
 }
 
-GLuint Texture::getgetHelpImageTexture()
+GLuint Texture::getHelpImageTexture()
 {
     return help_image_texture;
 }
