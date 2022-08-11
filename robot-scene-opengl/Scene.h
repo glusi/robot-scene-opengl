@@ -186,35 +186,160 @@ public:
 	 */
 	float* getAmbientColor();
 	/**
-	 * .
+	 * Getter for robot angle.
+	 *
+	 * \return robot angle
+	 */
+	float getRobotRotation();
+	/**
+	 * Getter for robot position.
+	 *
+	 * \return amount of robot movements
+	 */
+	float getRobotPosition();
+	/**
+	 * Getter for robot shoulder lift.
+	 *
+	 * \return robot shoulder lift
+	 */
+	float getShoulderLift();
+	/**
+	 * Getter for robot shoulder rotation.
+	 *
+	 * \return robot shoulder rotation
+	 */
+	float getShoulderRotation();
+	/**
+	 * Getter for robot elbow lift.
+	 *
+	 * \return robot elbow lift
+	 */
+	float getElbowLift();
+	/**
+	 * Getter for robot elbow rotation.
+	 * \return robot elbow rotation
+	 */
+	float getElbowRotation();
+	/**
+	 * Getter for robot palm lift.
+	 *
+	 * \return palm lift
+	 */
+	float getPalmLift();
+	/**
+	 * Getter for robot palm rotation.
+	 *
+	 * \return robot palm rotation
+	 */
+	float getPalmRotation();
+	/**
+	 * Getter for help image width.
+	 *
+	 * \return help image width
+	 */
+	int getHelpImageWidth();
+	/**
+	 * Getter for help image height.
+	 *
+	 * \return help image height
+	 */
+	int getHelpImageHeight();
+	/**
+	 * Getter for help image texture.
+	 *
+	 * \return help image texture
+	 */
+	GLuint getgetHelpImageTexture();
+	/**
+	 * Getter for robot head rotation.
+	 *
+	 * \return robot head rotation
+	 */
+	float getHeadRotation();
+	/**
+	 * Getter for robot head lift.
+	 *
+	 * \return head lift
+	 */
+	float getHeadLift();
+	/**
+	 * Draws a textured cube.
+	 * 
+	 * \param tex - the texture to be applied on cube
+	 */
+	void drawTexturedObject(TEXTURE_TYPE tex);
+	/**
+	 * gets the light position on axis
+	 *
+	 * \param axis -  the axis on which we want the position
+	 * \return - position on axis
+	 */
+	float getPointLightPosition(POINT_LIGHT_POS axis);
+	/**
+	 * set point light position
+	 *
+	 * \param point_light_position -  the new position
+	 */
+	void applyPointLightPos(Vector3 point_light_position);
+	/**
+	 * Getter for point color
+	 *
+	 * \return point color
+	 */
+	float* getPointLightColor();
+	/**
+	 * set new point color
+	 *
+	 * \param color_new - the new color
+	 */
+	void adjustPointLight(float* color);
+	/**
+	 * Setter for window width.
+	 * 
+	 * \param width
+	 */
+	void setWidth(float width);
+	/**
+	 * Setter for window height.
+	 *
+	 * \param height
+	 */
+	void setHeight(float height);
+	/**
+	 * Getter for window width.
 	 * 
 	 * \return 
 	 */
-	float getRobotRotation();
-	float getRobotPosition();
-	float getShoulderLift();
-	float getShoulderRotation();
-	float getElbowLift();
-	float getElbowRotation();;
-	float getPalmLift();
-	float getPalmRotation();
-	int getHelpImageWidth();
-	int getHelpImageHeight();
-	GLuint getgetHelpImageTexture();
-	float getHeadRotation();
-	float getHeadLift();
-	void drawTexturedObject(TEXTURE_TYPE tex);
-	float getPointLightPosition(POINT_LIGHT_POS axis);
-	void applyPointLightPos(Vector3 point_light_position);
-	float* getPointLightColor();
-	void adjustPointLight(float* color);
-	void setWidth(float width);
-	void setHeight(float height);
 	float getWidth();
+	/**
+	 * Getter for window height.
+	 *
+	 * \return
+	 */
 	float getHeight();
+	/**
+	 * set ambient light enabled or disabled
+	 *
+	 * \param enabled
+	 */
 	void disableAmbient(bool enabled);
+	/**
+	 * set point light enabled or disabled
+	 *
+	 * \param enabled
+	 */
 	void disablePoint(bool enabled);
+	/**
+	 * Getter for camera angle.
+	 * 
+	 * \return 
+	 */
 	float getCameraAngle();
+	/**
+	 * Getter for camera lift.
+	 * 
+	 * \return 
+	 */
 	float getCameraLift();
 };
 
