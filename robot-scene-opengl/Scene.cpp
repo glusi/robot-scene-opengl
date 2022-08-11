@@ -163,10 +163,12 @@ void Scene::buildTVCorner()
 	glTranslatef(15, 0, 11);
 
 	//Draw TV table
+	Tools::assignMaterial(wood, 0);
 	glPushMatrix();
 	glTranslatef(0, 1, 0);
 	glRotatef(90, 0, 1, 0);
 	glScalef(6, 2, 3);
+
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
