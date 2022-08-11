@@ -1,13 +1,13 @@
 #include "Scene.h"
 #include "../third-party/imgui/imgui_impl_glut.h"
 
-
 void Scene::addDecorations()
 {
 	//Draw eating corner including table, two chairs, teapot and two glasses.
 	buildEatingCorner();
 	buildTVCorner();
 
+	Tools::assignMaterial(wood, 0);
 	//Draw door
 	glPushMatrix();
 	glTranslatef(-16.1, 0, 0);
@@ -80,6 +80,7 @@ void Scene::buildEatingCorner()
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glScalef(6, 0.2, 4);
+	Tools::assignMaterial(wood, 0);
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
@@ -143,6 +144,7 @@ void Scene::buildEatingCorner()
 	glDisable(GL_COLOR_MATERIAL);
 
 	//Draw chair
+	Tools::assignMaterial(wood, 0);
 	buildChair();
 
 	//Draw second chair translated and rotated
@@ -202,13 +204,15 @@ void Scene::buildTVCorner()
 	//Draw sofa back
 	glPushMatrix();
 	glScalef(0.25, 9, 9);
+	Tools::assignMaterial(wood, 0);
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 	
 	//Draw sofa base
 	glPushMatrix();
 	glTranslatef(2.1, 0, 0);
-	glScalef(4, 3, 9);
+	glScalef(4, 3, 9); 
+	Tools::assignMaterial(fabric, 0);
 	drawTexturedObject(TEXTURE_FABRIC);
 	glPopMatrix();
 
@@ -276,6 +280,7 @@ void Scene::buildChair()
 	glPopMatrix();
 
 	//Draw chair sitting top
+	Tools::assignMaterial(wood, 0);
 	glDisable(GL_BLEND);
 	glDisable(GL_COLOR_MATERIAL);
 	glColor3f(0.5f, 0.35f, 0.05f);
@@ -286,6 +291,7 @@ void Scene::buildChair()
 	glPopMatrix();
 
 	//Draw hair back
+	Tools::assignMaterial(wood, 0);
 	glPushMatrix();
 	glTranslatef(-5.5, 4, 0);
 	glScalef(0.2, 1, 2.2);

@@ -184,9 +184,9 @@ void Menu::lightMenu()
         ImGui::Text("Adjust point light");
         ImGui::Checkbox("Enable point light", &point_enabled);
         scene->disablePoint(point_enabled);
-        ImGui::InputFloat("Position X", &point_light_position.x, 1.0f);
-        ImGui::InputFloat("Position Y", &point_light_position.y, 1.0f);
-        ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);       
+        ImGui::InputFloat("Position on X", &point_light_position.x, 1.0f);
+        ImGui::InputFloat("Position on Y", &point_light_position.y, 1.0f);
+        ImGui::InputFloat("Position on Z", &point_light_position.z, 1.0f);       
         ImGui::ColorEdit3("Point light color", point_color);
         //Update point light new values
         if (point_enabled) {
@@ -213,7 +213,7 @@ void Menu::robotMenu()
         //robot head
         ImGui::Text("Robot head");
         float rotate_head_right_left_new = rotate_head_right_left;
-        ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
+        ImGui::SliderFloat("Rotate head right left", &rotate_head_right_left, -360.0f, 360.0f);
         //Rotate head right and left
         if (rotate_head_right_left_new != rotate_head_right_left)
             scene->moveRobotHead(ROBOT_HEAD_RIGHT_LEFT, rotate_head_right_left);
@@ -270,7 +270,7 @@ void Menu::cameraMenu()
 
         //Rotate camera around z
         float rotate_camera_z_new = rotate_camera_z;
-        ImGui::SliderFloat("Rotate camera around z", &rotate_camera_z, -360.0f, 360.0f);
+        ImGui::SliderFloat("Rotate camera around itself", &rotate_camera_z, -360.0f, 360.0f);
         if (rotate_camera_z != rotate_camera_z_new)
             scene->rotateCamera(CAMERA_ROTATE ,rotate_camera_z);
 

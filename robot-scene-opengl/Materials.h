@@ -12,6 +12,12 @@ typedef struct materialStruct {
 	GLfloat n;
 } materialStruct;
 
+static const materialStruct wood{
+		{0.1, 0.1, 0.1, 1.0f}, // Ka
+		{0.81, 0.81, 0.81, 1.0f}, // Kd
+		{0.41, 0.41, 0.41, 1.0f}, // Ks
+		45 // n
+};
 
 static const materialStruct robot_material{
 		{0.33, 0.22, 0.03, 0.5}, // Ka
@@ -20,10 +26,10 @@ static const materialStruct robot_material{
 		27.8 // n
 };
 static const materialStruct materialTV{
-	{1.0, 1.0, 1.0, 1.0}, // Ka
+	{1.0, 1.0, 1.0, 0.5}, // Ka
 	{1.0, 1.0, 1.0, 1.0}, // Kd
 	{1.0, 1.0, 1.0, 1.0}, // Ks
-	5 // n
+	100 // 
 };
 static const materialStruct robot_eye_material{
 {0.0, 1.0, 1.0, 1.0}, // Ka
@@ -104,4 +110,12 @@ static const materialStruct material_wall{
 	{1.0f, 0.829f, 0.829f, 0.922f },
 	{0.296648f, 0.296648f, 0.296648f, 0.922f },
 	11.264f
+};
+
+//Fabric
+static const materialStruct fabric{
+	{ 0.27, 0.21,	0.21	,0.5		 },
+	{0.54,	0.54,	0.54,	0.5		 },
+	{0.23,	0.23,	0.23,	0.5 },
+	0.264f
 };
