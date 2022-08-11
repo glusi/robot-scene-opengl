@@ -165,7 +165,6 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneItem.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Vector3.cpp" />
