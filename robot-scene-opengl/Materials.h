@@ -13,7 +13,7 @@ typedef struct materialStruct {
 } materialStruct;
 
 
-static const materialStruct material1{
+static const materialStruct robot_material{
 		{0.33, 0.22, 0.03, 0.5}, // Ka
 		{0.78, 0.57, 0.11, 0.5}, // Kd
 		{0.99, 0.91, 0.81, 0.5}, // Ks

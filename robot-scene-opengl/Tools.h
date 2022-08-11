@@ -9,6 +9,7 @@
 #include "../third-party/imgui/imgui_impl_glut.h"
 #include "../third-party/imgui/imgui_impl_opengl3.h"
 #include "../third-party/imgui/imgui.h"
+#define DEG2RAD(a) (a * (M_PI / 180.0f))
 /**
  * This is a utility functions used in the whole project.
  */

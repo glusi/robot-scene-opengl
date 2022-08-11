@@ -6,7 +6,7 @@ Robot::Robot()
 	translated_position = Vector3::zeroVector();
 	translated_position_old = Vector3::zeroVector();
 	angle = 0.0;
-	shoulder_position_to_robot = Vector3(-0.8, 3.5, 0);//Vector3(-0.8, 3.5, 0);
+	shoulder_position_to_robot = Vector3(-0.8, 3.5, 0);
 	shoulder_lift = 45;
 	shoulder_rotation = 0.0;
 	elbow_position_to_robot = Vector3(-1.8, 3.5, 0);
@@ -22,25 +22,24 @@ Robot::Robot()
 
 void Robot::drawHand()
 {
-	//drawJoint(Vector3(0.8, 3.5, 0), 90, ROTATED_AROUND_X, -45, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1.2);
-	//drawJoint(Vector3(1.7, 2.5, 0), 90, ROTATED_AROUND_X, 15, ROTATED_AROUND_Z, Vector3(1, 0, 0), 1);
+	//Draw shoulder
 	glPushMatrix();
-	//glLoadIdentity();
 	drawJoint(shoulder_position_to_robot);
 	applyJointRotationAndLift(ROBOT_SHOULDER);
 	drawTube(shoulder_position_to_robot, -90, ROTATED_AROUND_X, Vector3(1, 0, 0), 1);
 	drawJoint(elbow_position_to_robot);
 	glPushMatrix();
+	//Draw elbow
 	applyJointRotationAndLift(ROBOT_ELBOW);
 	drawTube(elbow_position_to_robot, -90, ROTATED_AROUND_X, Vector3(1, 0, 0), 0.8);
 	drawJoint(palm_position_to_robot);
 	glPushMatrix();
+	//Draw palm
 	applyJointRotationAndLift(ROBOT_PALM);
 	drawPalm(palm_position_to_robot);
 	glPopMatrix();
 	glPopMatrix();
 	glPopMatrix();
-	
 	//Circle around shoulder
 	glPushMatrix();
 	glTranslatef(shoulder_position_to_robot.x, shoulder_position_to_robot.y, shoulder_position_to_robot.z);
@@ -61,20 +60,27 @@ void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type
 
 void Robot::drawHead()
 {
+	//Translate head to its place on top of body
 	glPushMatrix();
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 
+	//Apply Head lift
 	glPushMatrix();
 	glRotatef(-head_lift, 1, 0, 0);
+
+	//Apply Head rotation
+	//Translate to origin
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
+	//Rotate
 	glRotatef(head_rotation, 0, 1, 0);
-	
+	//Translate back
 	glTranslatef(head_position.x, head_position.y, head_position.z);
 
+	//Draw the head
 	glPushMatrix();
 	glutSolidCube(1.1);
 
-	//Antenna
+	//Draw an antenna
 	glPushMatrix();
 	glTranslatef(0, 1.3, 0);
 	glRotatef(90, 1, 0, 0);
@@ -85,20 +91,21 @@ void Robot::drawHead()
 	glutSolidSphere(0.1, 10, 10);
 	glPopMatrix();
 
-	//eyes
+	//Draw eyes
 	Tools::assignMaterial(robot_eye_material,1);
+	//First eye
 	glPushMatrix();
 	glTranslatef(0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
-
+	//Second eye
 	glPushMatrix();
 	glTranslatef(-0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
 
+	//Draw mouth
 	Tools::assignMaterial(materialTV,0);
-
 	glPushMatrix();
 	glTranslatef(0, -0.3, 0.55);
 	glScalef(5, 1, 1);
@@ -108,8 +115,8 @@ void Robot::drawHead()
 
 	glPopMatrix();
 
-	//neck
-	Tools::assignMaterial(material1, 1);
+	//Draw neck
+	Tools::assignMaterial(robot_material, 1);
 	glPushMatrix();
 	glTranslatef(0, -0.7, 0);
 	glutSolidCube(0.5);
@@ -125,7 +132,6 @@ void Robot::drawBody()
 	glTranslatef(0, 2, 0);
 	glScalef(1, 2.75, 1);
 	glutSolidCube(1.5);
-
 	glPopMatrix();
 }
 
@@ -139,36 +145,37 @@ void Robot::drawJoint(Vector3 position)
 
 void Robot::drawPalm(Vector3 position)
 {
+	//Draw hand base
 	glPushMatrix();
 	glTranslatef(position.x-0.45, position.y, position.z);
 	glScalef(1, 0.3, 1.2);
 	glutSolidCube(0.5);
 	glPopMatrix();
-
+	//Draw finger 1
 	glPushMatrix();
 	glTranslatef(position.x-0.85, position.y, position.z + 0.09);
 	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
-
+	//Draw finger 2
 	glPushMatrix();
 	glTranslatef(position.x - 0.85, position.y, position.z - 0.09);
 	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
-
+	//Draw finger 3
 	glPushMatrix();
 	glTranslatef(position.x - 0.85, position.y, position.z+0.26);
 	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
-
+	//Draw finger 4
 	glPushMatrix();
 	glTranslatef(position.x - 0.85, position.y, position.z - 0.26);
 	glScalef(3, 1, 1);
 	glutSolidCube(0.1);
 	glPopMatrix();
-
+	//Draw finger 5
 	glPushMatrix();
 	glTranslatef(position.x - 0.55, position.y, position.z - 0.4);;
 	glRotatef(-45, 0, 1, 0);
@@ -207,31 +214,40 @@ void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 }
 
 void Robot::draw() {
-	
-	Tools::assignMaterial(material1, 0);
+	Tools::assignMaterial(robot_material, 0);
 	glPushMatrix();
+	//Move robot to current position
 	translateToNewPosition();
+	//Rotate robot to current angle
 	rotateToNewAngle();
+	//Draw the robot
 	glPushMatrix();
 	glTranslatef(0, 0.475, 0);
+	//Draw head
 	drawHead();
+	//Draw body
 	drawBody();
+	//Draw hand
 	drawHand();
 	glPopMatrix();
-	glPushMatrix();
-	//Wheels
+	//Draw wheels
 	Tools::assignMaterial(black_rubber, 0.5);
+	//wheel 1
+	glPushMatrix();
 	glTranslatef(-0.6,0.2,-0.6);
 	glutSolidSphere(0.2, 20, 20);
 	glPopMatrix();
+	//wheel 2
 	glPushMatrix();
 	glTranslatef(0.6, 0.2, -0.6);
 	glutSolidSphere(0.2, 20, 20);
 	glPopMatrix();
+	//wheel 3
 	glPushMatrix();
 	glTranslatef(-0.6, 0.2, 0.6);
 	glutSolidSphere(0.2, 20, 20);
 	glPopMatrix();
+	//wheel 4
 	glPushMatrix();
 	glTranslatef(0.6, 0.2, 0.6);
 	glutSolidSphere(0.2, 20, 20);
@@ -267,23 +283,33 @@ void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
-		//glRotatef(-90, 1, 0, 0);
+		//Translate to origin
 		glTranslatef(shoulder_position_to_robot.x, shoulder_position_to_robot.y, shoulder_position_to_robot.z);
+		//apply rotation
 		glRotatef(shoulder_rotation, 1, 0, 0);
+		//apply lift
 		glRotatef(shoulder_lift, 0, 0, 1);
+		//Translate back
 		glTranslatef(-shoulder_position_to_robot.x, -shoulder_position_to_robot.y, -shoulder_position_to_robot.z);
-		//glRotatef(90, 1, 0, 0);
 		break;
 	case ROBOT_ELBOW:
+		//Translate to origin
 		glTranslatef(elbow_position_to_robot.x, elbow_position_to_robot.y, shoulder_position_to_robot.z);
+		//apply rotation
 		glRotatef(elbow_rotation, 1, 0, 0);
+		//apply lift
 		glRotatef(elbow_lift, 0, 0, 1);
+		//Translate back
 		glTranslatef(-elbow_position_to_robot.x, -elbow_position_to_robot.y, -shoulder_position_to_robot.z);
 		break;
 	case ROBOT_PALM:
+		//Translate to origin
 		glTranslatef(palm_position_to_robot.x, palm_position_to_robot.y, palm_position_to_robot.z);
+		//apply rotation
 		glRotatef(palm_rotation, 1, 0, 0);
+		//apply lift
 		glRotatef(palm_lift, 0, 0, 1);
+		//Translate back
 		glTranslatef(-palm_position_to_robot.x, -palm_position_to_robot.y, -palm_position_to_robot.z);
 		break;
 	};
@@ -323,6 +349,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
+		//Apply constraints
 		if ((shoulder_lift > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			shoulder_lift = shoulder_lift;
 		else {
@@ -333,6 +360,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 		}	
 		break;
 	case ROBOT_ELBOW:
+		//Apply constraints
 		if ((elbow_lift  > 180 - ELBOW_DOWN_OFFSET && action == ROBOT_HAND_UP) || (elbow_lift < -90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			elbow_lift = elbow_lift;
 		else {
@@ -343,6 +371,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 		}
 		break;
 	case ROBOT_PALM:
+		//Apply constraints
 		if ((palm_lift > 180 - PALM_DOWN_OFFSET && action == ROBOT_HAND_UP) || (palm_lift < - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			palm_lift = palm_lift;
 		else {
@@ -376,14 +405,14 @@ void Robot::rotate(ROBOT_ROTATION rotation_type)
 		angle++;
 	else
 		angle--;
-	move_direction = Vector3(sin(angle*(M_PI / 180)), 0, cos(angle * (M_PI / 180)));
+	move_direction = Vector3(sin(DEG2RAD(angle)), 0, cos(DEG2RAD(angle)));
 	move_direction.normalize();
 }
 
 void Robot::rotate( float angle_new)
 {
 	angle = angle_new;
-	move_direction = Vector3(sin(angle * (M_PI / 180)), 0, cos(angle * (M_PI / 180)));
+	move_direction = Vector3(sin(DEG2RAD(angle)), 0, cos(DEG2RAD(angle)));
 	move_direction.normalize();
 }
 
@@ -394,31 +423,44 @@ Vector3 Robot::getHeadPosition()
 
 void Robot::applyCameraRotation()
 {
+	//Move to head position
 	glPushMatrix();
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z- FP_CAMERA_OFFSET);
 	
+	//Move to robot position
 	glPushMatrix();
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z - FP_CAMERA_OFFSET);
 
+	//Apply head lift
 	glPushMatrix();
-	
+	//Translate to origin
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
+	//rotate to head lift
 	glRotatef(head_lift, 1, 0, 0);
+	//Translate back
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 
+	//Apply robot rotation
 	glPushMatrix();
+	//Translate to origin
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
+	//rotate to robot angle
 	glRotatef(-angle, 0, 1, 0);
+	//Translate back
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 	
+	//Apply head rotation
 	glPushMatrix();
+	//Translate to origin
 	glTranslatef(translated_position.x, translated_position.y, translated_position.z);
 	glTranslatef(head_position.x, head_position.y, head_position.z);
+	//rotate to head rotation
 	glRotatef(-head_rotation, 0, 1, 0);
+	//Translate back
 	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
 	glTranslatef(-translated_position.x, -translated_position.y, -translated_position.z);
 }
@@ -475,6 +517,7 @@ float Robot::getHeadLift()
 
 void Robot::updateOldPosition()
 {
+	//Apply new values of position and amount at end of frame to be old values in nect one
 	translated_position_old = translated_position;
 	amount_move_old = amount_move;
 }
