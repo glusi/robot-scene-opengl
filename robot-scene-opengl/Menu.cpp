@@ -47,14 +47,14 @@ void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, c
     ImGui::SliderFloat(Tools::concatStrings("Lift ", name).c_str(), &lift, -85.0f, 85.0f);
     //Update new  lift value
     if (lift_new != lift)
-            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, -lift);
+            scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, lift);
 
     //Rotate joint
     float rotation_new = rotation;
     ImGui::SliderFloat(Tools::concatStrings("Rotate ", name).c_str(), &rotation, -180.0f, 180.0f);
     //Update new rotation value
     if (rotation_new != rotation)
-            scene->rotateRobotHand(robot_joint, -rotation);
+            scene->rotateRobotHand(robot_joint, rotation);
 }
 
 void Menu::createMenu() {
