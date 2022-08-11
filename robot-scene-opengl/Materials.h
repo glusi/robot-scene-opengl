@@ -44,11 +44,11 @@ static const materialStruct glass{
 	{0.3f,0.31f,0.31f,0.8f}, // Ks
 	12.8 // n
 };
-static const materialStruct polished_copper{
-	{0.2295f, 0.08825f, 0.0275f, 1.0f}, // Ka
-	{0.5508f, 0.2118f, 0.066f, 1.0f}, // Kd
-	{0.580594f, 0.223257f, 0.0695701f, 1.0f}, // Ks
-	51.2f // n
+static const materialStruct polished_gold{
+	{ 0.24725f, 0.2245f, 0.0645f, 1.0f }, // Ka
+	{0.34615f, 0.3143f, 0.0903f, 1.0f}, // Kd
+	{0.797357f, 0.723991f, 0.208006f, 1.0f}, // Ks
+	83.2f // n
 };
 static const materialStruct silver{
 	{0.19, 0.19, 0.19, 1.0f}, // Ka

@@ -51,6 +51,22 @@ void Scene::addDecorations()
 	glutSolidDodecahedron();
 	glPopMatrix();
 
+	//Draw box gold
+	glPushMatrix();
+	Tools::assignMaterial(polished_gold, 0);
+	glTranslatef(-9, 0.125, 15);
+	glRotatef(45, 0, 1, 0);
+	glScalef(1, 0.25, 1);
+	glutSolidCube(1);
+	glPopMatrix();
+	//Draw box silver
+	glPushMatrix();
+	Tools::assignMaterial(silver, 0);
+	glTranslatef(-10, 0.375, 15);
+	glScalef(1, 0.25, 1);
+	glutSolidCube(1);
+	glPopMatrix();
+
 	//Draw window
 	Tools::assignMaterial(materialTV, 1);
 	texture.bindTexture(TEXTURE_WINDOW);
