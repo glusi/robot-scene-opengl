@@ -18,16 +18,17 @@ void Tools::rotate(float angle, ROTATION_TYPE rotation_type)
 }
 
 void Tools::assignMaterial(materialStruct  material) {
+	//Assign Ka, n, Ks and Kd values of material
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material.Ka);
 	glMaterialf(GL_FRONT, GL_SHININESS, material.n);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, material.Ks);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material.Kd);
 }
 
-void Tools::copyColor(float **ambient_color, float* new_color)
+void Tools::copyColor(float ** dst_color, float* new_color)
 {
 	for (int i = 0; i < 4; i++) {
-		(*ambient_color)[i] = new_color[i];
+		(*dst_color)[i] = new_color[i];
 	}
 }
 
@@ -47,7 +48,7 @@ void Tools::AlignForWidth(float width, float alignment)
 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 }
 
-void Tools::drawBox(GLfloat size, GLenum type)
+void Tools::drawBox()
 {
     int i, n = sizeof(cube) / (sizeof(cube[0]));
     glBegin(GL_QUADS);
@@ -63,6 +64,6 @@ void APIENTRY Tools::glutSolidCube(GLdouble size)
 {
     glPushMatrix();
     glScalef(0.5,0.5,0.5);
-    drawBox(size, GL_QUADS);
+    drawBox();
     glPopMatrix();
 }
