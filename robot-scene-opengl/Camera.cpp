@@ -120,6 +120,7 @@ Used for keyboards inputs that rotate camera.
 */
 void Camera::rotateCamera()
 {
+	
 	//Translate to eye
 	double x1 = center.x - eye.x;
 	double z1 = center.z - eye.z;
@@ -130,7 +131,10 @@ void Camera::rotateCamera()
 	center.x = x2 + eye.x;
 	center.z = z2 + eye.z;
 	//Update relevant fields
-	camera_angle_z ++;
+	if (camera_angle_z < 360)
+		camera_angle_z ++;
+	else
+		camera_angle_z = 0;
 	direction_moving = center - eye;
 	direction_moving.normalize();
 }
@@ -175,7 +179,10 @@ void Camera::liftCamera()
 	center.z = z2 + eye.z;
 	center.y = y2 + eye.y;
 	//Update relevant fields
-	camera_lift++;
+	if (camera_lift < 360)
+		camera_lift++;
+	else
+		camera_lift = 0;
 }
 
 /*
