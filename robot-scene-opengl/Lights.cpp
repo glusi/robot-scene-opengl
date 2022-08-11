@@ -89,7 +89,7 @@ void Lights::drawOrb()
 {
 	//draw orb in the place of point light
 	glPushMatrix();
-	Tools::assignMaterial(glass);
+	Tools::assignMaterial(glass, 1);
 	glTranslatef(point_light_poistion[0] - 0.25, point_light_poistion[1] - 0.25, point_light_poistion[2] - 0.25);
 	glutSolidSphere(0.5, 20, 20);
 	glPopMatrix();

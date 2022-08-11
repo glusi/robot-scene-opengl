@@ -35,7 +35,7 @@ public:
 	 * 
 	 * \param material - the type of material to be assigned
 	 */
-	static void assignMaterial(materialStruct  material);
+	static void assignMaterial(materialStruct  material, float emmision);
 	/**
 	 * copy a color.
 	 * 

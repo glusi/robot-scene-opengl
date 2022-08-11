@@ -54,7 +54,6 @@ void Robot::drawTube(Vector3 position, float angle1, ROTATION_TYPE rotation_type
 	glColor3f(color.x, color.y, color.z);
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
-	//Tools::rotate(angle2, rotation_type2);
 	Tools::rotate(angle1, rotation_type1);
 	Tools::drawCylinder(ROBOT_HAND_SIZE, length, 100);
 	glPopMatrix();
@@ -87,7 +86,7 @@ void Robot::drawHead()
 	glPopMatrix();
 
 	//eyes
-	applyMaterial(robot_eye_material,1);
+	Tools::assignMaterial(robot_eye_material,1);
 	glPushMatrix();
 	glTranslatef(0.3, 0.1, 0.5);
 	glutSolidSphere(0.15, 10, 10);
@@ -98,7 +97,7 @@ void Robot::drawHead()
 	glutSolidSphere(0.15, 10, 10);
 	glPopMatrix();
 
-	applyMaterial(materialTV,0);
+	Tools::assignMaterial(materialTV,0);
 
 	glPushMatrix();
 	glTranslatef(0, -0.3, 0.55);
@@ -110,7 +109,7 @@ void Robot::drawHead()
 	glPopMatrix();
 
 	//neck
-	applyMaterial(material1, 1);
+	Tools::assignMaterial(material1, 1);
 	glPushMatrix();
 	glTranslatef(0, -0.7, 0);
 	glutSolidCube(0.5);
@@ -209,7 +208,7 @@ void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement, float angle)
 
 void Robot::draw() {
 	
-	applyMaterial(material1, 0);
+	Tools::assignMaterial(material1, 0);
 	glPushMatrix();
 	translateToNewPosition();
 	rotateToNewAngle();
@@ -221,7 +220,7 @@ void Robot::draw() {
 	glPopMatrix();
 	glPushMatrix();
 	//Wheels
-	Tools::assignMaterial(black_rubber);
+	Tools::assignMaterial(black_rubber, 0.5);
 	glTranslatef(-0.6,0.2,-0.6);
 	glutSolidSphere(0.2, 20, 20);
 	glPopMatrix();
@@ -290,16 +289,6 @@ void Robot::applyJointRotationAndLift(ROBOT_JOINT joint)
 	};
 }
 
-void Robot::applyMaterial(materialStruct maaterial, float emmision)
-{
-	glMaterialfv(GL_FRONT, GL_AMBIENT, maaterial.Ka);
-	glMaterialf(GL_FRONT, GL_SHININESS, maaterial.n);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, maaterial.Ks);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, maaterial.Kd);
-	glMaterialf(GL_FRONT, GL_EMISSION, emmision);
-}
-
-
 void Robot::rotateHandJoint(ROBOT_JOINT joint)
 {
 	switch (joint) {
@@ -334,7 +323,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
-		if ((shoulder_lift + INITIAL_SHOULDER_ROTATION > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift + INITIAL_SHOULDER_ROTATION < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
+		if ((shoulder_lift > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			shoulder_lift = shoulder_lift;
 		else {
 			if (action == ROBOT_HAND_UP)
@@ -344,7 +333,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 		}	
 		break;
 	case ROBOT_ELBOW:
-		if ((elbow_lift  > 180 - ELBOW_DOWN_OFFSET- INITIAL_ELBOW_ROTATION && action == ROBOT_HAND_UP) || (elbow_lift < -INITIAL_ELBOW_ROTATION -90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
+		if ((elbow_lift  > 180 - ELBOW_DOWN_OFFSET && action == ROBOT_HAND_UP) || (elbow_lift < -90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			elbow_lift = elbow_lift;
 		else {
 			if (action == ROBOT_HAND_UP)
@@ -354,7 +343,7 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 		}
 		break;
 	case ROBOT_PALM:
-		if ((palm_lift > 180 - PALM_DOWN_OFFSET - INITIAL_PALM_ROTATION && action == ROBOT_HAND_UP) || (palm_lift < -INITIAL_PALM_ROTATION - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
+		if ((palm_lift > 180 - PALM_DOWN_OFFSET && action == ROBOT_HAND_UP) || (palm_lift < - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
 			palm_lift = palm_lift;
 		else {
 			if (action == ROBOT_HAND_UP)

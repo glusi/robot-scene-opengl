@@ -14,11 +14,11 @@ void Scene::addDecorations()
 	glPushMatrix();
 	glTranslatef(0, 4.55, 0);
 	glScalef(0.25, 9, 5);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
 	glPushMatrix();
-	Tools::assignMaterial(silver);
+	Tools::assignMaterial(silver, 0);
 	glTranslatef(1, 5, 1.8);
 	glutSolidSphere(0.2, 10, 10);
 	glPopMatrix();
@@ -27,30 +27,30 @@ void Scene::addDecorations()
 
 	//ball
 	glPushMatrix();
-	Tools::assignMaterial(green_plastic);
+	Tools::assignMaterial(green_plastic, 0);
 	glTranslatef(-11, 1, 14);
 	glutSolidSphere(1, 50, 50);
 	glPopMatrix();
 
 	glPushMatrix();
-	Tools::assignMaterial(blue_rubber);
+	Tools::assignMaterial(blue_rubber, 0);
 	glTranslatef(-14, 1, 14);
 	glutSolidCube(2);
 	glPopMatrix();
 
 
 	glPushMatrix();
-	Tools::assignMaterial(jade);
+	Tools::assignMaterial(jade, 0);
 	glTranslatef(-12, 2.85, 14);
 	glRotatef(45, 0, 0, 1);
 	glScalef(0.75, 0.75, 0.75);
 	glutSolidDodecahedron();
 	glPopMatrix();
 
-	Tools::assignMaterial(silver);
+	Tools::assignMaterial(silver, 0);
 
 	//Window
-	Tools::assignMaterial(materialTV);
+	Tools::assignMaterial(materialTV, 1);
 	texture.bindTexture(TEXTURE_WINDOW);
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
@@ -76,20 +76,10 @@ void Scene::buildEatingCorner()
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glScalef(6, 0.2, 4);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
-	
 
-	/*texture.bindTexture(TEXTURE_TABLE);
-	glEnable(GL_TEXTURE_2D);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0); glVertex3f(-3, 4.1, -2);
-	glTexCoord2f(0.0, 1.0); glVertex3f(-3, 4.1, 2);
-	glTexCoord2f(1.0, 1.0); glVertex3f(3, 4.1, 2);
-	glTexCoord2f(1.0, 0.0); glVertex3f(3, 4.1, -2);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);*/
-	Tools::assignMaterial(silver);
+	Tools::assignMaterial(silver, 0);
 	//Table legs
 	glPushMatrix();
 	glTranslatef(-2.5, 0, -1.5);
@@ -116,7 +106,7 @@ void Scene::buildEatingCorner()
 	glutSolidCylinder(0.1, 4, 10, 5);
 	glPopMatrix();
 	//Teapot
-	Tools::assignMaterial(pewter_material);
+	Tools::assignMaterial(pewter_material, 0);
 	glPushMatrix();
 	glTranslatef(1, 5, 0);
 	glRotatef(-200, 0, 1, 0);
@@ -153,7 +143,7 @@ void Scene::buildEatingCorner()
 
 	glPopMatrix();
 
-	
+
 }
 
 void Scene::buildTVCorner()
@@ -166,11 +156,11 @@ void Scene::buildTVCorner()
 	glTranslatef(0, 1, 0);
 	glRotatef(90, 0, 1, 0);
 	glScalef(6, 2, 3);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
 	//TV
-	Tools::assignMaterial(silver);
+	Tools::assignMaterial(silver, 0);
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	glRotatef(90, 0, 1, 0);
@@ -178,7 +168,7 @@ void Scene::buildTVCorner()
 	glutSolidCube(1);
 	glPopMatrix();
 
-	Tools::assignMaterial(materialTV);
+	Tools::assignMaterial(materialTV, 1);
 	texture.bindTexture(TEXTURE_TV);
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
@@ -200,20 +190,20 @@ void Scene::buildTVCorner()
 	glTranslatef(-10, 0, 0);
 
 	glPushMatrix();
-	glScalef(0.25,9,9);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	glScalef(0.25, 9, 9);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(2.1, 0, 0);
 	glScalef(4, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC, silver);
+	drawTexturedObject(TEXTURE_FABRIC);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0.6, 3, 0);
 	glScalef(1, 3, 9);
-	drawTexturedObject(TEXTURE_FABRIC, silver);
+	drawTexturedObject(TEXTURE_FABRIC);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -223,7 +213,7 @@ void Scene::buildTVCorner()
 
 void Scene::buildChair()
 {
-	Tools::assignMaterial(silver);
+	Tools::assignMaterial(silver, 0);
 	//Chair legs
 	glPushMatrix();
 	glTranslatef(-4, 0, 0);
@@ -273,16 +263,16 @@ void Scene::buildChair()
 	glPushMatrix();
 	glTranslatef(-4.75, 2, 0);
 	glScalef(2, 0.2, 2.2);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 
 	//Chair back
 	glPushMatrix();
 	glTranslatef(-5.5, 4, 0);
-	glScalef(0.2, 1 , 2.2);
-	drawTexturedObject(TEXTURE_TABLE, silver);
+	glScalef(0.2, 1, 2.2);
+	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
-	
+
 }
 
 Scene::Scene()
@@ -299,9 +289,8 @@ Scene::Scene()
 
 void Scene::draw() {
 	camera->draw();
-	//glPushMatrix();
-	
-	if(camera->getIFirstPerson())
+
+	if (camera->getIFirstPerson())
 		robot->applyCameraRotation();
 	lights->draw();
 	texture.bindTexture(TEXTURE_FLOOR);
@@ -313,11 +302,6 @@ void Scene::draw() {
 	lights->drawOrb();
 	gui.draw();
 
-	/*ImGui::Text("Hello, world %d", 123);
-	if (ImGui::Button("Save"))
-		printf("save");*/
-	//ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
-	//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
 	glPopMatrix();
 	if (camera->getIFirstPerson())
 	{
@@ -328,7 +312,7 @@ void Scene::draw() {
 		glPopMatrix();
 	}
 	robot->updateOldPosition();
-	
+
 }
 
 void Scene::moveCamera(USER_ACTION_CAMERA action)
@@ -352,7 +336,7 @@ void Scene::rotateCamera(CAMERA_MOVE camera_type)
 
 void Scene::rotateCamera(CAMERA_MOVE camera_type, float angle)
 {
-	if(camera_type == CAMERA_ROTATE)
+	if (camera_type == CAMERA_ROTATE)
 		camera->rotateCamera(angle);
 	else
 		camera->liftCamera(angle);
@@ -500,9 +484,8 @@ float Scene::getHeadLift()
 	return robot->getHeadLift();
 }
 
-void Scene::drawTexturedObject(TEXTURE_TYPE tex , materialStruct material)
+void Scene::drawTexturedObject(TEXTURE_TYPE tex)
 {
-	//Tools::assignMaterial(material);
 	texture.bindTexture(tex);
 	glEnable(GL_TEXTURE_2D);
 	Tools::glutSolidCube(1);

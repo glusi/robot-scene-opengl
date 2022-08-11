@@ -7,7 +7,8 @@ void Floor::draw() {
 	//Normal
 	glNormal3d(0, 1, 0);
 	//Material
-	Tools::assignMaterial(floor_material);
+	Tools::assignMaterial(floor_material, 1);
+	glMaterialf(GL_FRONT, GL_EMISSION, 1);
 	for ( int x = -grid_size_x; x < grid_size_x; x++)
 		for ( int y = -grid_size_y; y < grid_size_y; y++)
 		{
@@ -29,7 +30,7 @@ void Floor::draw() {
 void Floor::buildWalls() {
 	glPushMatrix();
 	//Wall material
-	Tools::assignMaterial(material_wall);
+	Tools::assignMaterial(material_wall, 0);
 	//Create walls at borders of floor
 	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, grid_size_x * tile_size_x, -grid_size_y * tile_size_y);
 	createWall(-grid_size_x * tile_size_x, -grid_size_y * tile_size_y, -grid_size_x * tile_size_x, grid_size_y * tile_size_y);
