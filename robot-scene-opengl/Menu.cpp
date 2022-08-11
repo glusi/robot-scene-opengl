@@ -24,7 +24,6 @@ void Menu::getInitialValues() {
 
     move_robot_foward_back = scene->getRobotPosition();
     rotate_robot = scene->getRobotRotation();
-    // move_robot_foward_back = scene->getRobotPosition();
 
     move_shoulder = scene->getShoulderLift();
     rotate_shoulder = scene->getShoulderRotation();
@@ -43,65 +42,69 @@ void Menu::getInitialValues() {
 }
 
 void Menu::moveRobotJoint(ROBOT_JOINT robot_joint, float lift, float rotation, const char* name) {
-    //Move shoulder
+    //Move joint
     float lift_new = lift;
     ImGui::SliderFloat(Tools::concatStrings("Lift ", name).c_str(), &lift, -85.0f, 85.0f);
+    //Update new  lift value
     if (lift_new != lift)
             scene->liftRobotHand(robot_joint, ROBOT_HAND_UP, -lift);
 
-    //Rotate shoulder
+    //Rotate joint
     float rotation_new = rotation;
     ImGui::SliderFloat(Tools::concatStrings("Rotate ", name).c_str(), &rotation, -180.0f, 180.0f);
+    //Update new rotation value
     if (rotation_new != rotation)
             scene->rotateRobotHand(robot_joint, -rotation);
 }
 
 void Menu::createMenu() {
+    //Create menu with flags such as assuring fixed position and auto resize
     ImGui::Begin("Menu", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | 
         ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_MenuBar);
+    //Get at start of every frame the values of the modifiable fields and could be changed
     getInitialValues();
-
+    //Add menu bar with Welcome message
     ImGui::BeginMenuBar();
     ImGui::Text("Welcome to my Robot OpenGl Simulation!");
     ImGui::EndMenuBar();
-
+    //Create main control menus
     lightMenu();   
     robotMenu();
     cameraMenu();
-
+    //Add 'Exit' and 'Help' buttons and place then in middle of the line in the menu
     ImGuiStyle& style = ImGui::GetStyle();
     float width = 0.0f;
     width += ImGui::CalcTextSize("Help").x;
     width += style.ItemSpacing.x;
     width += ImGui::CalcTextSize("Exit").x;
     Tools::AlignForWidth(width);
-
     if (ImGui::Button("Help"))
         helpFunc();
     ImGui::SameLine();
     if (ImGui::Button("Exit"))
         exit(0);
-
-    /*if (Tools::ButtonCenteredOnLine("Help", 0.5))
-        MyHelpFunction();
-    ImGui::SameLine();
-    if (ImGui::Button("Exit"))
-        exit(0);*/
-
-    // }
-         //ImGui::SetNextWindowPos();
     ImGui::End();
+    //Help Window
+    helpMenu();
+}
+
+void Menu::helpMenu() {
+    //Variable for 'x' button on popup window
     static bool x_pressable = true;
+    //If 'help' was pressed show window
     if (help_window_open) {
         ImGui::OpenPopup("help", ImGuiWindowFlags_AlwaysAutoResize);
-
+        //Add 'x' option on popup window
         ImGui::BeginPopupModal("help", &x_pressable, 0);
         if (!next_pressed) {
             ImGui::Text("You can move the robot and camera by Keyboard:");
             if (x_pressable) {
+                //Make the help image auto re-sizable according to simulation window size
                 float aspect = scene->getHelpImageHeight() / scene->getHelpImageWidth();
                 float width = scene->getWidth() / scene->getHelpImageWidth();
+                //Draw the image with keyboard controls
                 ImGui::Image((void*)(intptr_t)scene->getgetHelpImageTexture(), ImVec2(width * 700.0, aspect * width * 700.0));
+                //Add in middle of line a 'next' button
                 ImGuiStyle& style = ImGui::GetStyle();
                 width = ImGui::CalcTextSize("next").x;
                 Tools::AlignForWidth(width);
@@ -115,11 +118,13 @@ void Menu::createMenu() {
             }
         }
         else {
+            //If 'next' was clicked show second page of help explaining the Menu controls
             if (x_pressable) {
                 ImGui::Text("You can also control everything from the menu.");
                 ImGui::Text("The menu is located in right top corner.");
                 ImGui::NewLine();
                 ImGui::Indent();
+                //Lights sections
                 ImGui::Text("Lights");
                 ImGui::Text("In this section you can:");
                 ImGui::BulletText("Enable / Disable ambient light");
@@ -127,9 +132,8 @@ void Menu::createMenu() {
                 ImGui::BulletText("Enable / Disable point light");
                 ImGui::BulletText("Choose color for point light");
                 ImGui::BulletText("Move point light on X, Y and Z");
-
+                //Robot section
                 ImGui::NewLine();
-                //ImGui::Indent();
                 ImGui::Text("Robot");
                 ImGui::Text("In this section you can:");
                 ImGui::BulletText("Move robot forward and backwards");
@@ -138,9 +142,8 @@ void Menu::createMenu() {
                 ImGui::BulletText("Rotate and lift robot shoulder");
                 ImGui::BulletText("Rotate and lift robot elbow");
                 ImGui::BulletText("Rotate and lift robot palm");
-
+                //Camera section
                 ImGui::NewLine();
-                //ImGui::Indent();
                 ImGui::Text("Camera");
                 ImGui::Text("In this section you can:");
                 ImGui::BulletText("Change the camera to robot eyes and back to external camera");
@@ -150,7 +153,7 @@ void Menu::createMenu() {
                 ImGui::BulletText("Move camera on X, Y and Z");
                 ImGui::BulletText("Rotate camera around itself");
                 ImGui::BulletText("Lift camera up and down");
-                
+                //Buttons sections
                 ImGui::NewLine();
                 ImGui::Text("Pressing 'exit' will close the simulation");
                 ImGui::Text("Pressing 'help' will open this help window");
@@ -161,7 +164,6 @@ void Menu::createMenu() {
                 x_pressable = true;
             }
         }
-        
     }
 }
 
@@ -176,6 +178,7 @@ void Menu::lightMenu()
         ImGui::Checkbox("Enable ambient light", &ambient_enabled);
         scene->disableAmbient(ambient_enabled);
         ImGui::ColorEdit3("Ambient color", ambient_color);
+        //Update ambient light new values
         if (ambient_enabled)
             scene->adjustAmbientLight(ambient_color);
         ImGui::Text("Adjust point light");
@@ -185,6 +188,7 @@ void Menu::lightMenu()
         ImGui::InputFloat("Position Y", &point_light_position.y, 1.0f);
         ImGui::InputFloat("Position Z", &point_light_position.z, 1.0f);       
         ImGui::ColorEdit3("Point light color", point_color);
+        //Update point light new values
         if (point_enabled) {
             scene->applyPointLightPos(point_light_position);
             scene->adjustPointLight(point_color);
@@ -200,20 +204,19 @@ void Menu::robotMenu()
         float rotate_robot_new = rotate_robot, move_robot_foward_back_new = move_robot_foward_back;
         ImGui::InputFloat("Move robot", &move_robot_foward_back, 1.0f);
         ImGui::SliderFloat("Rotate robot", &rotate_robot, -360.0f, 360.0f);
+        //Update robot movement new values
         if (move_robot_foward_back_new != move_robot_foward_back)
             scene->moveRobot(ROBOT_MOVE_FRONT, move_robot_foward_back);
         if (rotate_robot_new != rotate_robot)
             scene->rotateRobot(rotate_robot);
 
+        //robot head
         ImGui::Text("Robot head");
         float rotate_head_right_left_new = rotate_head_right_left;
         ImGui::SliderFloat("Rotate head right", &rotate_head_right_left, -360.0f, 360.0f);
         //Rotate head right and left
         if (rotate_head_right_left_new != rotate_head_right_left)
-            //   if (rotate_head_right_left > 0)
             scene->moveRobotHead(ROBOT_HEAD_RIGHT_LEFT, rotate_head_right_left);
-        // else
-          //   scene->moveRobotHead(ROBOT_HEAD_LEFT, rotate_head_right_left);
 
         float rotate_head_up_down_new = rotate_head_up_down;
         ImGui::SliderFloat("Lift head up down", &rotate_head_up_down, -60.0f, 200.0f);
@@ -221,7 +224,9 @@ void Menu::robotMenu()
         if (rotate_head_up_down_new != rotate_head_up_down)
             scene->moveRobotHead(ROBOT_HEAD_UP_DOWN, rotate_head_up_down);
 
+        //Robot hand
         ImGui::Text("Robot hand");
+        //Menus for different joints
         moveRobotJoint(ROBOT_SHOULDER, move_shoulder, rotate_shoulder, "Shoulder");
         moveRobotJoint(ROBOT_ELBOW, move_elbow, rotate_elbow, "Elbow");
         moveRobotJoint(ROBOT_PALM, move_palm, rotate_palm, "Palm");
