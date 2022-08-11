@@ -195,14 +195,19 @@ void Robot::rotateToNewAngle()
 
 void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement)
 {
-	if (movement == ROBOT_HEAD_UP)
+	if (movement == ROBOT_HEAD_UP && head_lift < 200)
 		head_lift++;
-	if (movement == ROBOT_HEAD_DOWN)
+	if (movement == ROBOT_HEAD_DOWN && head_lift >-60)
 		head_lift--;
 	if (movement == ROBOT_HEAD_RIGHT)
 		head_rotation++;
 	if (movement == ROBOT_HEAD_LEFT)
 		head_rotation--;
+	//Constraints
+	if (head_rotation > 360)
+		head_rotation = 0;
+	if (head_rotation < -360)
+		head_rotation = 0;
 }
 
 void Robot::moveHead(ROBOT_HEAD_MOVEMENT movement, float angle)
@@ -319,13 +324,22 @@ void Robot::rotateHandJoint(ROBOT_JOINT joint)
 {
 	switch (joint) {
 	case ROBOT_SHOULDER:
-		shoulder_rotation++;
+		if (shoulder_rotation < 180)
+			shoulder_rotation++;
+		else
+			shoulder_rotation = -180;
 		break;
 	case ROBOT_ELBOW:
-		elbow_rotation++;
+		if (elbow_rotation < 180)
+			elbow_rotation++;
+		else
+			elbow_rotation = -180;
 		break;
 	case ROBOT_PALM:
-		palm_rotation++;
+		if (palm_rotation < 180)
+			palm_rotation++;
+		else
+			palm_rotation = -180;
 		break;
 	};
 }
@@ -350,35 +364,32 @@ void Robot::liftHandJoint(ROBOT_JOINT joint, ROBOT_UP_DOWN_ACTION action)
 	switch (joint) {
 	case ROBOT_SHOULDER:
 		//Apply constraints
-		if ((shoulder_lift > 90 - HAND_DOWN_OFFSET && action == ROBOT_HAND_UP) || (shoulder_lift < -90 + HAND_UP_OFFSET && action == ROBOT_HAND_DOWN))
-			shoulder_lift = shoulder_lift;
-		else {
+		if (!((shoulder_lift >= 85 && action == ROBOT_HAND_DOWN) || (shoulder_lift <= -85 && action == ROBOT_HAND_UP)))
+			{
 			if (action == ROBOT_HAND_UP)
-				shoulder_lift++;
-			else
 				shoulder_lift--;
+			else
+				shoulder_lift++;
 		}	
 		break;
 	case ROBOT_ELBOW:
 		//Apply constraints
-		if ((elbow_lift  > 180 - ELBOW_DOWN_OFFSET && action == ROBOT_HAND_UP) || (elbow_lift < -90 - ELBOW_UP_OFFSET && action == ROBOT_HAND_DOWN))
-			elbow_lift = elbow_lift;
-		else {
+		if (!((elbow_lift  >= 85 && action == ROBOT_HAND_DOWN) || (elbow_lift <= -85 && action == ROBOT_HAND_UP)))
+		{
 			if (action == ROBOT_HAND_UP)
-				elbow_lift++;
-			else
 				elbow_lift--;
+			else
+				elbow_lift++;
 		}
 		break;
 	case ROBOT_PALM:
 		//Apply constraints
-		if ((palm_lift > 180 - PALM_DOWN_OFFSET && action == ROBOT_HAND_UP) || (palm_lift < - 90 - PALM_UP_OFFSET && action == ROBOT_HAND_DOWN))
-			palm_lift = palm_lift;
-		else {
+		if (!((palm_lift >= 85 && action == ROBOT_HAND_DOWN) || (palm_lift <= -85 && action == ROBOT_HAND_UP)))
+			{
 			if (action == ROBOT_HAND_UP)
-				palm_lift++;
-			else
 				palm_lift--;
+			else
+				palm_lift++;
 		}
 		break;
 	};
