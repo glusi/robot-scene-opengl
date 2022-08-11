@@ -37,20 +37,8 @@ Vector3 Vector3::operator+=(Vector3 other)
 	return *this;
 }
 
-/*Vector3 Vector3::operator+=(Vector3& other)
-{
-	// Guard self assignment
-	if (this == &other)
-		return *this;
-	this->x += other.x;
-	this->y += other.y;
-	this->z += other.z;
-	return *this;
-}*/
-
 Vector3 Vector3::operator-=(Vector3 other)
 {
-	// Guard self assignment
 	if (this == &other)
 		return *this;
 	this->x -= other.x;
@@ -89,14 +77,6 @@ Vector3 Vector3::operator-(Vector3& other)
 {
 	return Vector3(x-other.x,y-other.y,z-other.z);
 }
-
-/*Vector3 Vector3::operator=(Vector3& other)
-{
-	this->x = other.x;
-	this->y = other.y;
-	this->z = other.z;
-	return *this;
-}*/
 
 Vector3 Vector3::operator=(Vector3 other)
 {
