@@ -66,15 +66,12 @@ void Robot::drawHead()
 
 	//Apply Head lift
 	glPushMatrix();
-	glRotatef(-head_lift, 1, 0, 0);
+	glRotatef(head_rotation, 0, 1, 0);
+	
 
 	//Apply Head rotation
-	//Translate to origin
-	glTranslatef(-head_position.x, -head_position.y, -head_position.z);
-	//Rotate
-	glRotatef(head_rotation, 0, 1, 0);
-	//Translate back
-	glTranslatef(head_position.x, head_position.y, head_position.z);
+	glPushMatrix();
+	glRotatef(-head_lift, 1, 0, 0);
 
 	//Draw the head
 	glPushMatrix();
@@ -113,6 +110,7 @@ void Robot::drawHead()
 	glPopMatrix();
 	glPopMatrix();
 
+	glPopMatrix();
 	glPopMatrix();
 
 	//Draw neck
