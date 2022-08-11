@@ -205,15 +205,16 @@ void Scene::buildTVCorner()
 
 	//Draw sofa back
 	glPushMatrix();
-	glScalef(0.25, 9, 9);
+	glTranslatef(0, 2.25, 0);
+	glScalef(0.25, 4.5, 9);
 	Tools::assignMaterial(wood, 0);
 	drawTexturedObject(TEXTURE_TABLE);
 	glPopMatrix();
 	
 	//Draw sofa base
 	glPushMatrix();
-	glTranslatef(2.1, 0, 0);
-	glScalef(4, 3, 9); 
+	glTranslatef(2.1, 1, 0);
+	glScalef(4, 1.5, 9); 
 	Tools::assignMaterial(fabric, 0);
 	drawTexturedObject(TEXTURE_FABRIC);
 	glPopMatrix();
