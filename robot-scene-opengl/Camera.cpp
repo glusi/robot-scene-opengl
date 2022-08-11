@@ -201,7 +201,7 @@ void Camera::liftCamera(float angle)
 }
 
 /*
-setter for is_first_person_int
+Setter for is_first_person_int
 */
 void Camera::setIFirstPerson(int is_first_person_int)
 {
@@ -209,7 +209,7 @@ void Camera::setIFirstPerson(int is_first_person_int)
 }
 
 /*
-getter for is_first_person_int 
+Getter for is_first_person_int 
 */
 bool Camera::getIFirstPerson()
 {
@@ -217,7 +217,7 @@ bool Camera::getIFirstPerson()
 }
 
 /*
-getter for camera's eye
+Getter for camera's eye
 */
 Vector3 Camera::getCameraPosition()
 {
@@ -225,7 +225,7 @@ Vector3 Camera::getCameraPosition()
 }
 
 /*
-getter for camera's angle around z
+Getter for camera's angle around z
 */
 float Camera::getCameraAngle()
 {
@@ -233,7 +233,7 @@ float Camera::getCameraAngle()
 }
 
 /*
-getter for camera's lift
+Getter for camera's lift
 */
 float Camera::getCameraLift()
 {

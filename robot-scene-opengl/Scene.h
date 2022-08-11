@@ -156,19 +156,19 @@ public:
 	 */
 	void moveRobotHead(ROBOT_HEAD_MOVEMENT movement, float angle);
 	/**
-	 * setter for boolean about camera mode.
+	 * Setter for boolean about camera mode.
 	 * 
 	 * \param isFirstPerson
 	 */
 	void setIFirstPerson(int isFirstPerson);
 	/**
-	 * getter for camera position.
+	 * Getter for camera position.
 	 * 
 	 * \return camera position
 	 */
 	Vector3 getCameraPosition();
 	/**
-	 * getter for head position.
+	 * Getter for head position.
 	 * 
 	 * \return head position
 	 */

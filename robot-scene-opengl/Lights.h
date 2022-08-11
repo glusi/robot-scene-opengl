@@ -31,7 +31,7 @@ public:
 	 */
 	void adjustAmbientLight(float* color_new);
 	/**
-	 * getter for ambient color
+	 * Getter for ambient color
 	 * 
 	 * \return ambient color
 	 */
@@ -50,7 +50,7 @@ public:
 	 */
 	void applyPointLightPos(Vector3 point_light_position);
 	/**
-	 * getter for point color
+	 * Getter for point color
 	 *
 	 * \return point color
 	 */

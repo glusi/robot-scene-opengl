@@ -79,23 +79,23 @@ public:
 	*/
 	void liftCamera(float angle);
 		/*
-	setter for is_first_person_int
+	Setter for is_first_person_int
 	*/
 	void setIFirstPerson(int is_first_person);
 	/*
-	getter for is_first_person_int
+	Getter for is_first_person_int
 	*/
 	bool getIFirstPerson();
 		/*
-	getter for camera's eye
+	Getter for camera's eye
 	*/
 	Vector3 getCameraPosition();
 	/*
-	getter for camera's angle around z
+	Getter for camera's angle around z
 	*/
 	float getCameraAngle();
 	/*
-	getter for camera's lift
+	Getter for camera's lift
 	*/
 	float getCameraLift();
 };

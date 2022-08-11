@@ -47,19 +47,19 @@ public:
 	 */
 	bool LoadHelpTexture(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 	/**
-	 * getter for help image width.
+	 * Getter for help image width.
 	 * 
 	 * \return help image width
 	 */
 	int getHelpImageWidth();
 	/**
-	 * getter for help image height.
+	 * Getter for help image height.
 	 *
 	 * \return help image height
 	 */
 	int getHelpImageHeight();
 	/**
-	 * getter for help image texture.
+	 * Getter for help image texture.
 	 *
 	 * \return help image texture
 	 */

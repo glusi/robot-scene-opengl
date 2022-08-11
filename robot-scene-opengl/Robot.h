@@ -189,26 +189,79 @@ class Robot : SceneItem
 		 */
 		void rotate(float angle_new);
 		/**
-		 * getter for head position.
+		 * Getter for head position.
 		 *
 		 * \return head position
 		 */
 		Vector3 getHeadPosition();
 		/**
-		 * .
+		 * Rotate scene similarly to robot head for first person camera.
 		 * 
 		 */
 		void applyCameraRotation();
+		/**
+		 * Getter for robot angle.
+		 * 
+		 * \return robot angle
+		 */
 		float getRobotRotation();
+		/**
+		 * Getter for robot position.
+		 * 
+		 * \return amount of robot movements
+		 */
 		float getRobotPosition();
+		/**
+		 * Getter for robot shoulder lift.
+		 * 
+		 * \return robot shoulder lift
+		 */
 		float getShoulderLift();
+		/**
+		 * Getter for robot shoulder rotation.
+		 * 
+		 * \return robot shoulder rotation
+		 */
 		float getShoulderRotation();
+		/**
+		 * Getter for robot elbow lift.
+		 * 
+		 * \return robot elbow lift
+		 */
 		float getElbowLift();
-		float getElbowRotation();;
+		/**
+		 * Getter for robot elbow rotation.
+		 * \return robot elbow rotation
+		 */
+		float getElbowRotation();
+		/**
+		 * Getter for robot palm lift.
+		 * 
+		 * \return palm lift
+		 */
 		float getPalmLift();
+		/**
+		 * Getter for robot palm rotation.
+		 * 
+		 * \return robot palm rotation
+		 */
 		float getPalmRotation();
+		/**
+		 * Getter for robot head rotation.
+		 * 
+		 * \return robot head rotation
+		 */
 		float getHeadRotation();
+		/**
+		 * Getter for robot head lift.
+		 *
+		 * \return head lift
+		 */
 		float getHeadLift();
+		/**
+		 * Updated the position of robot at end of frame to new value.
+		 * 
+		 */
 		void updateOldPosition();
 };
 

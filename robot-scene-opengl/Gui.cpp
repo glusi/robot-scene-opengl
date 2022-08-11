@@ -42,7 +42,7 @@ void Gui::drawText(float x, float y, std::string text, Vector3 color) {
 }
 
 /**
- * setter for camera mode boolean
+ * Setter for camera mode boolean
  */
 void Gui::setMode(bool mode)
 {
