@@ -162,6 +162,7 @@ void Menu::helpMenu() {
             else {
                 help_window_open = false;
                 x_pressable = true;
+                next_pressed = false;
             }
         }
     }
