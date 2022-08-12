@@ -149,4 +149,27 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Assets\fabric.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\floor-tiles.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\help.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\tv_screen.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\wall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\window.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Assets\wood.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

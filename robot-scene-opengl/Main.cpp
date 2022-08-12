@@ -19,48 +19,23 @@ constexpr auto WINDOW_HEIGHT = 500;
 constexpr auto WINDOW_POSITION_X = 50;
 constexpr auto WINDOW_POSITION_Y = 50;
 
-
 //the current width and height of the window
 GLsizei new_width, new_height;
+//Scene Object
 Scene* scene;
+//Menu object
 Menu menu;
-
-bool first_time_right_mouse = true;
-float xlast_mouse =0.0, ylast_mouse =0.0;
-
-
+//Menu show flag
 static bool show_menu = true;
+//Aspect of the window
 float aspect = 1;
-
+//Camera mode -First person or external camera
 bool is_ff = false;
 
-// Set Perspective projection
-void setPrespProjection() {
-    glMatrixMode(GL_PROJECTION); // Set projection
-    glLoadIdentity();
-    gluPerspective(65, aspect, 1.0, 150.0);
-}
-
-//Draw axises X,Y and Z for reference and as shown in the assignment
-void drawAxis() {
-    glColor3f(1, 0, 0);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(10, 0, 0);
-    glEnd();
-    glColor3f(0, 1, 0);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 10, 0);
-    glEnd();
-    glColor3f(0, 0, 1);
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 10);
-    glEnd();
-
-}
-
+/**
+ * The display function that is called every frame.
+ * 
+ */
 void display() {
     //Clears
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -70,12 +45,13 @@ void display() {
     //imgui new frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGLUT_NewFrame();
-    //ImGui::NewFrame();
 
+    //Create the menu
     menu.createMenu();
-
     ImGui::Render();
     ImGuiIO& io = ImGui::GetIO();
+
+    //Set projection and model view
     glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -83,24 +59,26 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    //Draw the scene
     scene->draw();
-    //drawAxis();
 
-    //ImGui_ImplGLUT_RenderDrawData();
- 
-    //ImGui_Impl_RenderDrawData(ImGui::GetDrawData());
-    glDisable(GL_LIGHTING);
+    //Imgui render
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    glEnable(GL_LIGHTING);
 
-
+    //Clean
     glFlush();
     glutSwapBuffers();
     glutPostRedisplay();
     
 }
 
-
+/**
+ * Binds keyboard keys to different actions.
+ * 
+ * \param Key
+ * \param x
+ * \param y
+ */
 void MyKeyboardFunc(unsigned char Key, int x, int y)
 {
     switch (Key)
@@ -120,7 +98,7 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
         case 'g': scene->moveRobot(ROBOT_MOVE_BACK); break;
         case 'r': scene->rotateRobot(ROBOT_ROTATE_RIGHT); break; //Rotate Robot
         case 'f': scene->rotateRobot(ROBOT_ROTATE_LEFT); break; //Rotate Robot
-
+        //Arm
         case 'y': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_UP); break;
         case 'h': scene->liftRobotHand(ROBOT_SHOULDER, ROBOT_HAND_DOWN); break;
         case 'n': scene->rotateRobotHand(ROBOT_SHOULDER); break;
@@ -130,25 +108,11 @@ void MyKeyboardFunc(unsigned char Key, int x, int y)
         case 'i': scene->liftRobotHand(ROBOT_PALM, ROBOT_HAND_UP); break;
         case 'k': scene->liftRobotHand(ROBOT_PALM, ROBOT_HAND_DOWN); break;
         case ',': scene->rotateRobotHand(ROBOT_PALM); break;
-        
+        //Head
         case 'o': scene->moveRobotHead(ROBOT_HEAD_UP); break;
         case 'l': scene->moveRobotHead(ROBOT_HEAD_DOWN); break;
         case 'v': scene->moveRobotHead(ROBOT_HEAD_RIGHT); break;
         case 'b': scene->moveRobotHead(ROBOT_HEAD_LEFT); break; 
-    case 27:
-        exit(1);
-        break;
-    };
-    glutPostRedisplay();
-}
-
-void MyGlutSpecialFunc(int Key, int x, int y) {
-    switch (Key)
-    {
-    case GLUT_KEY_UP: scene->moveRobot(ROBOT_MOVE_FRONT); break;
-    case GLUT_KEY_DOWN: scene->moveRobot(ROBOT_MOVE_BACK); break;
-    case GLUT_KEY_HOME:  break;
-    case GLUT_KEY_END:  break;
     case 27:
         exit(1);
         break;
@@ -173,8 +137,12 @@ void initImgui() {
     style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.2, 0.2, 0.2, 0.8);
 }
 
-//The Initialize function, called once:    
+/**
+ * The Initialize function, called once.
+ * 
+ */
 void Init() {
+    //Flags for Opengl to render the 3d simulation
     glEnable(GL_NORMALIZE);
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_TEXTURE_2D);
@@ -184,22 +152,26 @@ void Init() {
     glEnable(GL_DEPTH_TEST);                            // Depth Buffer Setup                       // Enables Depth Testing
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
     glEnable(GL_LIGHTING);
-    //glutIgnoreKeyRepeat(0);
-    //glutSetKeyRepeat(GLUT_KEY_REPEAT_ON);
-   // glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-   // glFrontFace(GL_CCW);
-   // glCullFace(GL_BACK);
-   // glEnable(GL_CULL_FACE);
+    //Initialize objects
     scene = new Scene();
     menu = Menu(scene);
-    
-
 }
 
+/**
+ * idle callback for opengl window. Calls redisplay to keep window functional.
+ * 
+ */
 void idleFucn() {
     display();
 }
 
+/**
+ * reshaping window size callback for opengl window. Reshapes the window using ImGui function,
+ * calculates new values for aspect and window sizes, and creates the new Viewport.
+ * 
+ * \param w
+ * \param h
+ */
 void reshapeFunc(GLint w, GLint h)
 {
     // imgui reshape func
@@ -212,23 +184,34 @@ void reshapeFunc(GLint w, GLint h)
     scene->setHeight(h);
 }
 
+/**
+ * The main function of the project.
+ * 
+ * \param argc
+ * \param argv
+ * \return 
+ */
 int main(int argc, char** argv)
 {
+    //Init Glut
     glutInit(&argc, argv);
+    //Set Glut options
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE | GLUT_STENCIL);
-    //Set initial parameters for the window
+    //Set initial parameters for the window and create it
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(WINDOW_POSITION_X, WINDOW_POSITION_Y);
     glutCreateWindow("robot-scene");
+    //Init
     Init();
+    //Set callbacks
     glutIdleFunc(idleFucn);
     glutDisplayFunc(display);
+    //Init ImGui
     initImgui();
+    //Set callbacks
     glutReshapeFunc(reshapeFunc);
     glutKeyboardFunc(MyKeyboardFunc);
-    //glutIgnoreKeyRepeat(1);
-    glutSpecialUpFunc(MyGlutSpecialFunc);
     glutMainLoop();
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();

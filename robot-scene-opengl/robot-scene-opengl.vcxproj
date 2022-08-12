@@ -197,6 +197,15 @@
   <ItemGroup>
     <ResourceCompile Include="robot-scene-opengl.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Assets\fabric.jpg" />
+    <Image Include="..\Assets\floor-tiles.jpg" />
+    <Image Include="..\Assets\help.png" />
+    <Image Include="..\Assets\tv_screen.jpg" />
+    <Image Include="..\Assets\wall.jpg" />
+    <Image Include="..\Assets\window.jpg" />
+    <Image Include="..\Assets\wood.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

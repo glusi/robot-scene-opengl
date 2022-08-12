@@ -67,10 +67,6 @@ void Menu::createMenu() {
     ImGui::BeginMenuBar();
     ImGui::Text("Welcome to my Robot OpenGl Simulation!");
     ImGui::EndMenuBar();
-    //Create main control menus
-    lightMenu();   
-    robotMenu();
-    cameraMenu();
     //Add 'Exit' and 'Help' buttons and place then in middle of the line in the menu
     ImGuiStyle& style = ImGui::GetStyle();
     float width = 0.0f;
@@ -83,9 +79,13 @@ void Menu::createMenu() {
     ImGui::SameLine();
     if (ImGui::Button("Exit"))
         exit(0);
-    ImGui::End();
     //Help Window
     helpMenu();
+    //Create main control menus
+    lightMenu();   
+    robotMenu();
+    cameraMenu();
+    ImGui::End();
 }
 
 void Menu::helpMenu() {
@@ -243,7 +243,7 @@ void Menu::cameraMenu()
 
         //Move camera right and left
         float rotate_camera_right_left_new = rotate_camera_right_left;
-        ImGui::InputFloat("Move camera right and left", &rotate_camera_right_left, 1.0f);
+        ImGui::InputFloat("Move camera on X", &rotate_camera_right_left, 1.0f);
         if (rotate_camera_right_left != rotate_camera_right_left_new)
             if (rotate_camera_right_left > 0)
                 scene->moveCamera(CAMERA_RIGHT, rotate_camera_right_left);
@@ -252,7 +252,7 @@ void Menu::cameraMenu()
 
         //Move camera up and down
         float rotate_camera_up_down_new = rotate_camera_up_down;
-        ImGui::InputFloat("Move camera up and down", &rotate_camera_up_down, 1.0f);
+        ImGui::InputFloat("Move camera on Y", &rotate_camera_up_down, 1.0f);
         if (rotate_camera_up_down != rotate_camera_up_down_new)
             if (rotate_camera_up_down > 0)
                 scene->moveCamera(CAMERA_UP, rotate_camera_up_down);
@@ -261,7 +261,7 @@ void Menu::cameraMenu()
 
         //Move camera front and back
         float rotate_camera_front_back_new = rotate_camera_front_back;
-        ImGui::InputFloat("Move camera front and back", &rotate_camera_front_back, 1.0f);
+        ImGui::InputFloat("Move camera on Z", &rotate_camera_front_back, 1.0f);
         if (rotate_camera_front_back != rotate_camera_front_back_new)
             if (rotate_camera_front_back > 0)
                 scene->moveCamera(CAMERA_FRONT, rotate_camera_front_back);

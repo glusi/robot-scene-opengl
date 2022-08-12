@@ -2,17 +2,19 @@
 
 void Texture::loadTexture(unsigned int texture, const char* texture_path)
 {
-    
+    //Set parameters
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, nrChannels;
+    //Use stb to load texture and retrieve its size
     unsigned char* data = stbi_load(texture_path, &width, &height, &nrChannels, 3);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     if (data)
     {
+        //Load the texture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         delete[] data;
     }
@@ -25,7 +27,7 @@ void Texture::loadTexture(unsigned int texture, const char* texture_path)
 
 Texture::Texture()
 {
-    
+    //Load all the regular textures
     glGenTextures(NUM_OF_TEXTURES, textures);
     loadTexture(textures[0], FLOOR_TEXTURE_PATH);
     loadTexture(textures[1], TABLE_TEXTURE_PATH);
@@ -33,6 +35,7 @@ Texture::Texture()
     loadTexture(textures[3], WALL_TEXTURE_PATH);
     loadTexture(textures[4], FABRIC_TEXTURE_PATH);
     loadTexture(textures[5], WINDOW_TEXTURE_PATH);
+    //Load the help texture
     bool ret = LoadHelpTexture(HELP_TEXTURE_PATH, &help_image_texture, &help_image_width, &help_image_height);
     if (!ret) {
         std::cout << "Failed to load help texture" << std::endl;

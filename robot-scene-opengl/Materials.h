@@ -114,8 +114,8 @@ static const materialStruct material_wall{
 
 //Fabric
 static const materialStruct fabric{
-	{ 0.27, 0.21,	0.21	,0.5		 },
-	{0.54,	0.54,	0.54,	0.5		 },
+	{ 0.27, 0.21,	0.21	,0.5},
+	{0.54,	0.54,	0.54,	0.5	},
 	{0.23,	0.23,	0.23,	0.5 },
 	0.264f
 };
